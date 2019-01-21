@@ -13,12 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().barTintColor = .gray
+        UINavigationBar.appearance().barTintColor = .customBlack
         UINavigationBar.appearance().prefersLargeTitles = true
         UINavigationBar.appearance().titleTextAttributes
             = [NSAttributedString.Key.foregroundColor: UIColor.white]
