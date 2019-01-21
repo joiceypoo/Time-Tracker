@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		242FB83E21C0447B00931945 /* Time-Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time-Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		242FB83E21C0447B00931945 /* Habbbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habbbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		242FB84121C0447B00931945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		242FB84321C0447B00931945 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		242FB84621C0447B00931945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -38,7 +38,7 @@
 		242FB83521C0447B00931945 = {
 			isa = PBXGroup;
 			children = (
-				242FB84021C0447B00931945 /* Time-Tracker */,
+				242FB84021C0447B00931945 /* Habbbit */,
 				242FB83F21C0447B00931945 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,24 +46,24 @@
 		242FB83F21C0447B00931945 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				242FB83E21C0447B00931945 /* Time-Tracker.app */,
+				242FB83E21C0447B00931945 /* Habbbit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		242FB84021C0447B00931945 /* Time-Tracker */ = {
+		242FB84021C0447B00931945 /* Habbbit */ = {
 			isa = PBXGroup;
 			children = (
 				242FB85521C0467200931945 /* Source */,
 				242FB85321C0463700931945 /* Resource */,
-				242FB84D21C0447D00931945 /* Info.plist */,
 			);
-			path = "Time-Tracker";
+			path = Habbbit;
 			sourceTree = "<group>";
 		};
 		242FB85321C0463700931945 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				242FB84D21C0447D00931945 /* Info.plist */,
 				242FB84821C0447D00931945 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -131,9 +131,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		242FB83D21C0447B00931945 /* Time-Tracker */ = {
+		242FB83D21C0447B00931945 /* Habbbit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 242FB85021C0447D00931945 /* Build configuration list for PBXNativeTarget "Time-Tracker" */;
+			buildConfigurationList = 242FB85021C0447D00931945 /* Build configuration list for PBXNativeTarget "Habbbit" */;
 			buildPhases = (
 				242FB83A21C0447B00931945 /* Sources */,
 				242FB83B21C0447B00931945 /* Frameworks */,
@@ -143,9 +143,9 @@
 			);
 			dependencies = (
 			);
-			name = "Time-Tracker";
+			name = Habbbit;
 			productName = "Time-Tracker";
-			productReference = 242FB83E21C0447B00931945 /* Time-Tracker.app */;
+			productReference = 242FB83E21C0447B00931945 /* Habbbit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -163,7 +163,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 242FB83921C0447B00931945 /* Build configuration list for PBXProject "Time-Tracker" */;
+			buildConfigurationList = 242FB83921C0447B00931945 /* Build configuration list for PBXProject "Habbbit" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -176,7 +176,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				242FB83D21C0447B00931945 /* Time-Tracker */,
+				242FB83D21C0447B00931945 /* Habbbit */,
 			);
 		};
 /* End PBXProject section */
@@ -347,8 +347,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PTZ6DN7M2T;
-				INFOPLIST_FILE = "Time-Tracker/Info.plist";
+				DEVELOPMENT_TEAM = YT3VFVK232;
+				INFOPLIST_FILE = "$(SRCROOT)/Habbbit/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -365,8 +365,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PTZ6DN7M2T;
-				INFOPLIST_FILE = "Time-Tracker/Info.plist";
+				DEVELOPMENT_TEAM = YT3VFVK232;
+				INFOPLIST_FILE = "$(SRCROOT)/Habbbit/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -381,7 +381,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		242FB83921C0447B00931945 /* Build configuration list for PBXProject "Time-Tracker" */ = {
+		242FB83921C0447B00931945 /* Build configuration list for PBXProject "Habbbit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				242FB84E21C0447D00931945 /* Debug */,
@@ -390,7 +390,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		242FB85021C0447D00931945 /* Build configuration list for PBXNativeTarget "Time-Tracker" */ = {
+		242FB85021C0447D00931945 /* Build configuration list for PBXNativeTarget "Habbbit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				242FB85121C0447D00931945 /* Debug */,
