@@ -8,19 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		242FB84221C0447B00931945 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242FB84121C0447B00931945 /* AppDelegate.swift */; };
-		242FB84421C0447B00931945 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242FB84321C0447B00931945 /* HomeController.swift */; };
+		242FB84421C0447B00931945 /* TodoItemsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242FB84321C0447B00931945 /* TodoItemsController.swift */; };
 		242FB84721C0447B00931945 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84521C0447B00931945 /* Main.storyboard */; };
 		242FB84921C0447D00931945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84821C0447D00931945 /* Assets.xcassets */; };
 		242FB84C21C0447D00931945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84A21C0447D00931945 /* LaunchScreen.storyboard */; };
 		CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24CD21F656050028AC7F /* UIColor+theme.swift */; };
 		CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D021F65F5B0028AC7F /* AddButton.swift */; };
 		CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */; };
+		CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24DE21F766250028AC7F /* StoryboardName.swift */; };
+		CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24E421F7678B0028AC7F /* TodoItemsControllerDelegate.swift */; };
+		CE8F24E721F767CD0028AC7F /* TodoItemsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24E621F767CD0028AC7F /* TodoItemsControllerDataSource.swift */; };
+		CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24E821F76BAD0028AC7F /* TodoListCell.swift */; };
+		CE8F24EB21F76C2B0028AC7F /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */; };
+		CE8F24EE21F771FB0028AC7F /* AddTodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24ED21F771FB0028AC7F /* AddTodoController.swift */; };
+		CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		242FB83E21C0447B00931945 /* Habbbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habbbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		242FB84121C0447B00931945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		242FB84321C0447B00931945 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		242FB84321C0447B00931945 /* TodoItemsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemsController.swift; sourceTree = "<group>"; };
 		242FB84621C0447B00931945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		242FB84821C0447D00931945 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		242FB84B21C0447D00931945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -28,6 +35,13 @@
 		CE8F24CD21F656050028AC7F /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		CE8F24D021F65F5B0028AC7F /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		CE8F24DE21F766250028AC7F /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
+		CE8F24E421F7678B0028AC7F /* TodoItemsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemsControllerDelegate.swift; sourceTree = "<group>"; };
+		CE8F24E621F767CD0028AC7F /* TodoItemsControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemsControllerDataSource.swift; sourceTree = "<group>"; };
+		CE8F24E821F76BAD0028AC7F /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
+		CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		CE8F24ED21F771FB0028AC7F /* AddTodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoController.swift; sourceTree = "<group>"; };
+		CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +84,7 @@
 		242FB85521C0467200931945 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				CE8F24DD21F765F40028AC7F /* Common */,
 				CE8F24D421F662D60028AC7F /* Core */,
 				242FB85621C0468D00931945 /* App */,
 			);
@@ -99,8 +114,8 @@
 		242FB85921C046B700931945 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				CE8F24CF21F65F2D0028AC7F /* Views */,
-				242FB84321C0447B00931945 /* HomeController.swift */,
+				CE8F24EC21F771C90028AC7F /* AddTodo */,
+				CE8F24E021F767060028AC7F /* TodoItems */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -117,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				CE8F24CD21F656050028AC7F /* UIColor+theme.swift */,
+				CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */,
+				CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -125,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				CE8F24D021F65F5B0028AC7F /* AddButton.swift */,
+				CE8F24E821F76BAD0028AC7F /* TodoListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,6 +153,65 @@
 				CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		CE8F24DD21F765F40028AC7F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F24DE21F766250028AC7F /* StoryboardName.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		CE8F24E021F767060028AC7F /* TodoItems */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F24E321F767680028AC7F /* DataSource */,
+				CE8F24E221F7675C0028AC7F /* Delegates */,
+				CE8F24E121F7674E0028AC7F /* Controller */,
+				CE8F24CF21F65F2D0028AC7F /* Views */,
+			);
+			path = TodoItems;
+			sourceTree = "<group>";
+		};
+		CE8F24E121F7674E0028AC7F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				242FB84321C0447B00931945 /* TodoItemsController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CE8F24E221F7675C0028AC7F /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F24E421F7678B0028AC7F /* TodoItemsControllerDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		CE8F24E321F767680028AC7F /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F24E621F767CD0028AC7F /* TodoItemsControllerDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		CE8F24EC21F771C90028AC7F /* AddTodo */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F24EF21F772030028AC7F /* Controller */,
+			);
+			path = AddTodo;
+			sourceTree = "<group>";
+		};
+		CE8F24EF21F772030028AC7F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F24ED21F771FB0028AC7F /* AddTodoController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,8 +286,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */,
-				242FB84421C0447B00931945 /* HomeController.swift in Sources */,
+				CE8F24EB21F76C2B0028AC7F /* UITableViewCell+Extension.swift in Sources */,
+				CE8F24EE21F771FB0028AC7F /* AddTodoController.swift in Sources */,
+				242FB84421C0447B00931945 /* TodoItemsController.swift in Sources */,
 				242FB84221C0447B00931945 /* AppDelegate.swift in Sources */,
+				CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */,
+				CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */,
+				CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */,
+				CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */,
+				CE8F24E721F767CD0028AC7F /* TodoItemsControllerDataSource.swift in Sources */,
 				CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */,
 				CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */,
 			);

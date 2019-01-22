@@ -20,9 +20,7 @@ class AddButton: UIButton {
     }
     
     private func setupView() {
-        self.layer.cornerRadius = 21
+        self.layer.cornerRadius = frame.height / 2
         self.layer.masksToBounds = true
-        self.layer.backgroundColor = UIColor.customYellow.cgColor
-        
     }
 }
