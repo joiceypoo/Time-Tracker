@@ -22,18 +22,11 @@ extension TodoItemsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let label = UILabel(frame: CGRect(x: 200,
-                                          y: 200,
-                                          width: self.todoListsTable.bounds.size.width,
-                                          height: todoListsTable.bounds.size.height))
-        label.text = "Nothing on your list yet, Tap the plus button below to add a new item"
-        label.backgroundColor = .red
-        label.numberOfLines = 0
-        label.textAlignment = .center
+        let label = DisplayMessage(frame: todoListsTable.frame)
         return label
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return todoItems.count == 0 ? 290: 0
+        return todoItems.count == 0 ? todoListsTable.frame.height - 200 : 0
     }
 }

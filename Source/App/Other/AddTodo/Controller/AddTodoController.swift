@@ -10,12 +10,13 @@ import UIKit
 
 class AddTodoController: UIViewController {
 
+    @IBOutlet weak var todoItemDetailTable: UITableView!
     @IBOutlet weak var notesTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .customDarkBlack
         navigationItem.title = "Add Habit"
+        view.backgroundColor = .customDarkBlack
         navigationController?.navigationBar.prefersLargeTitles = false
         let leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                             style: .plain,
@@ -47,5 +48,7 @@ class AddTodoController: UIViewController {
     
     private func setupView() {
         notesTextView.backgroundColor = .customBlack
+        notesTextView.textColor = .customLightGray
+        todoItemDetailTable.separatorColor = .customLightGray
     }
 }
