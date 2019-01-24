@@ -12,5 +12,6 @@ class CustomTitleCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .customBlack
     }
 }

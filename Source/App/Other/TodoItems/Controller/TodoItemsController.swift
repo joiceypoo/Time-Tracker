@@ -10,18 +10,29 @@ import UIKit
 
 class TodoItemsController: UIViewController {
 
-    var todoItems: [Int] = []
+    var todoItems: [String] = ["Test One",
+                               "Test Two",
+                               "Test Three",
+                               "Test Four",
+                               "Test Five",
+                               "Test Six",
+                               "Test Seven",
+                               "Test Eight",
+                               "Test Nine",
+                               "Test Ten"
+    ]
+    
     @IBOutlet weak var todoListsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "To do"
-        todoListsTable.backgroundColor = .customDarkBlack
         setupView()
     }
     
     private func setupView() {
-
+        todoListsTable.backgroundColor = .customDarkBlack
+        todoListsTable.tableFooterView = UIView()
     }
     
     @IBAction private func addTodoItemButtonPressed(_ sender: AddButton) {
@@ -29,6 +40,19 @@ class TodoItemsController: UIViewController {
             else { return }
         let navController = CustomNavigationController(rootViewController: addTodoController)
         present(navController, animated: true, completion: nil)
+    }
+    
+    public func deleteHandler(action: UITableViewRowAction, indexPath: IndexPath) {
+//        let todoItem = todoItems[indexPath.row]
+        todoItems.remove(at: indexPath.row)
+        todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    public func editHandler(action: UITableViewRowAction, indexPath: IndexPath) {
+        guard let editTodoController = EditTodoController.instantiate(from: .main)
+            else { return }
+        let navigationController = CustomNavigationController(rootViewController: editTodoController)
+        present(navigationController, animated: true, completion: nil)
     }
 }
 

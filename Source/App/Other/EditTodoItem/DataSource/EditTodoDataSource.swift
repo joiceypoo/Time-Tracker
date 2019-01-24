@@ -1,21 +1,21 @@
 //
-//  AddTodoDataSource.swift
+//  EditTodoDataSource.swift
 //  Habbbit
 //
-//  Created by Onyekachi Ezeoke on 22/01/2019.
+//  Created by Onyekachi Ezeoke on 24/01/2019.
 //  Copyright © 2019 Team Sweet Cheeks. All rights reserved.
 //
 
 import UIKit
 
-extension AddTodoController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension EditTodoController: UITableViewDataSource {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            guard let cell = CustomTitleCell.instantiate(from: tableView, for: indexPath) else {
+            guard let cell = EditTodoCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
             return cell
@@ -42,6 +42,5 @@ extension AddTodoController: UITableViewDataSource {
             return cell
         }
     }
-    
     
 }

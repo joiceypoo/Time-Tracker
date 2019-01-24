@@ -37,6 +37,7 @@ class CustomCell: UITableViewCell {
     }
     
     private func setupView() {
+        backgroundColor = .customBlack
         textLabel?.textColor = .white
         selectionStyle = .none
     }

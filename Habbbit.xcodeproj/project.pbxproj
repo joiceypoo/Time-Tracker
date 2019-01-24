@@ -13,6 +13,10 @@
 		242FB84921C0447D00931945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84821C0447D00931945 /* Assets.xcassets */; };
 		242FB84C21C0447D00931945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84A21C0447D00931945 /* LaunchScreen.storyboard */; };
 		CE84D6BF21F8CF40000C9D89 /* DisplayMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */; };
+		CE84D6C321F8FBAF000C9D89 /* EditTodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6C221F8FBAF000C9D89 /* EditTodoController.swift */; };
+		CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */; };
+		CE84D6CC21F95539000C9D89 /* EditTodoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6CB21F95539000C9D89 /* EditTodoDataSource.swift */; };
+		CE84D6CE21F95985000C9D89 /* EditTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6CD21F95985000C9D89 /* EditTodoCell.swift */; };
 		CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24CD21F656050028AC7F /* UIColor+theme.swift */; };
 		CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D021F65F5B0028AC7F /* AddButton.swift */; };
 		CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */; };
@@ -44,6 +48,10 @@
 		242FB84B21C0447D00931945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		242FB84D21C0447D00931945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessage.swift; sourceTree = "<group>"; };
+		CE84D6C221F8FBAF000C9D89 /* EditTodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoController.swift; sourceTree = "<group>"; };
+		CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModel.swift; sourceTree = "<group>"; };
+		CE84D6CB21F95539000C9D89 /* EditTodoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoDataSource.swift; sourceTree = "<group>"; };
+		CE84D6CD21F95985000C9D89 /* EditTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoCell.swift; sourceTree = "<group>"; };
 		CE8F24CD21F656050028AC7F /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		CE8F24D021F65F5B0028AC7F /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -138,6 +146,7 @@
 		242FB85921C046B700931945 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				CE84D6C021F8FB62000C9D89 /* EditTodoItem */,
 				CE8F250021F880420028AC7F /* Repeat */,
 				CE8F24EC21F771C90028AC7F /* AddTodo */,
 				CE8F24E021F767060028AC7F /* TodoItems */,
@@ -151,6 +160,48 @@
 				242FB84121C0447B00931945 /* AppDelegate.swift */,
 			);
 			path = Global;
+			sourceTree = "<group>";
+		};
+		CE84D6C021F8FB62000C9D89 /* EditTodoItem */ = {
+			isa = PBXGroup;
+			children = (
+				CE84D6CA21F954B7000C9D89 /* DataSource */,
+				CE84D6C921F954AD000C9D89 /* Delegates */,
+				CE84D6C621F9543D000C9D89 /* Views */,
+				CE84D6C121F8FB85000C9D89 /* Controller */,
+			);
+			path = EditTodoItem;
+			sourceTree = "<group>";
+		};
+		CE84D6C121F8FB85000C9D89 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE84D6C221F8FBAF000C9D89 /* EditTodoController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CE84D6C621F9543D000C9D89 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE84D6CD21F95985000C9D89 /* EditTodoCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CE84D6C921F954AD000C9D89 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		CE84D6CA21F954B7000C9D89 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				CE84D6CB21F95539000C9D89 /* EditTodoDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		CE8F24CC21F655EA0028AC7F /* Utilities */ = {
@@ -256,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				CE8F24FA21F7AE7A0028AC7F /* DescriptionVM.swift */,
+				CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -398,6 +450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE84D6CC21F95539000C9D89 /* EditTodoDataSource.swift in Sources */,
 				CE8F250521F880B90028AC7F /* AddTodoDelegate.swift in Sources */,
 				CE8F251121F88DA20028AC7F /* RepeatDelegates.swift in Sources */,
 				CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */,
@@ -407,8 +460,10 @@
 				CE8F24EE21F771FB0028AC7F /* AddTodoController.swift in Sources */,
 				CE8F250321F880740028AC7F /* RepeatController.swift in Sources */,
 				242FB84421C0447B00931945 /* TodoItemsController.swift in Sources */,
+				CE84D6CE21F95985000C9D89 /* EditTodoCell.swift in Sources */,
 				242FB84221C0447B00931945 /* AppDelegate.swift in Sources */,
 				CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */,
+				CE84D6C321F8FBAF000C9D89 /* EditTodoController.swift in Sources */,
 				CE8F250B21F886730028AC7F /* ScheduleEnum.swift in Sources */,
 				CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */,
 				CE8F24F621F7AB9E0028AC7F /* CustomCell.swift in Sources */,
@@ -421,6 +476,7 @@
 				CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */,
 				CE8F24FB21F7AE7A0028AC7F /* DescriptionVM.swift in Sources */,
 				CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */,
+				CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

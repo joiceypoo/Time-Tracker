@@ -17,7 +17,8 @@ extension TodoItemsController: UITableViewDataSource {
         guard let cell = TodoListCell.instantiate(from: tableView, for: indexPath) else {
             return UITableViewCell()
         }
-        cell.backgroundColor = .red
+        cell.textLabel?.text = todoItems[indexPath.row]
+        cell.detailTextLabel?.text = "Here again"
         return cell
     }
     
