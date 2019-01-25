@@ -18,12 +18,12 @@ extension TodoItemsController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.textLabel?.text = todoItems[indexPath.row]
-        cell.detailTextLabel?.text = "Here again"
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = DisplayMessage(frame: todoListsTable.frame)
+        label.messageLabel.text = "Nothing on your list yet, Tap the plus button below to add a new item"
         return label
     }
     

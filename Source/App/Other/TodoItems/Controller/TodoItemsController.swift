@@ -10,7 +10,7 @@ import UIKit
 
 class TodoItemsController: UIViewController {
 
-    var todoItems: [String] = ["Test One",
+    var todoItems: [String] = ["Exercise at home",
                                "Test Two",
                                "Test Three",
                                "Test Four",
@@ -22,16 +22,61 @@ class TodoItemsController: UIViewController {
                                "Test Ten"
     ]
     
+    @IBOutlet weak var calenderView: UIView!
     @IBOutlet weak var todoListsTable: UITableView!
+    
+    var sourceIndexPath: IndexPath?
+    var snapshot: UIView?
+    let bottonBorder = CALayer()
+    let topBorder = CALayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "To do"
+        let longPressedGestureRecognizer = UILongPressGestureRecognizer(target: self,
+                                                                        action: #selector(handleLongPress(recognizer:)))
+        todoListsTable.addGestureRecognizer(longPressedGestureRecognizer)
         setupView()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        topBorder.frame = CGRect(x: 0, y: 1, width: calenderView.bounds.width, height: 0.5)
+        bottonBorder.frame = CGRect(x: 0, y: 110, width: calenderView.bounds.width, height: 0.5)
+    }
+    
+    @objc func handleLongPress(recognizer: UILongPressGestureRecognizer) {
+        let state = recognizer.state
+        let locationInView = recognizer.location(in: todoListsTable)
+        let indexPath = todoListsTable.indexPathForRow(at: locationInView)
+        switch state {
+        case .began:
+            gestureBeganHandler(indexPath, locationInView)
+        case .changed:
+            gestureChangedHandler(locationInView, indexPath)
+        default:
+            handleDefault()
+        }
+    }
+    
     private func setupView() {
+        topBorder.frame = CGRect(x: 0,
+                                 y: 1,
+                                 width: calenderView.bounds.width,
+                                 height: 1)
+        bottonBorder.frame = CGRect(x: 0,
+                                    y: 110,
+                                    width: calenderView.bounds.width,
+                                    height: 1)
+        
+        topBorder.backgroundColor = UIColor.customLightGray.cgColor
+        bottonBorder.backgroundColor = UIColor.customLightGray.cgColor
+        calenderView.layer.addSublayer(topBorder)
+        calenderView.layer.addSublayer(bottonBorder)
+        calenderView.backgroundColor = .customDarkGray
+        
         todoListsTable.backgroundColor = .customDarkBlack
+        todoListsTable.separatorColor = .customLightGray
         todoListsTable.tableFooterView = UIView()
     }
     

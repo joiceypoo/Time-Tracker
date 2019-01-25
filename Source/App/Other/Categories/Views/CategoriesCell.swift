@@ -1,18 +1,17 @@
 //
-//  RepeatCell.swift
+//  CategoriesCell.swift
 //  Habbbit
 //
-//  Created by Onyekachi Ezeoke on 23/01/2019.
+//  Created by Onyekachi Ezeoke on 25/01/2019.
 //  Copyright © 2019 Team Sweet Cheeks. All rights reserved.
 //
 
 import UIKit
 
-class RepeatCell: UITableViewCell {
+class CategoriesCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -20,12 +19,12 @@ class RepeatCell: UITableViewCell {
         setupView()
     }
     
-    var viewModel: String? {
-        didSet { bindViewModel() }
+    var title: String? {
+        didSet { updateLabel() }
     }
     
-    private func bindViewModel() {
-        guard let title = viewModel
+    private func updateLabel() {
+        guard let title = title
             else { return }
         textLabel?.text = title
         textLabel?.textColor = .white
@@ -36,4 +35,5 @@ class RepeatCell: UITableViewCell {
         tintColor = .customOrange
         selectionStyle = .none
     }
+    
 }

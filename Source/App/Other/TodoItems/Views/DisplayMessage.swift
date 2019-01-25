@@ -20,10 +20,9 @@ public class DisplayMessage: UIView {
         setupView()
     }
     
-    private let messageLabel: UILabel = {
+    public let messageLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Nothing on your list yet, Tap the plus button below to add a new item"
         label.numberOfLines = 0
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 16)

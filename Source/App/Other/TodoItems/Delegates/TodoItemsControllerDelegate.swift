@@ -10,24 +10,23 @@ import UIKit
 
 extension TodoItemsController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.isEditing = true
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let editTodoController = EditTodoController.instantiate(from: .main)
+            else { return }
+        
+        let navigationController = CustomNavigationController(rootViewController: editTodoController)
+        present(navigationController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive,
                                                 title: "Delete",
                                                 handler: deleteHandler)
-        
-        let editAction = UITableViewRowAction(style: .normal,
-                                              title: "Edit",
-                                              handler: editHandler)
-        editAction.backgroundColor = .customDarkBlack
-        return [deleteAction, editAction]
+        return [deleteAction]
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -36,10 +35,4 @@ extension TodoItemsController: UITableViewDelegate {
         todoItems.remove(at: sourceIndexPath.row)
         todoItems.insert(movedTodoItem, at: destinationIndexPath.row)
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-    }
-    
-    
 }

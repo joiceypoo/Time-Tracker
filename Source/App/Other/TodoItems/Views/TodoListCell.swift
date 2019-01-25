@@ -12,7 +12,7 @@ public class TodoListCell: UITableViewCell {
     
     
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         setupView()
     }
     
@@ -34,17 +34,22 @@ public class TodoListCell: UITableViewCell {
     }()
     
     @objc private func checkboxPressed(sender: UIButton) {
+        let impact = UIImpactFeedbackGenerator(style: .light)
         if sender.currentImage == #imageLiteral(resourceName: "unchecked") {
             sender.setImage(#imageLiteral(resourceName: "checked"), for: .normal)
+            impact.impactOccurred()
         } else if sender.currentImage == #imageLiteral(resourceName: "checked") {
             sender.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
         }
     }
     
     private func setupView() {
+        detailTextLabel?.text = "Every day"
+        detailTextLabel?.textColor = .customLightGray
+        detailTextLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         backgroundColor = .customDarkGray
         textLabel?.textColor = .white
-        selectionStyle = .none
+        textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         accessoryView = checkBox
     }
 }
