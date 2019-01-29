@@ -15,10 +15,13 @@ extension RepeatController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath), cell.accessoryType.rawValue == 3 {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath) as? RepeatCell, cell.accessoryType.rawValue == 3 && cell.accessoryType == .checkmark {
             cell.accessoryType = .none
-        } else if let cell = tableView.cellForRow(at: indexPath) {
+            removeItemFromWeekDaysArray(item: cell.viewModel!)
+        } else if let cell = tableView.cellForRow(at: indexPath) as? RepeatCell {
             cell.accessoryType = .checkmark
+            addItemToWeekDaysArray(item: cell.viewModel!)
         }
     }
 }

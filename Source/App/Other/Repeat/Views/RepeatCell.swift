@@ -24,16 +24,21 @@ class RepeatCell: UITableViewCell {
         didSet { bindViewModel() }
     }
     
+    var weekdays: [String] = []
+    
     private func bindViewModel() {
         guard let title = viewModel
             else { return }
-        textLabel?.text = title
+        textLabel?.text = "Every \(title)"
         textLabel?.textColor = .white
     }
     
     private func setupView() {
         backgroundColor = .customBlack
         tintColor = .customOrange
-        selectionStyle = .none
+        accessoryType = .checkmark
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        selectedBackgroundView = view
     }
 }

@@ -47,9 +47,12 @@ public class TodoListCell: UITableViewCell {
         detailTextLabel?.text = "Every day"
         detailTextLabel?.textColor = .customLightGray
         detailTextLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        backgroundColor = .customDarkGray
+        backgroundColor = .customBlack
         textLabel?.textColor = .white
         textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         accessoryView = checkBox
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        selectedBackgroundView = view
     }
 }

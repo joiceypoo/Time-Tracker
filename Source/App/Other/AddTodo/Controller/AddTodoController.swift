@@ -15,6 +15,7 @@ class AddTodoController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
         navigationItem.title = "Add Habit"
         view.backgroundColor = .customDarkBlack
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -35,7 +36,9 @@ class AddTodoController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupView()
+        if let index = self.todoItemDetailTable.indexPathForSelectedRow {
+            self.todoItemDetailTable.deselectRow(at: index, animated: true)
+        }
     }
     
     @objc private func handleAddTodoItem() {

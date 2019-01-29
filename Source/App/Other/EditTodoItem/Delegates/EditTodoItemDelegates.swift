@@ -10,6 +10,7 @@ import UIKit
 
 extension EditTodoController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 1 {
             guard let repeatController = RepeatController.instantiate(from: .main)
                 else { return }

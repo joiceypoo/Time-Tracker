@@ -19,6 +19,13 @@ public class EditTodoController: UIViewController {
         setupView()
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let index = self.todoItemDetailTable.indexPathForSelectedRow {
+            self.todoItemDetailTable.deselectRow(at: index, animated: true)
+        }
+    }
+    
     private func setupView() {
         view.backgroundColor = .customDarkBlack
         navigationItem.title = "Edit"

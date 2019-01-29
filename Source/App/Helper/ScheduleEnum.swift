@@ -9,11 +9,11 @@
 import Foundation
 
 enum ScheduleEnum: String {
-    case sunday = "Every Sunday"
-    case monday = "Every Monday"
-    case tuesday = "Every Tuesday"
-    case wednesday = "Every Wednesday"
-    case thursday = "Every Thursday"
-    case friday = "Every Friday"
-    case saturday = "Every Saturday"
+    case sunday = "Sunday"
+    case monday = "Monday"
+    case tuesday = "Tuesday"
+    case wednesday = "Wednesday"
+    case thursday = "Thursday"
+    case friday = "Friday"
+    case saturday = "Saturday"
 }

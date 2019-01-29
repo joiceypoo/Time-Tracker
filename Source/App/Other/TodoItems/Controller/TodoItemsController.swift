@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TodoItemsController: UIViewController {
 
@@ -25,9 +26,6 @@ class TodoItemsController: UIViewController {
     @IBOutlet weak var calenderView: UIView!
     @IBOutlet weak var todoListsTable: UITableView!
     
-    var sourceIndexPath: IndexPath?
-    var snapshot: UIView?
-    let bottonBorder = CALayer()
     let topBorder = CALayer()
     
     override func viewDidLoad() {
@@ -39,10 +37,16 @@ class TodoItemsController: UIViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let index = self.todoListsTable.indexPathForSelectedRow {
+            self.todoListsTable.deselectRow(at: index, animated: true)
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        topBorder.frame = CGRect(x: 0, y: 1, width: calenderView.bounds.width, height: 0.5)
-        bottonBorder.frame = CGRect(x: 0, y: 110, width: calenderView.bounds.width, height: 0.5)
+        topBorder.frame = CGRect(x: 0, y: 1, width: calenderView.bounds.width, height: 0.3)
     }
     
     @objc func handleLongPress(recognizer: UILongPressGestureRecognizer) {
@@ -63,17 +67,10 @@ class TodoItemsController: UIViewController {
         topBorder.frame = CGRect(x: 0,
                                  y: 1,
                                  width: calenderView.bounds.width,
-                                 height: 1)
-        bottonBorder.frame = CGRect(x: 0,
-                                    y: 110,
-                                    width: calenderView.bounds.width,
-                                    height: 1)
-        
+                                 height: 0.3)
         topBorder.backgroundColor = UIColor.customLightGray.cgColor
-        bottonBorder.backgroundColor = UIColor.customLightGray.cgColor
+        calenderView.backgroundColor = .customBlack
         calenderView.layer.addSublayer(topBorder)
-        calenderView.layer.addSublayer(bottonBorder)
-        calenderView.backgroundColor = .customDarkGray
         
         todoListsTable.backgroundColor = .customDarkBlack
         todoListsTable.separatorColor = .customLightGray

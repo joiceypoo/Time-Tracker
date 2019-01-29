@@ -84,7 +84,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="lqW-8W-Z3A" secondAttribute="bottom" constant="8" id="3Uq-Le-EGr"/>
                                     <constraint firstAttribute="trailing" secondItem="lqW-8W-Z3A" secondAttribute="trailing" constant="19" id="Iqi-3f-baW"/>
@@ -150,11 +150,11 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faD-9z-eRI" customClass="AddButton" customModule="Habbbit" customModuleProvider="target">
-                                <rect key="frame" x="310" y="594" width="55" height="55"/>
+                                <rect key="frame" x="319" y="604" width="46" height="46"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="98p-IW-wSN"/>
-                                    <constraint firstAttribute="width" constant="55" id="ofN-4J-vVN"/>
+                                    <constraint firstAttribute="height" constant="46" id="98p-IW-wSN"/>
+                                    <constraint firstAttribute="width" constant="46" id="ofN-4J-vVN"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="add"/>
                                 <connections>
@@ -172,7 +172,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="G1L-ms-s5B" secondAttribute="trailing" constant="17" id="S0C-7f-Yhp"/>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SJD-Zv-uEQ"/>
                             <constraint firstItem="G1L-ms-s5B" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Td6-te-kcy"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="faD-9z-eRI" secondAttribute="bottom" constant="18" id="mgK-Yf-dZ3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="faD-9z-eRI" secondAttribute="bottom" constant="17" id="mgK-Yf-dZ3"/>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="top" secondItem="lqW-8W-Z3A" secondAttribute="bottom" constant="7" id="n9a-h9-n7D"/>
                             <constraint firstItem="2uN-AX-BgW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nVb-fx-Yw4"/>
                             <constraint firstItem="2uN-AX-BgW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="oAf-IX-cgn"/>
@@ -220,15 +220,21 @@
                                                         <constraint firstAttribute="height" constant="27.5" id="snc-Lk-tgW"/>
                                                     </constraints>
                                                 </view>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tyr-6b-LFc">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tyr-6b-LFc">
                                                     <rect key="frame" x="25" y="8" width="340" height="27"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="RjK-XJ-zon"/>
                                                     </constraints>
                                                     <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                            <color key="value" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -286,10 +292,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LHf-om-E3f">
-                                <rect key="frame" x="0.0" y="50" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="350"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="kEn-oV-7Eu"/>
+                                    <constraint firstAttribute="height" constant="350" id="kEn-oV-7Eu"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatCell" id="6nq-lH-jnS" customClass="RepeatCell" customModule="Habbbit" customModuleProvider="target">
@@ -501,6 +507,7 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Category Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WvS-Y6-BK6">
                                         <rect key="frame" x="28" y="10" width="339" height="30"/>
+                                        <color key="tintColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="yXa-kd-skq"/>
                                         </constraints>

@@ -9,7 +9,7 @@
 import UIKit
 
 class RepeatController: UIViewController {
-
+    
     @IBOutlet weak var scheduleTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +17,23 @@ class RepeatController: UIViewController {
         view.backgroundColor = .customDarkBlack
         navigationController?.navigationBar.tintColor = .customOrange
         scheduleTable.separatorColor = .customLightGray
+    }
+    
+    var weekDays: [String] = [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+    ]
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.isMovingFromParent {
+            NotificationCenter.default.post(name: .weekDays, object: nil, userInfo: ["weekDays": weekDays])
+        }
     }
     
     let schedules = [ScheduleEnum.sunday.rawValue,
@@ -27,4 +44,20 @@ class RepeatController: UIViewController {
                      ScheduleEnum.friday.rawValue,
                      ScheduleEnum.saturday.rawValue
     ]
+    
+    internal func addItemToWeekDaysArray(item: String) {
+        if weekDays.index(of: item) == nil {
+            let index = item.index(item.startIndex, offsetBy: 2)
+            weekDays.append(String(item[...index]))
+        }
+    }
+    
+    internal func removeItemFromWeekDaysArray(item: String) {
+        let weekdayIndex = item.index(item.startIndex, offsetBy: 2)
+        let weekday = String(item[...weekdayIndex])
+        if let index = weekDays.index(of: weekday) {
+            weekDays.remove(at: index)
+        }
+    }
+    
 }

@@ -35,4 +35,22 @@ extension TodoItemsController: UITableViewDelegate {
         todoItems.remove(at: sourceIndexPath.row)
         todoItems.insert(movedTodoItem, at: destinationIndexPath.row)
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = IndentLabel()
+        label.backgroundColor = .customDarkBlack
+        label.font = UIFont.boldSystemFont(ofSize: 19)
+        label.textColor = .customLightGray
+        label.text = "Gym Section"
+        return label
+    }
+    
 }
