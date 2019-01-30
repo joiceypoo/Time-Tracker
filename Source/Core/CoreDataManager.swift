@@ -22,6 +22,45 @@ struct CoreDataManager {
         return container
     }()
     
+    func fetchTodos() -> [TodoItem] {
+        let context = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<TodoItem>(entityName: "TodoItem")
+        do {
+            let todos = try context.fetch(fetchRequest)
+            return todos
+        } catch let err {
+            print("Error", err)
+            return []
+        }
+    }
+    
+    private func createTodo(todo title: String,
+                            repeatDays: [String],
+                            category: String,
+                            isRepeating: Bool,
+                            notes: String) {
+        
+        let context = persistentContainer.viewContext
+        let todoItem = NSEntityDescription.insertNewObject(forEntityName: "TodoItem", into: context) as! TodoItem
+        todoItem.setValue(title, forKey: "title")
+        todoItem.setValue(notes, forKey: "notes")
+        todoItem.category?.name = category        
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: repeatDays,
+                                                        requiringSecureCoding: false)
+            todoItem.repeatTodos?.weekday = data
+            
+        } catch let err {
+            print(err)
+        }
+        
+        do {
+            try context.save()
+        } catch let err {
+            print("Error \(err)")
+        }
+    }
+    
 //    func fetchCompanies() -> [Company] {
 //        let context = persistentContainer.viewContext
 //        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")

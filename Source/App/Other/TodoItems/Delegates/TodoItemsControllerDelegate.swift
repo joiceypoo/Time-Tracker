@@ -8,16 +8,24 @@
 
 import UIKit
 
-extension TodoItemsController: UITableViewDelegate {
+extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate {
+    func handleTodoDeletion(todoItem: String) {
+        guard let index = todoItems.index(of: todoItem) else { return }
+        todoItems.remove(at: index)
+        todoListsTable.reloadData()
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
         guard let editTodoController = EditTodoController.instantiate(from: .main)
             else { return }
-        
+        editTodoController.textTitle = cell?.textLabel?.text
+        editTodoController.delegate = self
         let navigationController = CustomNavigationController(rootViewController: editTodoController)
         present(navigationController, animated: true, completion: nil)
     }

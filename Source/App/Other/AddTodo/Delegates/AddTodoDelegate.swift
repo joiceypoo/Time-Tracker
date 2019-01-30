@@ -8,7 +8,15 @@
 
 import UIKit
 
-extension AddTodoController: UITableViewDelegate {
+extension AddTodoController: UITableViewDelegate, CustomCellDelegate {
+    func postCategory(category: String) {
+        self.category = category
+    }
+    
+    func handleWeekdays(days: [String]) {
+        weekdays = days
+    }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

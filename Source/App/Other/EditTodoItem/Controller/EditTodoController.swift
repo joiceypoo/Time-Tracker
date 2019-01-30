@@ -7,12 +7,18 @@
 //
 
 import UIKit
+protocol EditTodoControllerDelegate {
+    func handleTodoDeletion(todoItem: String)
+}
 
 public class EditTodoController: UIViewController {
 
     @IBOutlet weak var deleteView: UIView!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var todoItemDetailTable: UITableView!
+    
+    var textTitle: String?
+    var delegate: EditTodoControllerDelegate?
    
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,4 +61,12 @@ public class EditTodoController: UIViewController {
     @objc private func handleDoneAction() {
         
     }
+    
+    @IBAction func handleTodoDelete(_ sender: UIButton) {
+        guard let title = textTitle else { return }
+        dismiss(animated: true) {
+            self.delegate?.handleTodoDeletion(todoItem: title)
+        }
+    }
+    
 }

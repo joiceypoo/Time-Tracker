@@ -13,6 +13,9 @@ class AddTodoController: UIViewController {
     @IBOutlet weak var todoItemDetailTable: UITableView!
     @IBOutlet weak var notesTextView: UITextView!
     
+    var weekdays: [String] = []
+    var category: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -42,7 +45,7 @@ class AddTodoController: UIViewController {
     }
     
     @objc private func handleAddTodoItem() {
-        print("I am here")
+        print(weekdays, category)
     }
     
     @objc private func handleDismiss() {

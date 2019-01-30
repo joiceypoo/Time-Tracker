@@ -15,10 +15,17 @@ extension CategoriesController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath), cell.accessoryType.rawValue == 3 {
-            cell.accessoryType = .none
-        } else if let cell = tableView.cellForRow(at: indexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? CategoriesCell, let category = cell.textLabel?.text {
+            selectedCategory = category
             cell.accessoryType = .checkmark
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath), cell.accessoryType.rawValue == 3,
+            let category = cell.textLabel?.text {
+            selectedCategory = category
+            cell.accessoryType = .none
         }
     }
 }

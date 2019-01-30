@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomTitleCell: UITableViewCell {
+class TitleCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

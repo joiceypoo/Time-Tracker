@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol CustomCellDelegate {
+    func handleWeekdays(days: [String])
+    func postCategory(category: String)
+}
+
 class CustomCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -27,6 +32,7 @@ class CustomCell: UITableViewCell {
         }
     }
     
+    var delegate: CustomCellDelegate?
     let weekDays = [
         "Sun",
         "Mon",
@@ -63,6 +69,8 @@ class CustomCell: UITableViewCell {
                                                selector: #selector(updateRepeatLabel(notification:)),
                                                name: .weekDays,
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCategory),
+                                               name: .postCategory, object: nil)
     }
     
     @objc private func updateRepeatLabel(notification: Notification) {
@@ -74,9 +82,16 @@ class CustomCell: UITableViewCell {
                     days.append(weekday)
                 }
             }
-            
+            delegate?.handleWeekdays(days: days)
             self.detailTextLabel?.text = days.count == 7 ? "Every day": days.joined(separator: " ")
             days = []
+        }
+    }
+    
+    @objc private func updateCategory(notification: Notification) {
+        if let userInfo = notification.userInfo as? [String: String],
+            let category = userInfo["postCategory"] {
+            delegate?.postCategory(category: category)
         }
     }
 }

@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
     static let weekDays = Notification.Name("weekDays")
+    static let postCategory = Notification.Name("postCategory")
 }

@@ -18,6 +18,7 @@ extension EditTodoController: UITableViewDataSource {
             guard let cell = EditTodoCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
+            cell.todoItemTitle.text = textTitle
             return cell
         } else if indexPath.row == 1 {
             tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")

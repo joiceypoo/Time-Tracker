@@ -15,7 +15,7 @@ extension AddTodoController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            guard let cell = CustomTitleCell.instantiate(from: tableView, for: indexPath) else {
+            guard let cell = TitleCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
             return cell
@@ -24,6 +24,7 @@ extension AddTodoController: UITableViewDataSource {
             guard let cell = CustomCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
+            cell.delegate = self
             cell.viewModel = DescriptionVM(title: "Repeat", details: "Every day")
             return cell
         } else if indexPath.row == 2 {
@@ -38,6 +39,7 @@ extension AddTodoController: UITableViewDataSource {
             guard let cell = CustomCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
+            cell.delegate = self
             cell.viewModel = DescriptionVM(title: "Category", details: "Optional")
             return cell
         }

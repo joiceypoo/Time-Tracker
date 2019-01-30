@@ -25,6 +25,9 @@ class TodoItemsController: UIViewController {
     
     @IBOutlet weak var calenderView: UIView!
     @IBOutlet weak var todoListsTable: UITableView!
+    @IBOutlet weak var dateCollectionView: UICollectionView!
+    
+    @IBOutlet weak var selectedDate: UILabel!
     
     let topBorder = CALayer()
     
@@ -42,6 +45,12 @@ class TodoItemsController: UIViewController {
         if let index = self.todoListsTable.indexPathForSelectedRow {
             self.todoListsTable.deselectRow(at: index, animated: true)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        scrollToDate(date: Date())
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -96,6 +105,52 @@ class TodoItemsController: UIViewController {
         let navigationController = CustomNavigationController(rootViewController: editTodoController)
         present(navigationController, animated: true, completion: nil)
     }
+    
+    func displayDate(date: Date) {
+        UsedDates.shared.displayedDate = date
+        UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date) //so that if the selected date is Wednesday, it keeps selecting Wednesday next week
+        self.selectedDate.text = UsedDates.shared.displayedDateString
+    }
+    
+    func scrollToDate(date: Date)
+    {
+        let startDate = UsedDates.shared.startDate
+        let cal = Calendar.current
+        if let numberOfDays = cal.dateComponents([.day], from: startDate, to: date).day {
+            let extraDays: Int = numberOfDays % 7 // will = 0 for Mondays, 1 for Tuesday, etc ..
+            let scrolledNumberOfDays = numberOfDays - extraDays
+            let firstMondayIndexPath = IndexPath(row: scrolledNumberOfDays, section: 0)
+            dateCollectionView.scrollToItem(at: firstMondayIndexPath, at: .left , animated: false)
+        }
+        displayDate(date: date)
+    }
+    
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        displayWeek()
+    }
+    
+    func displayWeek() {
+        var visibleCells = dateCollectionView.visibleCells
+        visibleCells.sort { (cell1: UICollectionViewCell, cell2: UICollectionViewCell) -> Bool in
+            guard let cell1 = cell1 as? DateCollectionViewCell else {
+                return false
+            }
+            guard let cell2 = cell2 as? DateCollectionViewCell else {
+                return false
+            }
+            let result = cell1.date!.compare(cell2.date!)
+            return result == ComparisonResult.orderedAscending
+            
+        }
+        let middleIndex = visibleCells.count / 2
+        let middleCell = visibleCells[middleIndex] as! DateCollectionViewCell
+        let displayedDate = UsedDates.shared.getDateOfAnotherDayOfTheSameWeek(selectedDate: middleCell.date!,
+                                                                              requiredDayOfWeek: UsedDates.shared.selectdDayOfWeek)
+        displayDate(date: displayedDate)
+    }
+
 }
 
 
