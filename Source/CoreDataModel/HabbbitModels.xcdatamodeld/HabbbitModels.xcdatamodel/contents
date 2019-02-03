@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18D42" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="todoItem" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TodoItem" inverseName="category" inverseEntity="TodoItem" syncable="YES"/>
+        <relationship name="todoItem" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TodoItem" syncable="YES"/>
     </entity>
     <entity name="Repeat" representedClassName="Repeat" syncable="YES" codeGenerationType="class">
         <attribute name="isRepeating" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -10,15 +10,16 @@
         <relationship name="todoItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TodoItem" inverseName="repeatTodos" inverseEntity="TodoItem" syncable="YES"/>
     </entity>
     <entity name="TodoItem" representedClassName="TodoItem" syncable="YES" codeGenerationType="class">
+        <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="completed" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="todoItem" inverseEntity="Category" syncable="YES"/>
         <relationship name="repeatTodos" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repeat" inverseName="todoItem" inverseEntity="Repeat" syncable="YES"/>
     </entity>
     <elements>
         <element name="Category" positionX="168.96484375" positionY="-91.98828125" width="128" height="73"/>
         <element name="Repeat" positionX="174.87109375" positionY="130.421875" width="128" height="88"/>
-        <element name="TodoItem" positionX="-181.98046875" positionY="-20.8984375" width="128" height="118"/>
+        <element name="TodoItem" positionX="-284.46875" positionY="-27.71484375" width="128" height="133"/>
     </elements>
 </model>

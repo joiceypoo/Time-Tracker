@@ -12,13 +12,12 @@ class CategoriesController: UIViewController {
 
     @IBOutlet weak var categoriesTable: UITableView!
     
-    let categories: [String] = ["Work Outs", "Recreation", "Hospital"]
-//    let categories: [String] = []
-    
-    var selectedCategory = ""
+    var categories: [Category] = []
+    var selectedCategory = "Uncategorized"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        categories = CoreDataManager.shared.fetchCategories()
         view.backgroundColor = .customDarkBlack
         navigationController?.navigationBar.tintColor = .customOrange
         setupView()
@@ -29,7 +28,7 @@ class CategoriesController: UIViewController {
         if self.isMovingFromParent {
             NotificationCenter.default.post(name: .postCategory,
                                             object: nil,
-                                            userInfo: ["weekDays": selectedCategory])
+                                            userInfo: ["postCategory": selectedCategory])
         }
     }
     
@@ -48,6 +47,7 @@ class CategoriesController: UIViewController {
     @objc private func addCategoriesHandler() {
         guard let addCategoryController = AddCategoryController.instantiate(from: .main)
             else { return }
+        addCategoryController.delegate = self
         let navigationController = CustomNavigationController(rootViewController: addCategoryController)
         present(navigationController, animated: true, completion: nil)
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 public class TodoListCell: UITableViewCell {
     
@@ -19,6 +20,18 @@ public class TodoListCell: UITableViewCell {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
+    }
+    
+    var viewModel: TodoItem? {
+        didSet { bindViewModel() }
+    }
+    
+    private func bindViewModel() {
+        guard let viewModel = viewModel else { return }
+        let weekdays = viewModel.repeatTodos?.weekday
+        let days = Unarchive.unarchiveData(from: weekdays)
+        textLabel?.text = viewModel.title
+        detailTextLabel?.text = days
     }
     
     private lazy var checkBox: UIButton = {
@@ -44,7 +57,6 @@ public class TodoListCell: UITableViewCell {
     }
     
     private func setupView() {
-        detailTextLabel?.text = "Every day"
         detailTextLabel?.textColor = .customLightGray
         detailTextLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         backgroundColor = .customBlack

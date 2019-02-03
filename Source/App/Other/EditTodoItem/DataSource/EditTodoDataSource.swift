@@ -18,28 +18,28 @@ extension EditTodoController: UITableViewDataSource {
             guard let cell = EditTodoCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
-            cell.todoItemTitle.text = textTitle
+            cell.todo = todo
             return cell
         } else if indexPath.row == 1 {
             tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
             guard let cell = CustomCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
-            cell.viewModel = DescriptionVM(title: "Repeat", details: "Every day")
+            cell.viewModel = EditViewModel(todo: todo!, index: indexPath.row)
             return cell
         } else if indexPath.row == 2 {
             tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
             guard let cell = CustomCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
-            cell.viewModel = DescriptionVM(title: "Completed", details: "0 times")
+            cell.viewModel = EditViewModel(todo: todo!, index: indexPath.row)
             return cell
         } else {
             tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
             guard let cell = CustomCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
-            cell.viewModel = DescriptionVM(title: "Category", details: "Optional")
+            cell.viewModel = EditViewModel(todo: todo!, index: indexPath.row)
             return cell
         }
     }

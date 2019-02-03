@@ -12,10 +12,17 @@ public class EditTodoCell: UITableViewCell {
     
     @IBOutlet weak var todoItemTitle: UITextField!
     
+    var todo: TodoItem? {
+        didSet { bindViewModel() }
+    }
     public override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .customBlack
-        todoItemTitle.text = "Amazon"
         todoItemTitle?.textColor = .white
+    }
+    
+    private func bindViewModel() {
+        guard let todo = todo else { return }
+        todoItemTitle.text = todo.title
     }
 }

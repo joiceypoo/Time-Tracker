@@ -19,6 +19,9 @@ public class EditTodoController: UIViewController {
     
     var textTitle: String?
     var delegate: EditTodoControllerDelegate?
+    
+    
+    var todo: TodoItem?
    
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +51,7 @@ public class EditTodoController: UIViewController {
         rightBarButtonItem.tintColor = .customOrange
         navigationItem.leftBarButtonItem = leftBarButtonItem
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        notesTextView.text = todo?.notes
         notesTextView.backgroundColor = .customBlack
         notesTextView.textColor = .customLightGray
         todoItemDetailTable.separatorColor = .customLightGray
@@ -59,7 +63,7 @@ public class EditTodoController: UIViewController {
     }
     
     @objc private func handleDoneAction() {
-        
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func handleTodoDelete(_ sender: UIButton) {

@@ -17,7 +17,7 @@ extension CategoriesController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = CategoriesCell.instantiate(from: tableView, for: indexPath)
             else { return UITableViewCell() }
-        cell.title = categories[indexPath.row]
+        cell.title = categories[indexPath.row].name
         return cell
     }
     

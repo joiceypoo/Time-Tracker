@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension AddTodoController: UITableViewDataSource {
+extension AddHabitController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -18,29 +18,31 @@ extension AddTodoController: UITableViewDataSource {
             guard let cell = TitleCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
+            cell.titleTextField.delegate = self
             return cell
         } else if indexPath.row == 1 {
-            tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
-            guard let cell = CustomCell.instantiate(from: tableView, for: indexPath) else {
+            tableView.register(AddHabitCell.self, forCellReuseIdentifier: "AddHabitCell")
+            guard let cell = AddHabitCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
             cell.delegate = self
             cell.viewModel = DescriptionVM(title: "Repeat", details: "Every day")
             return cell
         } else if indexPath.row == 2 {
-            tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
-            guard let cell = CustomCell.instantiate(from: tableView, for: indexPath) else {
+            tableView.register(AddHabitCell.self, forCellReuseIdentifier: "AddHabitCell")
+            guard let cell = AddHabitCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
             cell.viewModel = DescriptionVM(title: "Completed", details: "0 times")
             return cell
         } else {
-            tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
-            guard let cell = CustomCell.instantiate(from: tableView, for: indexPath) else {
+            tableView.register(AddHabitCell.self, forCellReuseIdentifier: "AddHabitCell")
+            guard let cell = AddHabitCell.instantiate(from: tableView, for: indexPath) else {
                 return UITableViewCell()
             }
             cell.delegate = self
-            cell.viewModel = DescriptionVM(title: "Category", details: "Optional")
+            category = "Uncategorized"
+            cell.viewModel = DescriptionVM(title: "Category", details: "Uncategorized")
             return cell
         }
     }

@@ -10,6 +10,7 @@ import UIKit
 
 class TitleCell: UITableViewCell {
 
+    @IBOutlet weak var titleTextField: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .customBlack

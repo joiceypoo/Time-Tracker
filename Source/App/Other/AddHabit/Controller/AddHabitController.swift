@@ -8,19 +8,24 @@
 
 import UIKit
 
-class AddTodoController: UIViewController {
+protocol AddHabitDelegate {
+    func didAddHabit(todo: TodoItem, category: String?)
+}
+
+class AddHabitController: UIViewController {
 
     @IBOutlet weak var todoItemDetailTable: UITableView!
     @IBOutlet weak var notesTextView: UITextView!
     
-    var weekdays: [String] = []
+    var weekdays: [String] = ["Every day"]
     var category: String?
+    var habitTitle: String?
+    var delegate: AddHabitDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         navigationItem.title = "Add Habit"
-        view.backgroundColor = .customDarkBlack
         navigationController?.navigationBar.prefersLargeTitles = false
         let leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                             style: .plain,
@@ -29,7 +34,7 @@ class AddTodoController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(title: "Add",
                                                  style: .plain,
                                                  target: self,
-                                                 action: #selector(handleAddTodoItem))
+                                                 action: #selector(addHabit))
         leftBarButtonItem.tintColor = .customOrange
         rightBarButtonItem.tintColor = .customGray
         navigationItem.leftBarButtonItem = leftBarButtonItem
@@ -44,8 +49,29 @@ class AddTodoController: UIViewController {
         }
     }
     
-    @objc private func handleAddTodoItem() {
-        print(weekdays, category)
+    @objc private func addHabit() {
+        let longDateFormatter = DateFormatter()
+        longDateFormatter.dateFormat = "EEEE, d MMMM yyyy"
+        let dateString = longDateFormatter.string(from: Date())
+        if let title = habitTitle {
+            let (todo, cat) = CoreDataManager.shared.createTodo(todo: title,
+                                                         repeatDays: weekdays,
+                                                         categoryName: category,
+                                                         isRepeating: isRepeating,
+                                                         creationDate: dateString,
+                                                         notes: notesTextView.text)
+            dismiss(animated: true) {
+                self.delegate?.didAddHabit(todo: todo, category: cat)
+            }
+        }
+    }
+    
+    var isRepeating: Bool {
+        if weekdays[0] == "Every day" || weekdays.count == 7 {
+            return true
+        } else {
+            return false
+        }
     }
     
     @objc private func handleDismiss() {
@@ -53,8 +79,10 @@ class AddTodoController: UIViewController {
     }
     
     private func setupView() {
+        view.backgroundColor = .customDarkBlack
         notesTextView.backgroundColor = .customBlack
         notesTextView.textColor = .customLightGray
+        notesTextView.delegate = self
         todoItemDetailTable.separatorColor = .customLightGray
     }
 }

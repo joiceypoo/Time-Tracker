@@ -8,7 +8,12 @@
 
 import UIKit
 
-extension CategoriesController: UITableViewDelegate {
+extension CategoriesController: UITableViewDelegate, AddCategoryDelegate {
+    func didAddCategory(category: Category) {
+        categories.append(category)
+        let newIndexPath = IndexPath(row: categories.count - 1, section: 0)
+        categoriesTable.insertRows(at: [newIndexPath], with: .automatic)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50

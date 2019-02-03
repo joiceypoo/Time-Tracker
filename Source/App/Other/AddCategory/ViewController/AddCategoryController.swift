@@ -7,9 +7,17 @@
 //
 
 import UIKit
+import CoreData
+
+protocol AddCategoryDelegate {
+    func didAddCategory(category: Category)
+}
 
 class AddCategoryController: UIViewController {
 
+    @IBOutlet weak var categoryTextField: UITextField!
+    var delegate: AddCategoryDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -25,9 +33,25 @@ class AddCategoryController: UIViewController {
                                                 action: #selector(handleViewDismiss))
         leftBarButtonItem.tintColor = .customOrange
         navigationItem.leftBarButtonItem = leftBarButtonItem
+        categoryTextField.delegate = self
     }
     
     @objc private func handleViewDismiss() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    internal func createCategory(from name: String?) {
+        guard let name = name else { return }
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        let category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: context) as! Category
+        category.setValue(name, forKey: "name")
+        do {
+            try context.save()
+            dismiss(animated: true) {
+                self.delegate?.didAddCategory(category: category)
+            }
+        } catch let error {
+            print("Failed to save Category", error)
+        }
     }
 }

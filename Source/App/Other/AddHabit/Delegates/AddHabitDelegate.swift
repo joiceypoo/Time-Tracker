@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension AddTodoController: UITableViewDelegate, CustomCellDelegate {
+extension AddHabitController: UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, CustomCellDelegate {
     func postCategory(category: String) {
         self.category = category
     }
@@ -33,5 +33,28 @@ extension AddTodoController: UITableViewDelegate, CustomCellDelegate {
                 else { return }
             navigationController?.pushViewController(categoriesController, animated: true)
         }
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if (textField.text?.isEmpty)! {
+            let alertController = Alert.displayMessage(with: "The title field should not be empty",
+                                                       title: "Empty Field")
+            present(alertController, animated: true, completion: nil)
+        } else {
+            habitTitle = textField.text
+        }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        habitTitle = textField.text
+        return true
+    }
+    
+    public func textView(_ textView: UITextView,
+                         shouldChangeTextIn range: NSRange,
+                         replacementText text: String) -> Bool {
+        return true
     }
 }

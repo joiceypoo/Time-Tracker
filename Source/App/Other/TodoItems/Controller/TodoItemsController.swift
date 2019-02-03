@@ -10,18 +10,11 @@ import UIKit
 import CoreData
 
 class TodoItemsController: UIViewController {
-
-    var todoItems: [String] = ["Exercise at home",
-                               "Test Two",
-                               "Test Three",
-                               "Test Four",
-                               "Test Five",
-                               "Test Six",
-                               "Test Seven",
-                               "Test Eight",
-                               "Test Nine",
-                               "Test Ten"
-    ]
+    
+    var todos: [String: [TodoItem]] = [:]
+    var categories: [String] = []
+    var isUncategorized = false
+    var keys: [String] = []
     
     @IBOutlet weak var calenderView: UIView!
     @IBOutlet weak var todoListsTable: UITableView!
@@ -31,6 +24,11 @@ class TodoItemsController: UIViewController {
     
     let topBorder = CALayer()
     
+    internal func fetchTodos() {
+        todos = CoreDataManager.shared.fetchAllTodos()
+        categories = Array(todos.keys)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "To do"
@@ -38,6 +36,7 @@ class TodoItemsController: UIViewController {
                                                                         action: #selector(handleLongPress(recognizer:)))
         todoListsTable.addGestureRecognizer(longPressedGestureRecognizer)
         setupView()
+        fetchTodos()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,16 +86,17 @@ class TodoItemsController: UIViewController {
     }
     
     @IBAction private func addTodoItemButtonPressed(_ sender: AddButton) {
-        guard let addTodoController = AddTodoController.instantiate(from: .main)
+        guard let addHabitController = AddHabitController.instantiate(from: .main)
             else { return }
-        let navController = CustomNavigationController(rootViewController: addTodoController)
+        addHabitController.delegate = self
+        let navController = CustomNavigationController(rootViewController: addHabitController)
         present(navController, animated: true, completion: nil)
     }
     
     public func deleteHandler(action: UITableViewRowAction, indexPath: IndexPath) {
 //        let todoItem = todoItems[indexPath.row]
-        todoItems.remove(at: indexPath.row)
-        todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+//        todoItems.remove(at: indexPath.row)
+//        todoListsTable.deleteRows(at: [indexPath], with: .automatic)
     }
     
     public func editHandler(action: UITableViewRowAction, indexPath: IndexPath) {
@@ -108,7 +108,7 @@ class TodoItemsController: UIViewController {
     
     func displayDate(date: Date) {
         UsedDates.shared.displayedDate = date
-        UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date) //so that if the selected date is Wednesday, it keeps selecting Wednesday next week
+        UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date)
         self.selectedDate.text = UsedDates.shared.displayedDateString
     }
     
@@ -117,7 +117,7 @@ class TodoItemsController: UIViewController {
         let startDate = UsedDates.shared.startDate
         let cal = Calendar.current
         if let numberOfDays = cal.dateComponents([.day], from: startDate, to: date).day {
-            let extraDays: Int = numberOfDays % 7 // will = 0 for Mondays, 1 for Tuesday, etc ..
+            let extraDays: Int = numberOfDays % 7 
             let scrolledNumberOfDays = numberOfDays - extraDays
             let firstMondayIndexPath = IndexPath(row: scrolledNumberOfDays, section: 0)
             dateCollectionView.scrollToItem(at: firstMondayIndexPath, at: .left , animated: false)

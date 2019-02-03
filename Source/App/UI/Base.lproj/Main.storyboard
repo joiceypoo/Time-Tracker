@@ -207,19 +207,19 @@
             </objects>
             <point key="canvasLocation" x="847.20000000000005" y="111.99400299850076"/>
         </scene>
-        <!--Add Todo Controller-->
+        <!--Add Habit Controller-->
         <scene sceneID="wYh-mM-JYJ">
             <objects>
-                <viewController storyboardIdentifier="AddTodoControllerID" id="sJo-OH-3jz" customClass="AddTodoController" customModule="Habbbit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddHabitControllerID" id="sJo-OH-3jz" customClass="AddHabitController" customModule="Habbbit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bkH-dF-5le">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nOl-92-mm6">
-                                <rect key="frame" x="0.0" y="50" width="375" height="174"/>
+                                <rect key="frame" x="0.0" y="54" width="375" height="178"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="174" id="UA4-bt-Abd"/>
+                                    <constraint firstAttribute="height" constant="178" id="UA4-bt-Abd"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TitleCell" id="c6X-S9-c1H" customClass="TitleCell" customModule="Habbbit" customModuleProvider="target">
@@ -263,6 +263,9 @@
                                                 <constraint firstItem="wNS-2D-e6J" firstAttribute="top" secondItem="taW-E4-f0i" secondAttribute="top" constant="8" id="vnP-sM-h8X"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleTextField" destination="Tyr-6b-LFc" id="FSW-qI-gXq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -271,12 +274,12 @@
                                 </connections>
                             </tableView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Notes (Optional)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tF9-RO-5WS">
-                                <rect key="frame" x="0.0" y="252" width="375" height="152"/>
+                                <rect key="frame" x="0.0" y="256" width="375" height="148"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="152" id="uMy-wl-Neu"/>
+                                    <constraint firstAttribute="height" constant="148" id="uMy-wl-Neu"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -284,10 +287,10 @@
                         <constraints>
                             <constraint firstItem="tF9-RO-5WS" firstAttribute="leading" secondItem="m3E-AM-RnT" secondAttribute="leading" id="742-L5-99e"/>
                             <constraint firstItem="tF9-RO-5WS" firstAttribute="trailing" secondItem="m3E-AM-RnT" secondAttribute="trailing" id="UY1-tH-quk"/>
-                            <constraint firstItem="tF9-RO-5WS" firstAttribute="top" secondItem="nOl-92-mm6" secondAttribute="bottom" constant="28" id="dvP-Yw-wJX"/>
+                            <constraint firstItem="tF9-RO-5WS" firstAttribute="top" secondItem="nOl-92-mm6" secondAttribute="bottom" constant="24" id="dvP-Yw-wJX"/>
                             <constraint firstItem="nOl-92-mm6" firstAttribute="leading" secondItem="m3E-AM-RnT" secondAttribute="leading" id="hGk-up-b9s"/>
                             <constraint firstItem="nOl-92-mm6" firstAttribute="trailing" secondItem="m3E-AM-RnT" secondAttribute="trailing" id="mgu-yY-U3w"/>
-                            <constraint firstItem="nOl-92-mm6" firstAttribute="top" secondItem="m3E-AM-RnT" secondAttribute="top" constant="30" id="pFE-8w-6p4"/>
+                            <constraint firstItem="nOl-92-mm6" firstAttribute="top" secondItem="m3E-AM-RnT" secondAttribute="top" constant="34" id="pFE-8w-6p4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m3E-AM-RnT"/>
                     </view>
@@ -578,6 +581,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nbp-Hf-HtA"/>
                     </view>
+                    <connections>
+                        <outlet property="categoryTextField" destination="WvS-Y6-BK6" id="yuN-Rj-P1k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgk-wx-sOl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

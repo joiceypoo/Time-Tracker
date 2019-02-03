@@ -51,8 +51,11 @@ extension TodoItemsController {
             if ((indexPath != nil) && (indexPath != CellIndexPath.initialIndexPath)),
                 let cellIndexPath = CellIndexPath.initialIndexPath,
                 let indexPath = indexPath {
-                todoItems.insert(todoItems.remove(at: cellIndexPath.row),
-                                 at: indexPath.row)
+                let category = categories[indexPath.section]
+                guard var todos = todos[category] else { return }
+//                todos.insert(todos.remove(at: cellIndexPath.row), at: indexPath.row)
+//                todoItems.insert(todoItems.remove(at: cellIndexPath.row),
+//                                 at: indexPath.row)
                 todoListsTable.moveRow(at: cellIndexPath,
                                        to: indexPath)
                 CellIndexPath.initialIndexPath = indexPath

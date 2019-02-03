@@ -11,15 +11,7 @@ import UIKit
 class RepeatController: UIViewController {
     
     @IBOutlet weak var scheduleTable: UITableView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationItem.title = "Repeat"
-        view.backgroundColor = .customDarkBlack
-        navigationController?.navigationBar.tintColor = .customOrange
-        scheduleTable.separatorColor = .customLightGray
-    }
-    
-    var weekDays: [String] = [
+    private var weekDays: [String] = [
         "Sun",
         "Mon",
         "Tue",
@@ -28,6 +20,13 @@ class RepeatController: UIViewController {
         "Fri",
         "Sat"
     ]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.title = "Repeat"
+        view.backgroundColor = .customDarkBlack
+        navigationController?.navigationBar.tintColor = .customOrange
+        scheduleTable.separatorColor = .customLightGray
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

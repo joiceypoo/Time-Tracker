@@ -17,13 +17,13 @@ extension TodoItemsController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DateCollectionViewCell", for: indexPath) as! DateCollectionViewCell
         let addedDays = indexPath.row
         var addedDaysDateComp = DateComponents()
-        addedDaysDateComp.day = addedDays//calculating the date of the given cell
+        addedDaysDateComp.day = addedDays
         let currentCellDate = Calendar.current.date(byAdding: addedDaysDateComp , to: UsedDates.shared.startDate)
         
         if let cellDate = currentCellDate {
             cell.date = cellDate
             let dayOfMonth = Calendar.current.component(.day, from: cellDate)
-            cell.dayOfMonth.text = String(describing: dayOfMonth)            
+            cell.dayOfMonth.text = String(describing: dayOfMonth)
         }
         return cell
     }
