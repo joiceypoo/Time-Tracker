@@ -59,7 +59,8 @@ class AddHabitController: UIViewController {
                                                          categoryName: category,
                                                          isRepeating: isRepeating,
                                                          creationDate: dateString,
-                                                         notes: notesTextView.text)
+                                                         notes: notesTextView.text,
+                                                         day: Date())
             dismiss(animated: true) {
                 self.delegate?.didAddHabit(todo: todo)
             }

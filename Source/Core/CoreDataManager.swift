@@ -27,8 +27,10 @@ struct CoreDataManager {
                     categoryName: String?,
                     isRepeating: Bool,
                     creationDate: String,
-                    notes: String) -> TodoItem {
-        
+                    notes: String,
+                    day: Date) -> TodoItem {
+        let weekday = Calendar.current.component(.weekday, from: day)
+        let day = Days.getDay(dayOfWeekNumber: weekday)
         let context = persistentContainer.viewContext
         
         let todo = NSEntityDescription.insertNewObject(forEntityName: "TodoItem",
@@ -36,6 +38,7 @@ struct CoreDataManager {
         
         let repeatTodo = Repeat(context: context)
         repeatTodo.isRepeating = isRepeating
+        repeatTodo.dayString = day
         
         todo.title = title
         todo.creationDate = creationDate
@@ -66,12 +69,12 @@ struct CoreDataManager {
         }
     }
     
-    func fetchAllTodos() -> [(key: String, value: [TodoItem])]  {
+    func fetchAllTodos(for day: String) -> [(key: String, value: [TodoItem])]  {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<TodoItem>(entityName: "TodoItem")
-        let sortDescriptor = NSSortDescriptor(key: "creationDate",
-                                              ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        let predicate = NSPredicate(format: "repeatTodos.isRepeating == %@ || repeatTodos.dayString == %@",
+                                    argumentArray: [true, day])
+        fetchRequest.predicate = predicate
         var todosDictionary: [String: [TodoItem]] = [:]
         do {
             let todos = try context.fetch(fetchRequest)

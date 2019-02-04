@@ -13,7 +13,7 @@ class TodoItemsController: UIViewController {
     
     var todos: [(key: String, value: [TodoItem])] = []
     var categories: [String] = []
-    var isUncategorized = false
+    private var lastContentOffSet: CGFloat = 0
     
     @IBOutlet weak var calenderView: UIView!
     @IBOutlet weak var todoListsTable: UITableView!
@@ -23,8 +23,8 @@ class TodoItemsController: UIViewController {
     
     let topBorder = CALayer()
     
-    internal func fetchTodos() {
-        todos = CoreDataManager.shared.fetchAllTodos()
+    internal func fetchTodos(from day: String) {
+        todos = CoreDataManager.shared.fetchAllTodos(for: day)
         var newCategories : [String] = []
         for tuple in todos {
             newCategories.append(tuple.key)
@@ -38,8 +38,9 @@ class TodoItemsController: UIViewController {
         let longPressedGestureRecognizer = UILongPressGestureRecognizer(target: self,
                                                                         action: #selector(handleLongPress(recognizer:)))
         todoListsTable.addGestureRecognizer(longPressedGestureRecognizer)
+        let day = Calendar.current.component(.weekday, from: Date())
         setupView()
-        fetchTodos()
+        fetchTodos(from: UsedDates.shared.getDay(from: day))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,10 +118,12 @@ class TodoItemsController: UIViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
-    func displayDate(date: Date) {
+    func displayDate(date: Date) -> String {
         UsedDates.shared.displayedDate = date
         UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date)
         self.selectedDate.text = UsedDates.shared.displayedDateString
+        let dayString = UsedDates.shared.getDay(from: UsedDates.shared.selectdDayOfWeek)
+        return dayString
     }
     
     func scrollToDate(date: Date)
@@ -133,16 +136,22 @@ class TodoItemsController: UIViewController {
             let firstMondayIndexPath = IndexPath(row: scrolledNumberOfDays, section: 0)
             dateCollectionView.scrollToItem(at: firstMondayIndexPath, at: .left , animated: false)
         }
-        displayDate(date: date)
+        _ = displayDate(date: date)
     }
-    
-    
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        displayWeek()
+        if lastContentOffSet > scrollView.contentOffset.x {
+            let dayString = displayWeek()
+            fetchTodos(from: dayString)
+            todoListsTable.reloadData()
+        } else if lastContentOffSet < scrollView.contentOffset.x {
+            let dayString = displayWeek()
+            fetchTodos(from: dayString)
+            todoListsTable.reloadData()
+        }
     }
     
-    func displayWeek() {
+    func displayWeek() -> String {
         var visibleCells = dateCollectionView.visibleCells
         visibleCells.sort { (cell1: UICollectionViewCell, cell2: UICollectionViewCell) -> Bool in
             guard let cell1 = cell1 as? DateCollectionViewCell else {
@@ -159,7 +168,8 @@ class TodoItemsController: UIViewController {
         let middleCell = visibleCells[middleIndex] as! DateCollectionViewCell
         let displayedDate = UsedDates.shared.getDateOfAnotherDayOfTheSameWeek(selectedDate: middleCell.date!,
                                                                               requiredDayOfWeek: UsedDates.shared.selectdDayOfWeek)
-        displayDate(date: displayedDate)
+        let dayString = displayDate(date: displayedDate)
+        return dayString
     }
 
 }

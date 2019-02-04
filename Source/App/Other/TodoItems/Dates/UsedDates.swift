@@ -119,5 +119,10 @@ class UsedDates {
             
         }
     }
+    
+    func getDay(from day: Int) -> String {
+        return Days.getDay(dayOfWeekNumber: day)
+    }
+    
 }
 
