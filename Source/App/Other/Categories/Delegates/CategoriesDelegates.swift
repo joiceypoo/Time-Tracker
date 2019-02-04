@@ -33,4 +33,11 @@ extension CategoriesController: UITableViewDelegate, AddCategoryDelegate {
             cell.accessoryType = .none
         }
     }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive,
+                                                title: "Delete",
+                                                handler: deleteHandler)
+        return [deleteAction]
+    }
 }

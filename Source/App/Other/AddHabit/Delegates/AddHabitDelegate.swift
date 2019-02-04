@@ -41,20 +41,33 @@ extension AddHabitController: UITableViewDelegate, UITextFieldDelegate, UITextVi
             let alertController = Alert.displayMessage(with: "The title field should not be empty",
                                                        title: "Empty Field")
             present(alertController, animated: true, completion: nil)
-        } else {
-            habitTitle = textField.text
         }
+        habitTitle = textField.text
+        textField.resignFirstResponder()
         return true
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        habitTitle = textField.text
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+            habitTitle = updatedText
+        }
         return true
     }
     
     public func textView(_ textView: UITextView,
                          shouldChangeTextIn range: NSRange,
                          replacementText text: String) -> Bool {
+        let resultRange = text.rangeOfCharacter(from: CharacterSet.newlines,
+                                                options: .backwards)
+        if text.count == 1 && resultRange != nil {
+            textView.resignFirstResponder()
+            return false
+        }
         return true
     }
 }

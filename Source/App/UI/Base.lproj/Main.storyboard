@@ -526,7 +526,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nJ-V4-BMc">
-                                <rect key="frame" x="0.0" y="75" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Category Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WvS-Y6-BK6">
                                         <rect key="frame" x="28" y="10" width="339" height="30"/>
@@ -552,7 +552,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6O-8W-lo3">
-                                <rect key="frame" x="22" y="86" width="1.5" height="28"/>
+                                <rect key="frame" x="22" y="59" width="1.5" height="28"/>
                                 <color key="backgroundColor" red="0.83921568629999999" green="0.43529411759999997" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1.5" id="yFd-ZM-0AM"/>
@@ -568,14 +568,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="X6O-8W-lo3" firstAttribute="centerY" secondItem="8nJ-V4-BMc" secondAttribute="centerY" id="F73-Jy-B1p"/>
+                            <constraint firstItem="X6O-8W-lo3" firstAttribute="centerY" secondItem="8nJ-V4-BMc" secondAttribute="centerY" constant="-2" id="F73-Jy-B1p"/>
                             <constraint firstItem="H3q-i7-iVX" firstAttribute="leading" secondItem="nbp-Hf-HtA" secondAttribute="leading" constant="32" id="GrV-zb-sz2"/>
-                            <constraint firstItem="8nJ-V4-BMc" firstAttribute="top" secondItem="nbp-Hf-HtA" secondAttribute="top" constant="55" id="IFD-II-i0X"/>
+                            <constraint firstItem="8nJ-V4-BMc" firstAttribute="top" secondItem="nbp-Hf-HtA" secondAttribute="top" constant="30" id="IFD-II-i0X"/>
+                            <constraint firstItem="X6O-8W-lo3" firstAttribute="top" secondItem="8nJ-V4-BMc" secondAttribute="bottom" constant="-41" id="InV-PO-ft3"/>
                             <constraint firstItem="8nJ-V4-BMc" firstAttribute="leading" secondItem="nbp-Hf-HtA" secondAttribute="leading" id="LZ6-yv-7bL"/>
-                            <constraint firstItem="H3q-i7-iVX" firstAttribute="top" secondItem="8nJ-V4-BMc" secondAttribute="bottom" constant="31" id="STx-ef-zkm"/>
+                            <constraint firstItem="H3q-i7-iVX" firstAttribute="top" secondItem="8nJ-V4-BMc" secondAttribute="bottom" constant="56" id="STx-ef-zkm"/>
                             <constraint firstItem="X6O-8W-lo3" firstAttribute="leading" secondItem="8nJ-V4-BMc" secondAttribute="leading" constant="22" id="eYf-6n-qfH"/>
                             <constraint firstItem="8nJ-V4-BMc" firstAttribute="trailing" secondItem="nbp-Hf-HtA" secondAttribute="trailing" id="hzL-n6-Abx"/>
-                            <constraint firstItem="X6O-8W-lo3" firstAttribute="top" secondItem="Qyd-j1-LN6" secondAttribute="topMargin" constant="66" id="t9C-34-F3S"/>
                             <constraint firstItem="nbp-Hf-HtA" firstAttribute="trailing" secondItem="H3q-i7-iVX" secondAttribute="trailing" constant="25" id="wl4-qz-JP0"/>
                             <constraint firstItem="WvS-Y6-BK6" firstAttribute="leading" secondItem="X6O-8W-lo3" secondAttribute="trailing" constant="4.5" id="yA1-vN-xCu"/>
                         </constraints>

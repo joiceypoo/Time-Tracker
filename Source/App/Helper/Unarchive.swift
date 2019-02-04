@@ -14,4 +14,10 @@ public class Unarchive {
         let stringArray = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(newData) as! [String]
         return stringArray.count == 7 ? "Every day": stringArray.joined(separator: " ")
     }
+    
+    static func unarchiveWeekdays(weekdays: Data?) -> [String] {
+        guard let newData = weekdays else { return [] }
+        let stringArray = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(newData) as! [String]
+        return stringArray
+    }
 }

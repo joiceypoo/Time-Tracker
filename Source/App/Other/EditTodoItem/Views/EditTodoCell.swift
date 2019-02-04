@@ -19,6 +19,7 @@ public class EditTodoCell: UITableViewCell {
         super.awakeFromNib()
         backgroundColor = .customBlack
         todoItemTitle?.textColor = .white
+        selectionStyle = .none
     }
     
     private func bindViewModel() {

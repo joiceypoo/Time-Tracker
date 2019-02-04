@@ -27,7 +27,7 @@ struct CoreDataManager {
                     categoryName: String?,
                     isRepeating: Bool,
                     creationDate: String,
-                    notes: String) -> (TodoItem, String) {
+                    notes: String) -> TodoItem {
         
         let context = persistentContainer.viewContext
         
@@ -51,7 +51,7 @@ struct CoreDataManager {
             print("Failed to archive data", error )
         }
         
-        return (todo, categoryName!)
+        return todo
     }
     
     func fetchCategories() -> [Category] {
@@ -66,7 +66,7 @@ struct CoreDataManager {
         }
     }
     
-    func fetchAllTodos() -> [String: [TodoItem]]  {
+    func fetchAllTodos() -> [(key: String, value: [TodoItem])]  {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<TodoItem>(entityName: "TodoItem")
         let sortDescriptor = NSSortDescriptor(key: "creationDate",
@@ -76,27 +76,24 @@ struct CoreDataManager {
         do {
             let todos = try context.fetch(fetchRequest)
             for todo in todos {
-                guard let name = todo.categoryName else { return [:] }
-                if name == "Uncategorized" && todosDictionary[name] == nil {
+                if let name = todo.categoryName, name == "Uncategorized" && todosDictionary[name] == nil {
                     todosDictionary["Uncategorized"] = [todo]
-                } else if name == "Uncategorized" && todosDictionary[name] != nil {
+                } else if let name = todo.categoryName, name == "Uncategorized" && todosDictionary[name] != nil {
                     todosDictionary["Uncategorized"]?.append(todo)
-                } else if todosDictionary[name] == nil && name != "Uncategorized" {
-                    todosDictionary[name] = [todo]
-                } else if todosDictionary[name] != nil && name != "Uncategorized"  {
-                    todosDictionary[name]?.append(todo)
+                } else if let name = todo.categoryName, todosDictionary[name] == nil && name != "Uncategorized" {
+                    todosDictionary[todo.categoryName!] = [todo]
+                } else if let name = todo.categoryName, todosDictionary[name] != nil && name != "Uncategorized"  {
+                    todosDictionary[todo.categoryName!]?.append(todo)
                 }
                 
             }
         } catch let error {
             print("Failed in fetching todos", error)
         }
-        let sortedTodos = todosDictionary.sorted { (a, b) -> Bool in
-            a.key > b.key
+        let sortedTodos = todosDictionary.sorted { (todoA, todoB) -> Bool in
+            todoA.key < todoB.key
         }
-        print("I am sorted \(sortedTodos.count)")
-        print(Array(todosDictionary.keys))
-        return todosDictionary
+        return sortedTodos
     }
 }
 

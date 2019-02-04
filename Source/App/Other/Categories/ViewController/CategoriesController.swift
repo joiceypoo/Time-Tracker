@@ -13,7 +13,7 @@ class CategoriesController: UIViewController {
     @IBOutlet weak var categoriesTable: UITableView!
     
     var categories: [Category] = []
-    var selectedCategory = "Uncategorized"
+    var selectedCategory: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class CategoriesController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if self.isMovingFromParent {
+        if let selectedCategory = selectedCategory, self.isMovingFromParent {
             NotificationCenter.default.post(name: .postCategory,
                                             object: nil,
                                             userInfo: ["postCategory": selectedCategory])
@@ -52,4 +52,16 @@ class CategoriesController: UIViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
+    public func deleteHandler(action: UITableViewRowAction, indexPath: IndexPath) {
+        let category = categories[indexPath.row]
+        categories.remove(at: indexPath.row)
+        categoriesTable.deleteRows(at: [indexPath], with: .automatic)
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        context.delete(category)
+        do {
+            try context.save()
+        } catch {
+            print("Failed deletion: \(error)")
+        }
+    }
 }

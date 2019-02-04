@@ -8,7 +8,8 @@
 
 import UIKit
 protocol EditTodoControllerDelegate {
-    func handleTodoDeletion(todoItem: String)
+    func handleTodoDeletion(todoItem: TodoItem?)
+    func didEditTodo(todoItem: TodoItem?)
 }
 
 public class EditTodoController: UIViewController {
@@ -17,8 +18,10 @@ public class EditTodoController: UIViewController {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var todoItemDetailTable: UITableView!
     
-    var textTitle: String?
+    var habitTitle: String?
     var delegate: EditTodoControllerDelegate?
+    var weekdays: [String] = []
+    var category: String?
     
     
     var todo: TodoItem?
@@ -42,7 +45,7 @@ public class EditTodoController: UIViewController {
         let leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                 style: .plain,
                                                 target: self,
-                                                action: #selector(handleViewDismiss))
+                                                action: #selector(handleCancel))
         let rightBarButtonItem = UIBarButtonItem(title: "Done",
                                                  style: .done,
                                                  target: self,
@@ -58,18 +61,31 @@ public class EditTodoController: UIViewController {
         deleteView.backgroundColor = .customBlack
     }
     
-    @objc private func handleViewDismiss() {
+    @objc private func handleCancel() {
         dismiss(animated: true, completion: nil)
     }
     
     @objc private func handleDoneAction() {
-        dismiss(animated: true, completion: nil)
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: weekdays,
+                                                        requiringSecureCoding: false)
+            todo?.categoryName = category
+            todo?.notes = notesTextView.text
+            todo?.title = habitTitle
+            todo?.repeatTodos?.weekday = data
+            try context.save()
+            dismiss(animated: true) {
+                self.delegate?.didEditTodo(todoItem: self.todo)
+            }
+        } catch let error {
+            print("Failed to save data", error)
+        }
     }
     
     @IBAction func handleTodoDelete(_ sender: UIButton) {
-        guard let title = textTitle else { return }
         dismiss(animated: true) {
-            self.delegate?.handleTodoDeletion(todoItem: title)
+            self.delegate?.handleTodoDeletion(todoItem: self.todo)
         }
     }
     

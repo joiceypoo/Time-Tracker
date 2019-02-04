@@ -9,26 +9,42 @@
 import UIKit
 
 extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, AddHabitDelegate {
-    func didAddHabit(todo: TodoItem, category: String?) {
-//        fetchTodos()
-//        if let section = categories.index(of: category!) {
-//
-//        } else {
-//            categories.append(category!)
-//        }
-//        let newTodos = CoreDataManager.shared.fetchAllTodos()
-//        let cat = Array(newTodos.keys)
-//        guard let category = category, let section = cat.index(of: category)  else { return }
-//        let row = newTodos[category]?.count
-//        let insertionIndex = IndexPath(row: row!, section: section + 1)
-//        todos[category]?.append(todo)
-//        todoListsTable.insertRows(at: [insertionIndex], with: .middle)
+    func didEditTodo(todoItem: TodoItem?) {
+        guard let category = todoItem?.categoryName,
+            let section = categories.index(of: category),
+            let todo = todoItem else { return }
+        let row = todos[section].value.index(of: todo)
+        let reloadIndexPath = IndexPath(row: row!, section: section)
+        todoListsTable.reloadRows(at: [reloadIndexPath], with: .middle)
     }
     
-    func handleTodoDeletion(todoItem: String) {
-//        guard let index = todoItems.index(of: todoItem) else { return }
-//        todoItems.remove(at: index)
-        todoListsTable.reloadData()
+    func didAddHabit(todo: TodoItem) {
+        if categories.count == 0, let category = todo.categoryName {
+            categories.append(category)
+            let newTodo = (key: category, value: [todo])
+            todos.append(newTodo)
+            todoListsTable.reloadData()
+        } else if let category = todo.categoryName, categories.contains(category), let section = categories.index(of: category) {
+            var newTodo = todos[section].value
+            newTodo.append(todo)
+            todos[section].value = newTodo
+            todoListsTable.reloadData()
+        } else if let category = todo.categoryName {
+            categories.append(category)
+            let newTodo = (key: category, value: [todo])
+            todos.append(newTodo)
+            todoListsTable.reloadData()
+        }
+    }
+    
+    func handleTodoDeletion(todoItem: TodoItem?) {
+        guard let category = todoItem?.categoryName,
+            let todo = todoItem,
+            let section = categories.index(of: category),
+            let index = todos[section].value.index(of: todo) else { return }
+        let newIndexPath = IndexPath(row: index, section: section)
+        todos[section].value.remove(at: index)
+        todoListsTable.deleteRows(at: [newIndexPath], with: .automatic)
     }
     
     
@@ -38,13 +54,12 @@ extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        guard let editTodoController = EditTodoController.instantiate(from: .main),
-            let todos = todos[categories[indexPath.section]]
+        guard let editTodoController = EditTodoController.instantiate(from: .main)
             else { return }
-        
-        editTodoController.textTitle = cell?.textLabel?.text
+        let newTodos = todos[indexPath.section].value
+        editTodoController.habitTitle = cell?.textLabel?.text
         editTodoController.delegate = self
-        editTodoController.todo = todos[indexPath.row]
+        editTodoController.todo = newTodos[indexPath.row]
         let navigationController = CustomNavigationController(rootViewController: editTodoController)
         present(navigationController, animated: true, completion: nil)
     }
@@ -54,17 +69,6 @@ extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, 
                                                 title: "Delete",
                                                 handler: deleteHandler)
         return [deleteAction]
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        tableView.isEditing = true
-//        let movedTodoItem = todoItems[sourceIndexPath.row]
-//        todoItems.remove(at: sourceIndexPath.row)
-//        todoItems.insert(movedTodoItem, at: destinationIndexPath.row)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return categories.count == 0 ? 1: categories.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -95,4 +99,12 @@ extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, 
         return todos.count == 0 ? todoListsTable.frame.height - 200 : 0
     }
     
+//    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+//        var row = 0
+//        if sourceIndexPath.section != proposedDestinationIndexPath.section {
+//            row = todoListsTable.numberOfRows(inSection: sourceIndexPath.section) - 1
+//            return IndexPath(row: row, section: sourceIndexPath.section)
+//        }
+//        return proposedDestinationIndexPath
+//    }
 }

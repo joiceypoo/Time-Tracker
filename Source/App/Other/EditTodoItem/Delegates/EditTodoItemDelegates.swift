@@ -8,7 +8,15 @@
 
 import UIKit
 
-extension EditTodoController: UITableViewDelegate {
+extension EditTodoController: UITableViewDelegate, UITextFieldDelegate, CustomCellDelegate {
+    func handleWeekdays(days: [String]) {
+         weekdays = days
+    }
+    
+    func postCategory(category: String) {
+        self.category = category
+    }
+    
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 1 {
@@ -24,5 +32,28 @@ extension EditTodoController: UITableViewDelegate {
                 else { return }
             navigationController?.pushViewController(categoriesController, animated: true)
         }
+    }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if (textField.text?.isEmpty)! {
+            let alertController = Alert.displayMessage(with: "The title field should not be empty",
+                                                       title: "Empty Field")
+            present(alertController, animated: true, completion: nil)
+        } else {
+            habitTitle = textField.text
+        }
+        return true
+    }
+    
+    public func textField(_ textField: UITextField,
+                          shouldChangeCharactersIn range: NSRange,
+                          replacementString string: String) -> Bool {
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+            habitTitle = updatedText
+        }
+        return true
     }
 }

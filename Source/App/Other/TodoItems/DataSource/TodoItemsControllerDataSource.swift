@@ -9,25 +9,27 @@
 import UIKit
 
 extension TodoItemsController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return categories.count == 0 ? 1: categories.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let keys2 = Array(todos.keys)
         if categories.count == 0 {
             return 0
         }
-        let todosForThisKey = todos[categories[section]]
-        let todosCount = todosForThisKey?.count
-        return todosCount!
+        let todosForThisKey = todos[section].value
+        let todosCount = todosForThisKey.count
+        return todosCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = TodoListCell.instantiate(from: tableView, for: indexPath) else {
             return UITableViewCell()
         }
-        
         let categoryIndex = indexPath.section
-//        let keys2 = Array(todos.keys)
-        let categoryString = categories[categoryIndex]
-        cell.viewModel = todos[categoryString]?[indexPath.row]
+        var newTodos = todos[categoryIndex].value
+        cell.viewModel = newTodos[indexPath.row]
         return cell
     }
 }

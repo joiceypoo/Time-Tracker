@@ -19,6 +19,8 @@ extension EditTodoController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.todo = todo
+            habitTitle = cell.todoItemTitle.text
+            cell.todoItemTitle.delegate = self
             return cell
         } else if indexPath.row == 1 {
             tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
@@ -26,6 +28,8 @@ extension EditTodoController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.viewModel = EditViewModel(todo: todo!, index: indexPath.row)
+            weekdays = Unarchive.unarchiveWeekdays(weekdays: todo?.repeatTodos?.weekday)
+            cell.delegate = self
             return cell
         } else if indexPath.row == 2 {
             tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
@@ -40,6 +44,8 @@ extension EditTodoController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.viewModel = EditViewModel(todo: todo!, index: indexPath.row)
+            cell.delegate = self
+            category = cell.detailTextLabel?.text
             return cell
         }
     }

@@ -14,5 +14,6 @@ class TitleCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .customBlack
+        self.selectionStyle = .none
     }
 }

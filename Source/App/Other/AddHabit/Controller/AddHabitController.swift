@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddHabitDelegate {
-    func didAddHabit(todo: TodoItem, category: String?)
+    func didAddHabit(todo: TodoItem)
 }
 
 class AddHabitController: UIViewController {
@@ -54,14 +54,14 @@ class AddHabitController: UIViewController {
         longDateFormatter.dateFormat = "EEEE, d MMMM yyyy"
         let dateString = longDateFormatter.string(from: Date())
         if let title = habitTitle {
-            let (todo, cat) = CoreDataManager.shared.createTodo(todo: title,
+            let todo = CoreDataManager.shared.createTodo(todo: title,
                                                          repeatDays: weekdays,
                                                          categoryName: category,
                                                          isRepeating: isRepeating,
                                                          creationDate: dateString,
                                                          notes: notesTextView.text)
             dismiss(animated: true) {
-                self.delegate?.didAddHabit(todo: todo, category: cat)
+                self.delegate?.didAddHabit(todo: todo)
             }
         }
     }

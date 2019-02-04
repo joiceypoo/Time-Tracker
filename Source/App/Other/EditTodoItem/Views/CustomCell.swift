@@ -76,15 +76,15 @@ class CustomCell: UITableViewCell {
     
     private func addObserver() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateRepeatLabel(notification:)),
+                                               selector: #selector(updateRepeat(notification:)),
                                                name: .weekDays,
                                                object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCategoryLabel),
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCategory),
                                                name: .postCategory, object: nil)
     }
     
-    @objc private func updateRepeatLabel(notification: Notification) {
-        if detailText.isEmpty == false,
+    @objc private func updateRepeat(notification: Notification) {
+        if textLabel?.text == "Repeat",
             let userInfo = notification.userInfo as? [String: [String]],
             let weekdays = userInfo["weekDays"] {
             for weekday in weekDays {
@@ -98,7 +98,7 @@ class CustomCell: UITableViewCell {
         }
     }
     
-    @objc private func updateCategoryLabel(notification: Notification) {
+    @objc private func updateCategory(notification: Notification) {
         if let userInfo = notification.userInfo as? [String: String],
             let category = userInfo["postCategory"] {
             delegate?.postCategory(category: category)

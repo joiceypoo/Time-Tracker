@@ -11,10 +11,9 @@ import CoreData
 
 class TodoItemsController: UIViewController {
     
-    var todos: [String: [TodoItem]] = [:]
+    var todos: [(key: String, value: [TodoItem])] = []
     var categories: [String] = []
     var isUncategorized = false
-    var keys: [String] = []
     
     @IBOutlet weak var calenderView: UIView!
     @IBOutlet weak var todoListsTable: UITableView!
@@ -26,7 +25,11 @@ class TodoItemsController: UIViewController {
     
     internal func fetchTodos() {
         todos = CoreDataManager.shared.fetchAllTodos()
-        categories = Array(todos.keys)
+        var newCategories : [String] = []
+        for tuple in todos {
+            newCategories.append(tuple.key)
+        }
+        categories = newCategories
     }
     
     override func viewDidLoad() {
@@ -94,9 +97,17 @@ class TodoItemsController: UIViewController {
     }
     
     public func deleteHandler(action: UITableViewRowAction, indexPath: IndexPath) {
-//        let todoItem = todoItems[indexPath.row]
-//        todoItems.remove(at: indexPath.row)
-//        todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+        let section = indexPath.section
+        let todo = todos[section].value[indexPath.row]
+        todos[section].value.remove(at: indexPath.row)
+        todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        context.delete(todo)
+        do {
+            try context.save()
+        } catch {
+            print("Failed deletion: \(error)")
+        }
     }
     
     public func editHandler(action: UITableViewRowAction, indexPath: IndexPath) {
