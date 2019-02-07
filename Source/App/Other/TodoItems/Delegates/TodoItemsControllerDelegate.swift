@@ -98,13 +98,4 @@ extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return todos.count == 0 ? todoListsTable.frame.height - 200 : 0
     }
-    
-//    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-//        var row = 0
-//        if sourceIndexPath.section != proposedDestinationIndexPath.section {
-//            row = todoListsTable.numberOfRows(inSection: sourceIndexPath.section) - 1
-//            return IndexPath(row: row, section: sourceIndexPath.section)
-//        }
-//        return proposedDestinationIndexPath
-//    }
 }

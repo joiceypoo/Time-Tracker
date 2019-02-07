@@ -59,6 +59,7 @@
 		CE8F250B21F886730028AC7F /* ScheduleEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250A21F886730028AC7F /* ScheduleEnum.swift */; };
 		CE8F250F21F888920028AC7F /* RepeatDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250E21F888920028AC7F /* RepeatDataSource.swift */; };
 		CE8F251121F88DA20028AC7F /* RepeatDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F251021F88DA20028AC7F /* RepeatDelegates.swift */; };
+		CEF78BDF220B150900DB0031 /* DatesString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF78BDE220B150900DB0031 /* DatesString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,7 @@
 		CE8F250A21F886730028AC7F /* ScheduleEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEnum.swift; sourceTree = "<group>"; };
 		CE8F250E21F888920028AC7F /* RepeatDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatDataSource.swift; sourceTree = "<group>"; };
 		CE8F251021F88DA20028AC7F /* RepeatDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatDelegates.swift; sourceTree = "<group>"; };
+		CEF78BDE220B150900DB0031 /* DatesString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,6 +523,7 @@
 				CE776B1D2202939C003E617C /* Alert.swift */,
 				CE776B1F2205F3D4003E617C /* Unarchive.swift */,
 				CE776B252208776F003E617C /* Days.swift */,
+				CEF78BDE220B150900DB0031 /* DatesString.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */,
 				CE8F24F621F7AB9E0028AC7F /* AddHabitCell.swift in Sources */,
 				CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */,
+				CEF78BDF220B150900DB0031 /* DatesString.swift in Sources */,
 				CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */,
 				CE8F250821F8859A0028AC7F /* RepeatCell.swift in Sources */,
 				CE8C9AE221FB0817002947EE /* CategoriesCell.swift in Sources */,

@@ -165,7 +165,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faD-9z-eRI" customClass="AddButton" customModule="Habbbit" customModuleProvider="target">
-                                <rect key="frame" x="319" y="604" width="46" height="46"/>
+                                <rect key="frame" x="319" y="611" width="46" height="46"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="98p-IW-wSN"/>
@@ -187,7 +187,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="G1L-ms-s5B" secondAttribute="trailing" constant="18" id="S0C-7f-Yhp"/>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SJD-Zv-uEQ"/>
                             <constraint firstItem="G1L-ms-s5B" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="Td6-te-kcy"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="faD-9z-eRI" secondAttribute="bottom" constant="17" id="mgK-Yf-dZ3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="faD-9z-eRI" secondAttribute="bottom" constant="10" id="mgK-Yf-dZ3"/>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="top" secondItem="lqW-8W-Z3A" secondAttribute="bottom" constant="7" id="n9a-h9-n7D"/>
                             <constraint firstItem="2uN-AX-BgW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nVb-fx-Yw4"/>
                             <constraint firstItem="2uN-AX-BgW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="oAf-IX-cgn"/>
@@ -201,6 +201,7 @@
                         <outlet property="dateCollectionView" destination="G1L-ms-s5B" id="tOO-7d-4N2"/>
                         <outlet property="selectedDate" destination="lqW-8W-Z3A" id="og8-YG-u6D"/>
                         <outlet property="todoListsTable" destination="0ww-Ks-kEg" id="FJg-IX-aOI"/>
+                        <outlet property="weekDaysStackView" destination="woo-RC-dlM" id="u0f-ks-8AA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -46,11 +46,10 @@ class CustomCell: UITableViewCell {
     private func bindViewModel() {
         guard let viewM = viewModel
             else { return }
-
-        completed = Int(viewM.todo.completed)
+        let datesArray = Unarchive.unarchiveStringArrayData(from: viewM.todo.isDone)
         category = viewM.todo.categoryName
         let data = viewM.todo.repeatTodos?.weekday
-        weekString = Unarchive.unarchiveData(from: data)
+        weekString = Unarchive.unarchiveDaysData(from: data)
         switch viewM.index {
         case 1:
             textLabel?.text = "Repeat"
@@ -58,7 +57,7 @@ class CustomCell: UITableViewCell {
             accessoryType = .disclosureIndicator
         case 2:
         textLabel?.text = "Completed"
-        detailTextLabel?.text = "\(completed!)"
+        detailTextLabel?.text = "\(datesArray.count)"
         default:
             textLabel?.text = "Category"
             detailTextLabel?.text = category

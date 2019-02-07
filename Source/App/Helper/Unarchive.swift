@@ -9,15 +9,21 @@
 import Foundation
 
 public class Unarchive {
-    static func unarchiveData(from data: Data?) -> String {
+    static func unarchiveDaysData(from data: Data?) -> String {
         guard let newData = data else { return "" }
         let stringArray = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(newData) as! [String]
         return stringArray.count == 7 ? "Every day": stringArray.joined(separator: " ")
     }
     
-    static func unarchiveWeekdays(weekdays: Data?) -> [String] {
-        guard let newData = weekdays else { return [] }
+    static func unarchiveStringArrayData(from data: Data?) -> [String] {
+        guard let newData = data else { return [] }
         let stringArray = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(newData) as! [String]
         return stringArray
     }
+    
+//    static func unarchiveDateData(from data: Data?) -> [Date] {
+//        guard let newData = data else { return [] }
+//        let dateArray = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(newData) as! [Date]
+//        return dateArray
+//    }
 }

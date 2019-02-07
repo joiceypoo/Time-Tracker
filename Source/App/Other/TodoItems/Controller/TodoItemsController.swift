@@ -10,15 +10,17 @@ import UIKit
 import CoreData
 
 class TodoItemsController: UIViewController {
-    
     var todos: [(key: String, value: [TodoItem])] = []
     var categories: [String] = []
     private var lastContentOffSet: CGFloat = 0
+    var dayStr: String?
     
     @IBOutlet weak var calenderView: UIView!
     @IBOutlet weak var todoListsTable: UITableView!
     @IBOutlet weak var dateCollectionView: UICollectionView!
+    var displayedDayOfWeek: String?
     
+    @IBOutlet weak var weekDaysStackView: UIStackView!
     @IBOutlet weak var selectedDate: UILabel!
     
     let topBorder = CALayer()
@@ -118,12 +120,18 @@ class TodoItemsController: UIViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
-    func displayDate(date: Date) -> String {
+    private func getDayOfWeek(from dayNumber: Int) -> String {
+        return UsedDates.shared.getDay(from: dayNumber)
+    }
+    
+    func displayDate(date: Date) {
         UsedDates.shared.displayedDate = date
         UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date)
+        highlightDayOfWeek(UsedDates.shared.selectdDayOfWeek)
         self.selectedDate.text = UsedDates.shared.displayedDateString
         let dayString = UsedDates.shared.getDay(from: UsedDates.shared.selectdDayOfWeek)
-        return dayString
+        displayedDayOfWeek = dayString
+        UsedDates.shared.currentDate = date
     }
     
     func scrollToDate(date: Date)
@@ -131,27 +139,31 @@ class TodoItemsController: UIViewController {
         let startDate = UsedDates.shared.startDate
         let cal = Calendar.current
         if let numberOfDays = cal.dateComponents([.day], from: startDate, to: date).day {
-            let extraDays: Int = numberOfDays % 7 
+            let extraDays: Int = numberOfDays % 7
             let scrolledNumberOfDays = numberOfDays - extraDays
             let firstMondayIndexPath = IndexPath(row: scrolledNumberOfDays, section: 0)
             dateCollectionView.scrollToItem(at: firstMondayIndexPath, at: .left , animated: false)
         }
-        _ = displayDate(date: date)
+        displayDate(date: date)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if lastContentOffSet > scrollView.contentOffset.x {
-            let dayString = displayWeek()
-            fetchTodos(from: dayString)
+        if lastContentOffSet > scrollView.contentOffset.x,
+            let displayedDayOfWeek = displayedDayOfWeek {
+            displayWeek()
+            fetchTodos(from: displayedDayOfWeek)
             todoListsTable.reloadData()
-        } else if lastContentOffSet < scrollView.contentOffset.x {
-            let dayString = displayWeek()
-            fetchTodos(from: dayString)
+        } else if lastContentOffSet < scrollView.contentOffset.x,
+            let displayedDayOfWeek = displayedDayOfWeek {
+            displayWeek()
+            fetchTodos(from: displayedDayOfWeek)
             todoListsTable.reloadData()
         }
+        
+        
     }
     
-    func displayWeek() -> String {
+    func displayWeek() {
         var visibleCells = dateCollectionView.visibleCells
         visibleCells.sort { (cell1: UICollectionViewCell, cell2: UICollectionViewCell) -> Bool in
             guard let cell1 = cell1 as? DateCollectionViewCell else {
@@ -168,10 +180,23 @@ class TodoItemsController: UIViewController {
         let middleCell = visibleCells[middleIndex] as! DateCollectionViewCell
         let displayedDate = UsedDates.shared.getDateOfAnotherDayOfTheSameWeek(selectedDate: middleCell.date!,
                                                                               requiredDayOfWeek: UsedDates.shared.selectdDayOfWeek)
-        let dayString = displayDate(date: displayedDate)
-        return dayString
+        displayDate(date: displayedDate)
     }
-
+    
+    func highlightDayOfWeek(_ weekDay: Int) {
+        let selectedWeekDayIndex = weekDay - 1
+        for i in 0...6 {
+            let label = weekDaysStackView.arrangedSubviews[i] as! UILabel
+            if i == selectedWeekDayIndex {
+                label.textColor = UIColor.white
+            }
+            else {
+                label.textColor = UIColor.customLightGray
+            }
+        }
+        
+    }
+    
 }
 
 

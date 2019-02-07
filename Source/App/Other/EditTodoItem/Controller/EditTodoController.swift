@@ -54,6 +54,7 @@ public class EditTodoController: UIViewController {
         rightBarButtonItem.tintColor = .customOrange
         navigationItem.leftBarButtonItem = leftBarButtonItem
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        notesTextView.delegate = self
         notesTextView.text = todo?.notes
         notesTextView.backgroundColor = .customBlack
         notesTextView.textColor = .customLightGray

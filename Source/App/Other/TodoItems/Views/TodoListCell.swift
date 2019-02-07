@@ -29,7 +29,15 @@ public class TodoListCell: UITableViewCell {
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
         let weekdays = viewModel.repeatTodos?.weekday
-        let days = Unarchive.unarchiveData(from: weekdays)
+        let days = Unarchive.unarchiveDaysData(from: weekdays)
+        let currentDate = UsedDates.shared.currentDate
+        let dateString = DatesString.getDatesString(format: "EEEE, d MMMM yyyy", date: currentDate)
+        let datesArray = Unarchive.unarchiveStringArrayData(from: viewModel.isDone)
+        if datesArray.contains(dateString) {
+            checkBox.setImage(#imageLiteral(resourceName: "checked"), for: .normal)
+        } else {
+            checkBox.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
+        }
         textLabel?.text = viewModel.title
         detailTextLabel?.text = days
     }
@@ -48,11 +56,14 @@ public class TodoListCell: UITableViewCell {
     
     @objc private func checkboxPressed(sender: UIButton) {
         let impact = UIImpactFeedbackGenerator(style: .light)
+        let currentDate = UsedDates.shared.displayedDate
         if sender.currentImage == #imageLiteral(resourceName: "unchecked") {
             sender.setImage(#imageLiteral(resourceName: "checked"), for: .normal)
+            updateDateRecord(from: currentDate)
             impact.impactOccurred()
         } else if sender.currentImage == #imageLiteral(resourceName: "checked") {
             sender.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
+            updateDateRecord(from: currentDate)
         }
     }
     
@@ -67,4 +78,29 @@ public class TodoListCell: UITableViewCell {
         view.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         selectedBackgroundView = view
     }
+    
+    private func updateDateRecord(from date: Date) {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        
+        guard let todo = viewModel else { return }
+        do {
+            var datesArray = Unarchive.unarchiveStringArrayData(from: todo.isDone)
+            let currentDateString = DatesString.getDatesString(format: "EEEE, d MMMM yyyy",
+                                                               date: date)
+            if !datesArray.contains(currentDateString) {
+                datesArray.append(currentDateString)
+                
+            } else if let currentIndex = datesArray.index(of: currentDateString) {
+                datesArray.remove(at: currentIndex)
+            }
+            let data = try NSKeyedArchiver.archivedData(withRootObject: datesArray,
+                                                        requiringSecureCoding: false)
+            todo.isDone = data
+            try context.save()
+        } catch let error {
+            print("Failed to archive data", error )
+        }
+
+    }
+    
 }

@@ -26,6 +26,7 @@ class UsedDates {
     static let shared = UsedDates()
     private let formatter: DateFormatter
     var displayedDate = Date()
+    var currentDate = Date()
     var displayedMondayDate = Date()
     var selectdDayOfWeek = 2
     

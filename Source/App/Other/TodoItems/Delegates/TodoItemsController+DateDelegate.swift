@@ -16,4 +16,14 @@ extension TodoItemsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if let myCell = cell as? DateCollectionViewCell,
+            let displayedDayOfWeek = displayedDayOfWeek {
+            displayDate(date: myCell.date)
+            fetchTodos(from: displayedDayOfWeek)
+            todoListsTable.reloadData()
+        }
+    }
 }

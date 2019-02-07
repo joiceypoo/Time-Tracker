@@ -50,17 +50,15 @@ class AddHabitController: UIViewController {
     }
     
     @objc private func addHabit() {
-        let longDateFormatter = DateFormatter()
-        longDateFormatter.dateFormat = "EEEE, d MMMM yyyy"
-        let dateString = longDateFormatter.string(from: Date())
+        let dateString = DatesString.getDatesString(format: "EEEE, d MMMM yyyy",
+                                                    date: Date())
         if let title = habitTitle {
             let todo = CoreDataManager.shared.createTodo(todo: title,
                                                          repeatDays: weekdays,
                                                          categoryName: category,
                                                          isRepeating: isRepeating,
                                                          creationDate: dateString,
-                                                         notes: notesTextView.text,
-                                                         day: Date())
+                                                         notes: notesTextView.text)
             dismiss(animated: true) {
                 self.delegate?.didAddHabit(todo: todo)
             }

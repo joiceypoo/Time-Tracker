@@ -12,6 +12,7 @@ extension TodoItemsController {
     public func gestureBeganHandler(_ indexPath: IndexPath?, _ locationInView: CGPoint) {
         if let indexPath = indexPath {
             CellIndexPath.initialIndexPath = indexPath
+            let selectedTodo = todos[indexPath.section].value[indexPath.row]
             let cell = todoListsTable.cellForRow(at: indexPath)
             CellDetail.cellSnapshot  = snapshotFromView(inputView: cell!)
             var center = cell?.center

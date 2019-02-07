@@ -28,7 +28,7 @@ extension EditTodoController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.viewModel = EditViewModel(todo: todo!, index: indexPath.row)
-            weekdays = Unarchive.unarchiveWeekdays(weekdays: todo?.repeatTodos?.weekday)
+            weekdays = Unarchive.unarchiveStringArrayData(from: todo?.repeatTodos?.weekday)
             cell.delegate = self
             return cell
         } else if indexPath.row == 2 {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension EditTodoController: UITableViewDelegate, UITextFieldDelegate, CustomCellDelegate {
+extension EditTodoController: UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, CustomCellDelegate {
     func handleWeekdays(days: [String]) {
          weekdays = days
     }
@@ -53,6 +53,18 @@ extension EditTodoController: UITableViewDelegate, UITextFieldDelegate, CustomCe
             let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
             habitTitle = updatedText
+        }
+        return true
+    }
+    
+    public func textView(_ textView: UITextView,
+                         shouldChangeTextIn range: NSRange,
+                         replacementText text: String) -> Bool {
+        let resultRange = text.rangeOfCharacter(from: CharacterSet.newlines,
+                                                options: .backwards)
+        if text.count == 1 && resultRange != nil {
+            textView.resignFirstResponder()
+            return false
         }
         return true
     }
