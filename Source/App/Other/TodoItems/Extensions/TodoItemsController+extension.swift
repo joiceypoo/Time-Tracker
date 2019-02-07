@@ -12,7 +12,6 @@ extension TodoItemsController {
     public func gestureBeganHandler(_ indexPath: IndexPath?, _ locationInView: CGPoint) {
         if let indexPath = indexPath {
             CellIndexPath.initialIndexPath = indexPath
-            let selectedTodo = todos[indexPath.section].value[indexPath.row]
             let cell = todoListsTable.cellForRow(at: indexPath)
             CellDetail.cellSnapshot  = snapshotFromView(inputView: cell!)
             var center = cell?.center
@@ -53,15 +52,21 @@ extension TodoItemsController {
                 let cellIndexPath = CellIndexPath.initialIndexPath,
                 let indexPath = indexPath {
                 if cellIndexPath.section != indexPath.section && cellIndexPath.section < indexPath.section {
-                    let newSection = indexPath.section + cellIndexPath.section
                     let oldTodo = todos[cellIndexPath.section].value.remove(at: cellIndexPath.row)
-                    todos[newSection].value.insert(oldTodo, at: indexPath.row)
+                    todos[indexPath.section].value.insert(oldTodo, at: indexPath.row)
                 } else if cellIndexPath.section != indexPath.section && cellIndexPath.section > indexPath.section {
                     let oldTodo = todos[cellIndexPath.section].value.remove(at: cellIndexPath.row)
                     todos[indexPath.section].value.insert(oldTodo, at: indexPath.row)
+                } else if cellIndexPath.section == indexPath.section && cellIndexPath.row > 0 {
+                    let oldTodo = todos[cellIndexPath.section].value.remove(at: cellIndexPath.row)
+                    let replacedTodo = todos[cellIndexPath.section].value[indexPath.row]
+                    todos[cellIndexPath.section].value.insert(oldTodo, at: indexPath.row)
+                    CoreDataManager.shared.reorderTodo(from: oldTodo, to: replacedTodo)
                 } else {
-                    let oldTodo = todos[indexPath.section].value.remove(at: cellIndexPath.row)
-                    todos[indexPath.section].value.insert(oldTodo, at: indexPath.row)
+                    let oldTodo = todos[cellIndexPath.section].value.remove(at: cellIndexPath.row)
+                    let replacedTodo = todos[cellIndexPath.section].value[cellIndexPath.row]
+                    CoreDataManager.shared.reorderTodo(from: oldTodo, to: replacedTodo)
+                    todos[cellIndexPath.section].value.insert(oldTodo, at: cellIndexPath.row)
                 }
                 todoListsTable.moveRow(at: cellIndexPath,
                                        to: indexPath)

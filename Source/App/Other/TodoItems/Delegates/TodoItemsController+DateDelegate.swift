@@ -19,11 +19,14 @@ extension TodoItemsController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        if let myCell = cell as? DateCollectionViewCell,
-            let displayedDayOfWeek = displayedDayOfWeek {
+        if let myCell = cell as? DateCollectionViewCell {
             displayDate(date: myCell.date)
-            fetchTodos(from: displayedDayOfWeek)
+            fetchTodos(from: displayedDayOfWeek!)
             todoListsTable.reloadData()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
