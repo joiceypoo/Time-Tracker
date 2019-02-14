@@ -16,7 +16,9 @@ extension RepeatController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let cell = tableView.cellForRow(at: indexPath) as? RepeatCell, cell.accessoryType.rawValue == 3 && cell.accessoryType == .checkmark {
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? RepeatCell,
+            cell.accessoryType.rawValue == 3 && cell.accessoryType == .checkmark {
             cell.accessoryType = .none
             removeItemFromWeekDaysArray(item: cell.viewModel!)
         } else if let cell = tableView.cellForRow(at: indexPath) as? RepeatCell {

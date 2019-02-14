@@ -18,8 +18,13 @@ public class EditTodoCell: UITableViewCell {
     public override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .customBlack
-        todoItemTitle?.textColor = .white
         selectionStyle = .none
+        todoItemTitle?.textColor = .white
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            UIView.animate(withDuration: 0.6, animations: {
+                self.todoItemTitle.becomeFirstResponder()
+            })
+        }
     }
     
     private func bindViewModel() {

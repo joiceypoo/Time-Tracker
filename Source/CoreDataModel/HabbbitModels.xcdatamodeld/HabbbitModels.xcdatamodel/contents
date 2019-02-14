@@ -11,6 +11,7 @@
     <entity name="TodoItem" representedClassName="TodoItem" syncable="YES" codeGenerationType="class">
         <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="displayOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isDone" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,6 +20,6 @@
     <elements>
         <element name="Category" positionX="168.96484375" positionY="-91.98828125" width="128" height="60"/>
         <element name="Repeat" positionX="174.87109375" positionY="130.421875" width="128" height="90"/>
-        <element name="TodoItem" positionX="-284.46875" positionY="-27.71484375" width="128" height="135"/>
+        <element name="TodoItem" positionX="-284.46875" positionY="-27.71484375" width="128" height="150"/>
     </elements>
 </model>

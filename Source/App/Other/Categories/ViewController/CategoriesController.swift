@@ -14,6 +14,7 @@ class CategoriesController: UIViewController {
     
     var categories: [Category] = []
     var selectedCategory: String?
+    var detailLabelText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,10 @@ class CategoriesController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        postSelectedCategory()
+    }
+    
+    public func postSelectedCategory() {
         if let selectedCategory = selectedCategory, self.isMovingFromParent {
             NotificationCenter.default.post(name: .postCategory,
                                             object: nil,
@@ -63,5 +68,15 @@ class CategoriesController: UIViewController {
         } catch {
             print("Failed deletion: \(error)")
         }
+    }
+    
+    public func editHandler(action: UITableViewRowAction, indexPath: IndexPath) {
+        let category = categories[indexPath.row]
+        guard let editCategoryController = AddCategoryController.instantiate(from: .main)
+            else { return }
+        editCategoryController.delegate = self
+        editCategoryController.category = category
+        let navigationController = CustomNavigationController(rootViewController: editCategoryController)
+        present(navigationController, animated: true, completion: nil)
     }
 }

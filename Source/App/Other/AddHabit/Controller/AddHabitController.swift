@@ -14,14 +14,14 @@ protocol AddHabitDelegate {
 
 class AddHabitController: UIViewController {
 
-    @IBOutlet weak var todoItemDetailTable: UITableView!
+    @IBOutlet weak var addHabitTable: UITableView!
     @IBOutlet weak var notesTextView: UITextView!
     
-    var weekdays: [String] = ["Every day"]
     var category: String?
     var habitTitle: String?
     var delegate: AddHabitDelegate?
-    
+    var weekdays: [String] = ["Every day"]
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -44,15 +44,15 @@ class AddHabitController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let index = self.todoItemDetailTable.indexPathForSelectedRow {
-            self.todoItemDetailTable.deselectRow(at: index, animated: true)
+        if let index = self.addHabitTable.indexPathForSelectedRow {
+            self.addHabitTable.deselectRow(at: index, animated: true)
         }
     }
     
     @objc private func addHabit() {
         let dateString = DatesString.getDatesString(format: "EEEE, d MMMM yyyy",
                                                     date: Date())
-        if let title = habitTitle {
+        if let title = habitTitle, !title.trimmingCharacters(in: .whitespaces).isEmpty {
             let todo = CoreDataManager.shared.createTodo(todo: title,
                                                          repeatDays: weekdays,
                                                          categoryName: category,
@@ -82,6 +82,6 @@ class AddHabitController: UIViewController {
         notesTextView.backgroundColor = .customBlack
         notesTextView.textColor = .customLightGray
         notesTextView.delegate = self
-        todoItemDetailTable.separatorColor = .customLightGray
+        addHabitTable.separatorColor = .customLightGray
     }
 }

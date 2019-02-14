@@ -59,7 +59,7 @@ class CustomCell: UITableViewCell {
         textLabel?.text = "Completed"
         detailTextLabel?.text = "\(datesArray.count)"
         default:
-            textLabel?.text = "Category"
+            textLabel?.text = "Tag"
             detailTextLabel?.text = category
             accessoryType = .disclosureIndicator
         }
@@ -101,7 +101,7 @@ class CustomCell: UITableViewCell {
         if let userInfo = notification.userInfo as? [String: String],
             let category = userInfo["postCategory"] {
             delegate?.postCategory(category: category)
-            if textLabel?.text == "Category" {
+            if textLabel?.text == "Tag" {
                 detailTextLabel?.text = category
             }
         }

@@ -24,8 +24,6 @@ class RepeatCell: UITableViewCell {
         didSet { bindViewModel() }
     }
     
-    var weekdays: [String] = []
-    
     private func bindViewModel() {
         guard let title = viewModel
             else { return }

@@ -20,6 +20,16 @@ class RepeatController: UIViewController {
         "Fri",
         "Sat"
     ]
+    
+    let schedules = [ScheduleEnum.sunday.rawValue,
+                     ScheduleEnum.monday.rawValue,
+                     ScheduleEnum.tuesday.rawValue,
+                     ScheduleEnum.wednesday.rawValue,
+                     ScheduleEnum.thursday.rawValue,
+                     ScheduleEnum.friday.rawValue,
+                     ScheduleEnum.saturday.rawValue
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Repeat"
@@ -34,15 +44,6 @@ class RepeatController: UIViewController {
             NotificationCenter.default.post(name: .weekDays, object: nil, userInfo: ["weekDays": weekDays])
         }
     }
-    
-    let schedules = [ScheduleEnum.sunday.rawValue,
-                     ScheduleEnum.monday.rawValue,
-                     ScheduleEnum.tuesday.rawValue,
-                     ScheduleEnum.wednesday.rawValue,
-                     ScheduleEnum.thursday.rawValue,
-                     ScheduleEnum.friday.rawValue,
-                     ScheduleEnum.saturday.rawValue
-    ]
     
     internal func addItemToWeekDaysArray(item: String) {
         if weekDays.index(of: item) == nil {

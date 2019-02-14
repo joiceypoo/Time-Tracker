@@ -53,7 +53,7 @@ class AddHabitCell: UITableViewCell {
             detailText = descriptionText.details
         }
         
-        if descriptionText.title == "Category" {
+        if descriptionText.title == "Tag" {
             accessoryType = .disclosureIndicator
         }
         detailTextLabel?.text = descriptionText.details
@@ -96,7 +96,7 @@ class AddHabitCell: UITableViewCell {
         if let userInfo = notification.userInfo as? [String: String],
             let category = userInfo["postCategory"] {
             delegate?.postCategory(category: category)
-            if textLabel?.text == "Category" {
+            if textLabel?.text == "Tag" {
                 detailTextLabel?.text = category
             }
         }

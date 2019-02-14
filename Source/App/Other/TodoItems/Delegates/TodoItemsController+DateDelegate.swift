@@ -10,7 +10,8 @@ import UIKit
 extension TodoItemsController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: dateCollectionView.bounds.width/7, height: dateCollectionView.bounds.height)
+        return CGSize(width: dateCollectionView.bounds.width/7,
+                      height: dateCollectionView.bounds.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

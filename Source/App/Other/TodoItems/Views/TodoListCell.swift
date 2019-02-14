@@ -31,7 +31,8 @@ public class TodoListCell: UITableViewCell {
         let weekdays = viewModel.repeatTodos?.weekday
         let days = Unarchive.unarchiveDaysData(from: weekdays)
         let currentDate = UsedDates.shared.currentDate
-        let dateString = DatesString.getDatesString(format: "EEEE, d MMMM yyyy", date: currentDate)
+        let dateString = DatesString.getDatesString(format: "EEEE, d MMMM yyyy",
+                                                    date: currentDate)
         let datesArray = Unarchive.unarchiveStringArrayData(from: viewModel.isDone)
         if datesArray.contains(dateString) {
             checkBox.setImage(#imageLiteral(resourceName: "checked"), for: .normal)

@@ -28,8 +28,11 @@ extension EditTodoController: UITableViewDelegate, UITextFieldDelegate, UITextVi
         }
         
         if indexPath.row == 3 {
+            let indexPath = IndexPath(row: indexPath.row, section: 0)
+            let cell = todoItemDetailTable.cellForRow(at: indexPath) as! CustomCell
             guard let categoriesController = CategoriesController.instantiate(from: .main)
                 else { return }
+            categoriesController.detailLabelText = cell.detailTextLabel?.text
             navigationController?.pushViewController(categoriesController, animated: true)
         }
     }
@@ -42,6 +45,7 @@ extension EditTodoController: UITableViewDelegate, UITextFieldDelegate, UITextVi
         } else {
             habitTitle = textField.text
         }
+        textField.resignFirstResponder()
         return true
     }
     

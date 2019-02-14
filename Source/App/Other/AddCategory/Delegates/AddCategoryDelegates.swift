@@ -13,8 +13,11 @@ extension AddCategoryController: UITextFieldDelegate {
         if (categoryTextField.text?.isEmpty)! {
             categoryTextField.resignFirstResponder()
             return false
-        } else {
+        } else if category == nil {
             createCategory(from: categoryTextField.text)
+            return true
+        } else {
+            saveChanges()
             return true
         }
     }

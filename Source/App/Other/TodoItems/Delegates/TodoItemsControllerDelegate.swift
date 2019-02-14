@@ -24,7 +24,8 @@ extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, 
             let newTodo = (key: category, value: [todo])
             todos.append(newTodo)
             todoListsTable.reloadData()
-        } else if let category = todo.categoryName, categories.contains(category), let section = categories.index(of: category) {
+        } else if let category = todo.categoryName, categories.contains(category),
+            let section = categories.index(of: category) {
             var newTodo = todos[section].value
             newTodo.append(todo)
             todos[section].value = newTodo

@@ -20,10 +20,4 @@ public class Unarchive {
         let stringArray = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(newData) as! [String]
         return stringArray
     }
-    
-//    static func unarchiveDateData(from data: Data?) -> [Date] {
-//        guard let newData = data else { return [] }
-//        let dateArray = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(newData) as! [Date]
-//        return dateArray
-//    }
 }

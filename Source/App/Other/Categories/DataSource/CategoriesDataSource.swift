@@ -17,6 +17,10 @@ extension CategoriesController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = CategoriesCell.instantiate(from: tableView, for: indexPath)
             else { return UITableViewCell() }
+        if let detailTextLabel = detailLabelText, detailTextLabel == categories[indexPath.row].name {
+            cell.accessoryType = .checkmark
+            cell.title = categories[indexPath.row].name
+        }
         cell.title = categories[indexPath.row].name
         return cell
     }

@@ -11,9 +11,15 @@ import UIKit
 class TitleCell: UITableViewCell {
 
     @IBOutlet weak var titleTextField: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .customBlack
-        self.selectionStyle = .none
+        selectionStyle = .none
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            UIView.animate(withDuration: 0.6, animations: {
+                self.titleTextField.becomeFirstResponder()
+            })
+        }
     }
 }

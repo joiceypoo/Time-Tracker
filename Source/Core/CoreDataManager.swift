@@ -30,12 +30,15 @@ struct CoreDataManager {
                     notes: String) -> TodoItem {
         let context = persistentContainer.viewContext
         
+        let todosCount = getAllTodosCount()
+        
         let todo = NSEntityDescription.insertNewObject(forEntityName: "TodoItem",
                                                        into: context) as! TodoItem
         
         let repeatTodo = Repeat(context: context)
         repeatTodo.isRepeating = isRepeating
         
+        todo.displayOrder = todosCount
         todo.title = title
         todo.creationDate = creationDate
         todo.notes = notes
@@ -76,13 +79,13 @@ struct CoreDataManager {
                 
                 let daysArray = Unarchive.unarchiveStringArrayData(from: todo.repeatTodos?.weekday)
                 let isValidDay = daysArray.contains(day) || daysArray.contains("Every day")
-                if let name = todo.categoryName, name == "Uncategorized" && todosDictionary[name] == nil && isValidDay  {
-                    todosDictionary["Uncategorized"] = [todo]
-                } else if let name = todo.categoryName, name == "Uncategorized" && todosDictionary[name] != nil && isValidDay {
-                    todosDictionary["Uncategorized"]?.append(todo)
-                } else if let name = todo.categoryName, todosDictionary[name] == nil && name != "Uncategorized" && isValidDay  {
+                if let name = todo.categoryName, name == "None" && todosDictionary[name] == nil && isValidDay  {
+                    todosDictionary["None"] = [todo]
+                } else if let name = todo.categoryName, name == "None" && todosDictionary[name] != nil && isValidDay {
+                    todosDictionary["None"]?.append(todo)
+                } else if let name = todo.categoryName, todosDictionary[name] == nil && name != "None" && isValidDay  {
                     todosDictionary[todo.categoryName!] = [todo]
-                } else if let name = todo.categoryName, todosDictionary[name] != nil && name != "Uncategorized" && isValidDay {
+                } else if let name = todo.categoryName, todosDictionary[name] != nil && name != "None" && isValidDay {
                     todosDictionary[todo.categoryName!]?.append(todo)
                 }
                 
@@ -90,52 +93,54 @@ struct CoreDataManager {
         } catch let error {
             print("Failed in fetching todos", error)
         }
+        
+        let keys = Array(todosDictionary.keys)
+        for key in keys {
+            let sortedTodosList = todosDictionary[key]!.sorted { (todoA, todoB) -> Bool in
+                todoA.displayOrder < todoB.displayOrder
+            }
+            todosDictionary[key] = sortedTodosList
+        }
+        
+        
         let sortedTodos = todosDictionary.sorted { (todoA, todoB) -> Bool in
             todoA.key < todoB.key
         }
+        
         return sortedTodos
     }
     
     
     
     func reorderTodo(from todoOne: TodoItem, to todoTwo: TodoItem) {
-        guard let oldTodo = fetchTodoFromCoreData(for: todoOne),
-            let replacedTodo = fetchTodoFromCoreData(for: todoTwo) else { return}
-         let context = persistentContainer.viewContext
-        let temp = oldTodo
-        oldTodo.categoryName = replacedTodo.categoryName
-        oldTodo.title = replacedTodo.title
-        oldTodo.creationDate = replacedTodo.creationDate
-        oldTodo.notes = replacedTodo.notes
-        oldTodo.repeatTodos = replacedTodo.repeatTodos
-        oldTodo.isDone = replacedTodo.isDone
-        replacedTodo.categoryName = temp.categoryName
-        replacedTodo.title = temp.title
-        replacedTodo.creationDate = temp.creationDate
-        replacedTodo.notes = temp.notes
-        replacedTodo.repeatTodos = temp.repeatTodos
-        replacedTodo.isDone = temp.isDone
+        let context = persistentContainer.viewContext
+        let displayOrderOne = todoOne.displayOrder
+        let displayOrderTwo = todoTwo.displayOrder
+        let categoryNameOne = todoOne.categoryName ?? ""
+        let categoryNameTwo = todoTwo.categoryName ?? ""
+        todoOne.displayOrder = displayOrderTwo
+        todoTwo.displayOrder = displayOrderOne
+        
+        if categoryNameOne != categoryNameTwo {
+            todoOne.categoryName = categoryNameTwo
+        }
+        
         do {
             try context.save()
         } catch let error {
-            print("Failed to update records", error)
+            print("Saved new positions", error)
         }
     }
     
-    func fetchTodoFromCoreData(for todo: TodoItem) -> TodoItem? {
-        guard let categoryName = todo.categoryName, let title = todo.title else { return nil }
+    private func getAllTodosCount() -> Int16 {
         let context = persistentContainer.viewContext
-        let predicate = NSPredicate(format: "categoryName == %@ && title == %@",
-                                    argumentArray: [categoryName, title])
-        let request = NSFetchRequest<TodoItem>(entityName: "TodoItem")
-        request.predicate = predicate
-        
+        let fetchRequest = NSFetchRequest<TodoItem>(entityName: "TodoItem")
         do {
-            let todos = try context.fetch(request)
-            return todos.first
+            let todos = try context.fetch(fetchRequest)
+            return Int16(todos.count)
         } catch let error {
-            print("Failed to fetch todo", error)
-            return nil
+            print("Failed in fetching todos", error)
+            return 0
         }
     }
 }

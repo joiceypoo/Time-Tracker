@@ -10,9 +10,25 @@ import UIKit
 
 extension CategoriesController: UITableViewDelegate, AddCategoryDelegate {
     func didAddCategory(category: Category) {
-        categories.append(category)
-        let newIndexPath = IndexPath(row: categories.count - 1, section: 0)
-        categoriesTable.insertRows(at: [newIndexPath], with: .automatic)
+        
+        if categories.isEmpty {
+            categories.append(category)
+            let indexPath = IndexPath(row: 0, section: 0)
+            categoriesTable.insertRows(at: [indexPath], with: .automatic)
+            selectedCategory = category.name
+            postSelectedCategory()
+            navigationController?.popViewController(animated: true)
+        } else {
+            categories.append(category)
+            let newIndexPath = IndexPath(row: categories.count - 1, section: 0)
+            categoriesTable.insertRows(at: [newIndexPath], with: .automatic)
+        }
+    }
+    
+    func didEditCategory(category: Category) {
+        let row = categories.index(of: category)
+        let newIndexPath = IndexPath(row: row!, section: 0)
+        categoriesTable.reloadRows(at: [newIndexPath], with: .automatic)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -23,14 +39,9 @@ extension CategoriesController: UITableViewDelegate, AddCategoryDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? CategoriesCell, let category = cell.textLabel?.text {
             selectedCategory = category
             cell.accessoryType = .checkmark
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath), cell.accessoryType.rawValue == 3,
-            let category = cell.textLabel?.text {
-            selectedCategory = category
-            cell.accessoryType = .none
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
@@ -38,6 +49,12 @@ extension CategoriesController: UITableViewDelegate, AddCategoryDelegate {
         let deleteAction = UITableViewRowAction(style: .destructive,
                                                 title: "Delete",
                                                 handler: deleteHandler)
-        return [deleteAction]
+        let editAction = UITableViewRowAction(style: .normal,
+                                              title: "Edit",
+                                              handler: editHandler)
+        editAction.backgroundColor = UIColor.customDarkBlack
+
+        
+        return [deleteAction, editAction]
     }
 }

@@ -25,15 +25,6 @@ class TodoItemsController: UIViewController {
     
     let topBorder = CALayer()
     
-    internal func fetchTodos(from day: String) {
-        todos = CoreDataManager.shared.fetchAllTodos(for: day)
-        var newCategories : [String] = []
-        for tuple in todos {
-            newCategories.append(tuple.key)
-        }
-        categories = newCategories
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "To do"
@@ -42,7 +33,7 @@ class TodoItemsController: UIViewController {
         todoListsTable.addGestureRecognizer(longPressedGestureRecognizer)
         let day = Calendar.current.component(.weekday, from: Date())
         setupView()
-        fetchTodos(from: UsedDates.shared.getDay(from: day))
+        fetchTodos(from: UsedDates.shared.getDay(dayOfWeekNumber: day))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +51,19 @@ class TodoItemsController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        topBorder.frame = CGRect(x: 0, y: 1, width: calenderView.bounds.width, height: 0.3)
+        topBorder.frame = CGRect(x: 0,
+                                 y: 1,
+                                 width: calenderView.bounds.width,
+                                 height: 0.3)
+    }
+    
+    internal func fetchTodos(from day: String) {
+        todos = CoreDataManager.shared.fetchAllTodos(for: day)
+        var newCategories : [String] = []
+        for tuple in todos {
+            newCategories.append(tuple.key)
+        }
+        categories = newCategories
     }
     
     @objc func handleLongPress(recognizer: UILongPressGestureRecognizer) {
@@ -78,13 +81,10 @@ class TodoItemsController: UIViewController {
     }
     
     private func setupView() {
-        topBorder.frame = CGRect(x: 0,
-                                 y: 1,
-                                 width: calenderView.bounds.width,
-                                 height: 0.3)
         topBorder.backgroundColor = UIColor.customLightGray.cgColor
         calenderView.backgroundColor = .customBlack
         calenderView.layer.addSublayer(topBorder)
+        
         
         todoListsTable.backgroundColor = .customDarkBlack
         todoListsTable.separatorColor = .customLightGray
@@ -121,7 +121,7 @@ class TodoItemsController: UIViewController {
     }
     
     private func getDayOfWeek(from dayNumber: Int) -> String {
-        return UsedDates.shared.getDay(from: dayNumber)
+        return UsedDates.shared.getDay(dayOfWeekNumber: dayNumber)
     }
     
     func displayDate(date: Date) {
@@ -129,7 +129,7 @@ class TodoItemsController: UIViewController {
         UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date)
         highlightDayOfWeek(UsedDates.shared.selectdDayOfWeek)
         self.selectedDate.text = UsedDates.shared.displayedDateString
-        let dayString = UsedDates.shared.getDay(from: UsedDates.shared.selectdDayOfWeek)
+        let dayString = UsedDates.shared.getDay(dayOfWeekNumber: UsedDates.shared.selectdDayOfWeek)
         displayedDayOfWeek = dayString
         UsedDates.shared.currentDate = date
     }
@@ -138,11 +138,16 @@ class TodoItemsController: UIViewController {
     {
         let startDate = UsedDates.shared.startDate
         let cal = Calendar.current
-        if let numberOfDays = cal.dateComponents([.day], from: startDate, to: date).day {
+        if let numberOfDays = cal.dateComponents([.day],
+                                                 from: startDate,
+                                                 to: date).day {
             let extraDays: Int = numberOfDays % 7
             let scrolledNumberOfDays = numberOfDays - extraDays
-            let firstMondayIndexPath = IndexPath(row: scrolledNumberOfDays, section: 0)
-            dateCollectionView.scrollToItem(at: firstMondayIndexPath, at: .left , animated: false)
+            let firstMondayIndexPath = IndexPath(row: scrolledNumberOfDays,
+                                                 section: 0)
+            dateCollectionView.scrollToItem(at: firstMondayIndexPath,
+                                            at: .left ,
+                                            animated: false)
         }
         displayDate(date: date)
     }
@@ -185,9 +190,9 @@ class TodoItemsController: UIViewController {
     
     func highlightDayOfWeek(_ weekDay: Int) {
         let selectedWeekDayIndex = weekDay - 1
-        for i in 0...6 {
-            let label = weekDaysStackView.arrangedSubviews[i] as! UILabel
-            if i == selectedWeekDayIndex {
+        for index in 0...6 {
+            let label = weekDaysStackView.arrangedSubviews[index] as! UILabel
+            if index == selectedWeekDayIndex {
                 label.textColor = UIColor.white
             }
             else {

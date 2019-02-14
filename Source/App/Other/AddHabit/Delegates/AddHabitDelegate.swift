@@ -29,12 +29,14 @@ extension AddHabitController: UITableViewDelegate, UITextFieldDelegate, UITextVi
         }
         
         if indexPath.row == 3 {
+            let indexPath = IndexPath(row: indexPath.row, section: 0)
+            let cell = addHabitTable.cellForRow(at: indexPath) as! AddHabitCell
             guard let categoriesController = CategoriesController.instantiate(from: .main)
                 else { return }
+            categoriesController.detailLabelText = cell.detailTextLabel?.text
             navigationController?.pushViewController(categoriesController, animated: true)
         }
     }
-    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (textField.text?.isEmpty)! {
@@ -55,6 +57,13 @@ extension AddHabitController: UITableViewDelegate, UITextFieldDelegate, UITextVi
             let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
             habitTitle = updatedText
+        }
+        return true
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if notesTextView.text == "Notes (Optional)" {
+            notesTextView.text = ""
         }
         return true
     }

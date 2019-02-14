@@ -41,8 +41,8 @@ extension AddHabitController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.delegate = self
-            category = "Uncategorized"
-            cell.viewModel = DescriptionVM(title: "Category", details: "Uncategorized")
+            category = "None"
+            cell.viewModel = DescriptionVM(title: "Tag", details: "None")
             return cell
         }
     }

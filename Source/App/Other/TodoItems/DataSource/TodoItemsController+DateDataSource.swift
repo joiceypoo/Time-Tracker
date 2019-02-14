@@ -18,7 +18,8 @@ extension TodoItemsController: UICollectionViewDataSource {
         let addedDays = indexPath.row
         var addedDaysDateComp = DateComponents()
         addedDaysDateComp.day = addedDays
-        let currentCellDate = Calendar.current.date(byAdding: addedDaysDateComp , to: UsedDates.shared.startDate)
+        let currentCellDate = Calendar.current.date(byAdding: addedDaysDateComp ,
+                                                    to: UsedDates.shared.startDate)
         
         if let cellDate = currentCellDate {
             cell.date = cellDate
