@@ -87,7 +87,7 @@ class AddHabitCell: UITableViewCell {
                 }
             }
             delegate?.handleWeekdays(days: days)
-            self.detailTextLabel?.text = days.count == 7 ? "Every day": days.joined(separator: " ")
+            self.detailTextLabel?.text = days.count == 7 ? "Weekdays": days.joined(separator: " ")
             days = []
         }
     }

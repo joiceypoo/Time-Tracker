@@ -20,7 +20,7 @@ class AddHabitController: UIViewController {
     var category: String?
     var habitTitle: String?
     var delegate: AddHabitDelegate?
-    var weekdays: [String] = ["Every day"]
+    var weekdays: [String] = ["Weekdays"]
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ class AddHabitController: UIViewController {
     }
     
     @objc private func addHabit() {
-        let dateString = DatesString.getDatesString(format: "EEEE, d MMMM yyyy",
+        let dateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",
                                                     date: Date())
         if let title = habitTitle, !title.trimmingCharacters(in: .whitespaces).isEmpty {
             let todo = CoreDataManager.shared.createTodo(todo: title,
@@ -66,7 +66,7 @@ class AddHabitController: UIViewController {
     }
     
     var isRepeating: Bool {
-        if weekdays[0] == "Every day" || weekdays.count == 7 {
+        if weekdays[0] == "Weekdays" || weekdays.count == 7 {
             return true
         } else {
             return false

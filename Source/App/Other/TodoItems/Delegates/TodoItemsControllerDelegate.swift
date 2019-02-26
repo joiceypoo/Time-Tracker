@@ -8,17 +8,49 @@
 
 import UIKit
 
-extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, AddHabitDelegate {
+extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, AddHabitDelegate,
+AddHabitViewDelegate {
+    func showTextInputArea() {
+        isTextInputAreaTapped = true
+    }
+    
+    func didDeleteHabit(todo: TodoItem?) {
+        guard let category = todo?.categoryName,
+            let todo = todo,
+            let section = categories.index(of: category),
+            let index = todos[section].value.index(of: todo) else { return }
+        let newIndexPath = IndexPath(row: index, section: section)
+        todos[section].value.remove(at: index)
+        todoListsTable.deleteRows(at: [newIndexPath], with: .automatic)
+    }
+    
+    func didEditHabit(todo: TodoItem?) {
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        displayHabitView = false
+        guard let category = todo?.categoryName,
+            let section = categories.index(of: category),
+            let todo = todo,
+            let row = todos[section].value.index(of: todo) else { return }
+        let reloadIndexPath = IndexPath(row: row, section: section)
+        todoListsTable.reloadRows(at: [reloadIndexPath], with: .middle)
+    }
+    
+    func didDismissView() {
+        dismissViewHandler()
+    }
+    
     func didEditTodo(todoItem: TodoItem?) {
         guard let category = todoItem?.categoryName,
             let section = categories.index(of: category),
-            let todo = todoItem else { return }
-        let row = todos[section].value.index(of: todo)
-        let reloadIndexPath = IndexPath(row: row!, section: section)
+            let todo = todoItem,
+            let row = todos[section].value.index(of: todo) else { return }
+        let reloadIndexPath = IndexPath(row: row, section: section)
         todoListsTable.reloadRows(at: [reloadIndexPath], with: .middle)
     }
     
     func didAddHabit(todo: TodoItem) {
+        displayHabitView = false
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         if categories.count == 0, let category = todo.categoryName {
             categories.append(category)
             let newTodo = (key: category, value: [todo])
@@ -50,19 +82,14 @@ extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, 
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 68
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        guard let editTodoController = EditTodoController.instantiate(from: .main)
-            else { return }
+        displayHabitView.toggle()
         let newTodos = todos[indexPath.section].value
-        editTodoController.habitTitle = cell?.textLabel?.text
-        editTodoController.delegate = self
-        editTodoController.todo = newTodos[indexPath.row]
-        let navigationController = CustomNavigationController(rootViewController: editTodoController)
-        present(navigationController, animated: true, completion: nil)
+        let todo = newTodos[indexPath.row]
+        setupAddHabitView(for: todo)
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -73,16 +100,24 @@ extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        if categories.isEmpty {
+            return 0
+        } else if categories.count == 1 && categories.contains("None") {
+            return 20
+        }
+        return 40
     }
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = IndentLabel()
-        label.backgroundColor = .customDarkBlack
-        label.font = UIFont.boldSystemFont(ofSize: 19)
-        label.textColor = .customLightGray
-        if categories.count == 0 {
+        label.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+        if categories.count == 1 && categories.contains("None") {
             label.text = ""
+        } else if categories[section] == "None" {
+            label.text = "No Tags"
         } else {
             label.text = categories[section]
         }
@@ -92,7 +127,7 @@ extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, 
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = DisplayMessage(frame: todoListsTable.frame)
-        label.messageLabel.text = "Nothing on your list yet, Tap the plus button below to add a new item"
+        label.messageLabel.text = "Time to add some habits 🐰🥕"
         return label
     }
     

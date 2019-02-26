@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ScheduleEnum: String {
+enum WeekdaysEnum: String {
     case sunday = "Sunday"
     case monday = "Monday"
     case tuesday = "Tuesday"

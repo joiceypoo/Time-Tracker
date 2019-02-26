@@ -11,5 +11,12 @@ import UIKit
 class DateCollectionViewCell: UICollectionViewCell {
     
     var date: Date!
-    @IBOutlet weak var dayOfMonth: UILabel!
+    @IBOutlet weak var dayOfMonthLabel: UILabel!
+    @IBOutlet weak var dayOfWeekLabel: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
+        self.layer.cornerRadius = 4
+        self.layer.masksToBounds = true
+    }
 }

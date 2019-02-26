@@ -11,7 +11,7 @@ import UIKit
 
 class CustomNavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
 }
 
@@ -19,12 +19,11 @@ class CustomNavigationController: UINavigationController {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().barTintColor = .customBlack
+        UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().prefersLargeTitles = true
         UINavigationBar.appearance().titleTextAttributes
             = [NSAttributedString.Key.foregroundColor: UIColor.white]

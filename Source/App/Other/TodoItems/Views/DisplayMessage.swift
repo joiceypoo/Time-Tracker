@@ -26,15 +26,14 @@ public class DisplayMessage: UIView {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = .customLightGray
+        label.textColor = #colorLiteral(red: 0.6039215686, green: 0.6156862745, blue: 0.6745098039, alpha: 1)
         return label
     }()
     
     private func setupView() {
         backgroundColor = .clear
         addSubview(messageLabel)
-        messageLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        messageLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        messageLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -32).isActive = true
+        messageLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 70).isActive = true
+        messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
 }

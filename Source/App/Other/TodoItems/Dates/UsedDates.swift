@@ -6,7 +6,7 @@
 //  Copyright © 2019 Team Sweet Cheeks. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Date {
     
@@ -43,7 +43,7 @@ class UsedDates {
         startComponents.year = 2000
         startComponents.month = 12
         startComponents.day = 31
-        startComponents.timeZone = TimeZone(abbreviation: "GMT")
+        startComponents.timeZone = TimeZone(abbreviation: currentTimeZone)
         
         let res = Calendar.current.date(from: startComponents) ?? Date()
         
@@ -62,21 +62,21 @@ class UsedDates {
     func getDayOfWeekLetterFromDayOfWeekNumber(dayOfWeekNumber: Int) -> String {
         switch dayOfWeekNumber {
         case 1:
-            return "S"
+            return "Sun"
         case 2:
-            return "M"
+            return "Mon"
         case 3:
-            return "T"
+            return "Tue"
         case 4:
-            return "W"
+            return "Wed"
         case 5:
-            return "T"
+            return "Thu"
         case 6:
-            return "F"
+            return "Fri"
         case 7:
-            return "S"
+            return "Sat"
         default:
-            return "S"
+            return "Sun"
         }
     }
     
@@ -115,31 +115,13 @@ class UsedDates {
     var displayedDateString: String {
         get {
             let longDateFormatter = DateFormatter()
-            longDateFormatter.dateFormat = "EEEE, d MMMM yyyy"
+            longDateFormatter.dateFormat = "MMMM"
             return longDateFormatter.string(from: displayedDate)
-            
         }
     }
     
-    func getDay(dayOfWeekNumber: Int) -> String {
-        switch dayOfWeekNumber {
-        case 1:
-            return "Sun"
-        case 2:
-            return "Mon"
-        case 3:
-            return "Tue"
-        case 4:
-            return "Wed"
-        case 5:
-            return "Thu"
-        case 6:
-            return "Fri"
-        case 7:
-            return "Sat"
-        default:
-            return "Sun"
-        }
+    var currentTimeZone: String {
+        return TimeZone.current.abbreviation() ?? "PST"
     }
 }
 

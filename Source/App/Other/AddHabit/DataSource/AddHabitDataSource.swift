@@ -26,7 +26,7 @@ extension AddHabitController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.delegate = self
-            cell.viewModel = DescriptionVM(title: "Repeat", details: "Every day")
+            cell.viewModel = DescriptionVM(title: "Repeat", details: "Weekdays")
             return cell
         } else if indexPath.row == 2 {
             tableView.register(AddHabitCell.self, forCellReuseIdentifier: "AddHabitCell")

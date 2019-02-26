@@ -12,6 +12,13 @@
 		242FB84721C0447B00931945 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84521C0447B00931945 /* Main.storyboard */; };
 		242FB84921C0447D00931945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84821C0447D00931945 /* Assets.xcassets */; };
 		242FB84C21C0447D00931945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84A21C0447D00931945 /* LaunchScreen.storyboard */; };
+		CE0C6CB9221AEE460007F68F /* AddHabitView+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C6CB8221AEE460007F68F /* AddHabitView+DataSource.swift */; };
+		CE0C6CBB221AEEA80007F68F /* AddHabitView+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C6CBA221AEEA80007F68F /* AddHabitView+Delegates.swift */; };
+		CE0C6CBD221AF6B70007F68F /* AddHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C6CBC221AF6B70007F68F /* AddHabitViewModel.swift */; };
+		CE14E4BC22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE14E4BB22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf */; };
+		CE14E4BE2218AE98009C4432 /* AddHabitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE14E4BD2218AE98009C4432 /* AddHabitView.xib */; };
+		CE14E4C02218AEDB009C4432 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */; };
+		CE6EDA7E221F8982009DB063 /* CustomCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6EDA7D221F8982009DB063 /* CustomCollectionViewFlowLayout.swift */; };
 		CE776B1122024D9F003E617C /* UsedDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1022024D9F003E617C /* UsedDates.swift */; };
 		CE776B1322024DDF003E617C /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */; };
 		CE776B1522024F61003E617C /* TodoItemsController+DateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */; };
@@ -55,10 +62,11 @@
 		CE8F250321F880740028AC7F /* RepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250221F880740028AC7F /* RepeatController.swift */; };
 		CE8F250521F880B90028AC7F /* AddHabitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250421F880B90028AC7F /* AddHabitDelegate.swift */; };
 		CE8F250821F8859A0028AC7F /* RepeatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250721F8859A0028AC7F /* RepeatCell.swift */; };
-		CE8F250B21F886730028AC7F /* ScheduleEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250A21F886730028AC7F /* ScheduleEnum.swift */; };
+		CE8F250B21F886730028AC7F /* WeekdaysEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250A21F886730028AC7F /* WeekdaysEnum.swift */; };
 		CE8F250F21F888920028AC7F /* RepeatDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250E21F888920028AC7F /* RepeatDataSource.swift */; };
 		CE8F251121F88DA20028AC7F /* RepeatDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F251021F88DA20028AC7F /* RepeatDelegates.swift */; };
-		CEF78BDF220B150900DB0031 /* DatesString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF78BDE220B150900DB0031 /* DatesString.swift */; };
+		CECAEE37221C3C9B002F1D4B /* Weekdays.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECAEE36221C3C9B002F1D4B /* Weekdays.swift */; };
+		CEF78BDF220B150900DB0031 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF78BDE220B150900DB0031 /* Dates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +77,13 @@
 		242FB84821C0447D00931945 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		242FB84B21C0447D00931945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		242FB84D21C0447D00931945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE0C6CB8221AEE460007F68F /* AddHabitView+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHabitView+DataSource.swift"; sourceTree = "<group>"; };
+		CE0C6CBA221AEEA80007F68F /* AddHabitView+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHabitView+Delegates.swift"; sourceTree = "<group>"; };
+		CE0C6CBC221AF6B70007F68F /* AddHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitViewModel.swift; sourceTree = "<group>"; };
+		CE14E4BB22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CustomSF-Pro-Text-Light.otf"; sourceTree = "<group>"; };
+		CE14E4BD2218AE98009C4432 /* AddHabitView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddHabitView.xib; sourceTree = "<group>"; };
+		CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
+		CE6EDA7D221F8982009DB063 /* CustomCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		CE776B1022024D9F003E617C /* UsedDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedDates.swift; sourceTree = "<group>"; };
 		CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+DateDataSource.swift"; sourceTree = "<group>"; };
@@ -112,10 +127,11 @@
 		CE8F250221F880740028AC7F /* RepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatController.swift; sourceTree = "<group>"; };
 		CE8F250421F880B90028AC7F /* AddHabitDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitDelegate.swift; sourceTree = "<group>"; };
 		CE8F250721F8859A0028AC7F /* RepeatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCell.swift; sourceTree = "<group>"; };
-		CE8F250A21F886730028AC7F /* ScheduleEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEnum.swift; sourceTree = "<group>"; };
+		CE8F250A21F886730028AC7F /* WeekdaysEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysEnum.swift; sourceTree = "<group>"; };
 		CE8F250E21F888920028AC7F /* RepeatDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatDataSource.swift; sourceTree = "<group>"; };
 		CE8F251021F88DA20028AC7F /* RepeatDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatDelegates.swift; sourceTree = "<group>"; };
-		CEF78BDE220B150900DB0031 /* DatesString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesString.swift; sourceTree = "<group>"; };
+		CECAEE36221C3C9B002F1D4B /* Weekdays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekdays.swift; sourceTree = "<group>"; };
+		CEF78BDE220B150900DB0031 /* Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +148,7 @@
 		242FB83521C0447B00931945 = {
 			isa = PBXGroup;
 			children = (
+				CE14E4BA22170D7C009C4432 /* Fonts */,
 				242FB83F21C0447B00931945 /* Products */,
 				242FB85321C0463700931945 /* Resource */,
 				242FB85521C0467200931945 /* Source */,
@@ -207,6 +224,30 @@
 				242FB84121C0447B00931945 /* AppDelegate.swift */,
 			);
 			path = Global;
+			sourceTree = "<group>";
+		};
+		CE0C6CB6221AEE040007F68F /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				CE0C6CBA221AEEA80007F68F /* AddHabitView+Delegates.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		CE0C6CB7221AEE110007F68F /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				CE0C6CB8221AEE460007F68F /* AddHabitView+DataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		CE14E4BA22170D7C009C4432 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CE14E4BB22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		CE776B0F22024D5F003E617C /* Dates */ = {
@@ -409,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				242FB84321C0447B00931945 /* TodoItemsController.swift */,
+				CE6EDA7D221F8982009DB063 /* CustomCollectionViewFlowLayout.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -453,8 +495,12 @@
 		CE8F24F221F7AA870028AC7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CE0C6CB7221AEE110007F68F /* DataSource */,
+				CE0C6CB6221AEE040007F68F /* Delegates */,
 				CE8F24F321F7AB460028AC7F /* TitleCell.swift */,
 				CE8F24F521F7AB9E0028AC7F /* AddHabitCell.swift */,
+				CE14E4BD2218AE98009C4432 /* AddHabitView.xib */,
+				CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -465,6 +511,7 @@
 				CE8F24FA21F7AE7A0028AC7F /* DescriptionVM.swift */,
 				CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */,
 				CE776B232205FF82003E617C /* EditViewModel.swift */,
+				CE0C6CBC221AF6B70007F68F /* AddHabitViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -517,10 +564,11 @@
 			children = (
 				CE8C9AD421FA62DC002947EE /* CellDetail.swift */,
 				CE8C9AD621FA638F002947EE /* CellIndexPath.swift */,
-				CE8F250A21F886730028AC7F /* ScheduleEnum.swift */,
+				CE8F250A21F886730028AC7F /* WeekdaysEnum.swift */,
 				CE776B1D2202939C003E617C /* Alert.swift */,
 				CE776B1F2205F3D4003E617C /* Unarchive.swift */,
-				CEF78BDE220B150900DB0031 /* DatesString.swift */,
+				CEF78BDE220B150900DB0031 /* Dates.swift */,
+				CECAEE36221C3C9B002F1D4B /* Weekdays.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -602,6 +650,8 @@
 				242FB84C21C0447D00931945 /* LaunchScreen.storyboard in Resources */,
 				242FB84921C0447D00931945 /* Assets.xcassets in Resources */,
 				242FB84721C0447B00931945 /* Main.storyboard in Resources */,
+				CE14E4BE2218AE98009C4432 /* AddHabitView.xib in Resources */,
+				CE14E4BC22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,26 +674,30 @@
 				CE8C9B1221FE1103002947EE /* HabbbitModels.xcdatamodeld in Sources */,
 				CE776B19220251DE003E617C /* TodoItemsController+DateDelegate.swift in Sources */,
 				CE84D6BF21F8CF40000C9D89 /* DisplayMessage.swift in Sources */,
+				CE0C6CB9221AEE460007F68F /* AddHabitView+DataSource.swift in Sources */,
 				CE8F24EB21F76C2B0028AC7F /* UITableViewCell+Extension.swift in Sources */,
+				CECAEE37221C3C9B002F1D4B /* Weekdays.swift in Sources */,
 				CE8F24EE21F771FB0028AC7F /* AddHabitController.swift in Sources */,
 				CE8F250321F880740028AC7F /* RepeatController.swift in Sources */,
 				242FB84421C0447B00931945 /* TodoItemsController.swift in Sources */,
 				CE8C9B1921FFEC40002947EE /* Notification+extension.swift in Sources */,
 				CE8C9AED21FB38D8002947EE /* EditTodoItemDelegates.swift in Sources */,
 				CE776B222205F9CE003E617C /* CustomCell.swift in Sources */,
+				CE14E4C02218AEDB009C4432 /* AddHabitView.swift in Sources */,
 				CE84D6CE21F95985000C9D89 /* EditTodoCell.swift in Sources */,
 				CE776B1E2202939C003E617C /* Alert.swift in Sources */,
 				242FB84221C0447B00931945 /* AppDelegate.swift in Sources */,
 				CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */,
 				CE84D6C321F8FBAF000C9D89 /* EditTodoController.swift in Sources */,
-				CE8F250B21F886730028AC7F /* ScheduleEnum.swift in Sources */,
+				CE8F250B21F886730028AC7F /* WeekdaysEnum.swift in Sources */,
+				CE6EDA7E221F8982009DB063 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				CE776B1C220275CB003E617C /* AddCategoryDelegates.swift in Sources */,
 				CE8C9AE621FB1179002947EE /* CategoriesDelegates.swift in Sources */,
 				CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */,
 				CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */,
 				CE8F24F621F7AB9E0028AC7F /* AddHabitCell.swift in Sources */,
 				CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */,
-				CEF78BDF220B150900DB0031 /* DatesString.swift in Sources */,
+				CEF78BDF220B150900DB0031 /* Dates.swift in Sources */,
 				CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */,
 				CE8F250821F8859A0028AC7F /* RepeatCell.swift in Sources */,
 				CE8C9AE221FB0817002947EE /* CategoriesCell.swift in Sources */,
@@ -653,6 +707,7 @@
 				CE8F24FF21F7B37F0028AC7F /* AddHabitDataSource.swift in Sources */,
 				CE8C9AD521FA62DC002947EE /* CellDetail.swift in Sources */,
 				CE8C9AEB21FB2782002947EE /* AddCategoryController.swift in Sources */,
+				CE0C6CBD221AF6B70007F68F /* AddHabitViewModel.swift in Sources */,
 				CE8F250F21F888920028AC7F /* RepeatDataSource.swift in Sources */,
 				CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */,
 				CE8C9AE021FB06CE002947EE /* CategoriesController.swift in Sources */,
@@ -660,6 +715,7 @@
 				CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */,
 				CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */,
 				CE8C9AD721FA638F002947EE /* CellIndexPath.swift in Sources */,
+				CE0C6CBB221AEEA80007F68F /* AddHabitView+Delegates.swift in Sources */,
 				CE776B1522024F61003E617C /* TodoItemsController+DateDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

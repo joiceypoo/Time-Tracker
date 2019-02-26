@@ -77,8 +77,9 @@ struct CoreDataManager {
             let todos = try context.fetch(fetchRequest)
             for todo in todos {
                 
-                let daysArray = Unarchive.unarchiveStringArrayData(from: todo.repeatTodos?.weekday)
-                let isValidDay = daysArray.contains(day) || daysArray.contains("Every day")
+                let data = todo.repeatTodos?.weekday
+                let daysArray = Unarchive.unarchiveStringArrayData(from: data)
+                let isValidDay = daysArray.contains(day) || daysArray.count == 7
                 if let name = todo.categoryName, name == "None" && todosDictionary[name] == nil && isValidDay  {
                     todosDictionary["None"] = [todo]
                 } else if let name = todo.categoryName, name == "None" && todosDictionary[name] != nil && isValidDay {
@@ -141,6 +142,20 @@ struct CoreDataManager {
         } catch let error {
             print("Failed in fetching todos", error)
             return 0
+        }
+    }
+    
+    func createCategory(from categoryName: String?) {
+        let name = categoryName ?? ""
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        let category = NSEntityDescription.insertNewObject(forEntityName: "Category",
+                                                           into: context) as! Category
+        category.setValue(name,
+                          forKey: "name")
+        do {
+            try context.save()
+        } catch let error {
+            print("Failed to save Category", error)
         }
     }
 }

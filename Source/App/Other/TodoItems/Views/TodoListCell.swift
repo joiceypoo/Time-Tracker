@@ -28,19 +28,33 @@ public class TodoListCell: UITableViewCell {
     
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
-        let weekdays = viewModel.repeatTodos?.weekday
-        let days = Unarchive.unarchiveDaysData(from: weekdays)
+        let data = viewModel.repeatTodos?.weekday
+        
+        var daysArray = Unarchive.unarchiveStringArrayData(from: data)
+        daysArray = daysArray.map { day in
+            return Weekdays.getShortWeekday(for: day)
+        }
+        
+        let daysString = daysArray.joined(separator: " ")
+        
         let currentDate = UsedDates.shared.currentDate
-        let dateString = DatesString.getDatesString(format: "EEEE, d MMMM yyyy",
+        let dateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",
                                                     date: currentDate)
+        
         let datesArray = Unarchive.unarchiveStringArrayData(from: viewModel.isDone)
         if datesArray.contains(dateString) {
             checkBox.setImage(#imageLiteral(resourceName: "checked"), for: .normal)
         } else {
             checkBox.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
         }
+        
+        if daysArray.count == 7 {
+            detailTextLabel?.text = "Weekdays"
+        } else {
+            detailTextLabel?.text = daysString
+        }
+        
         textLabel?.text = viewModel.title
-        detailTextLabel?.text = days
     }
     
     private lazy var checkBox: UIButton = {
@@ -48,8 +62,7 @@ public class TodoListCell: UITableViewCell {
         let image = #imageLiteral(resourceName: "unchecked")
         button.layer.cornerRadius = button.frame.height / 2
         button.layer.masksToBounds = true
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.customLightGray.cgColor
+        button.backgroundColor = .white
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(checkboxPressed(sender:)), for: .touchUpInside)
         return button
@@ -69,14 +82,15 @@ public class TodoListCell: UITableViewCell {
     }
     
     private func setupView() {
-        detailTextLabel?.textColor = .customLightGray
-        detailTextLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        backgroundColor = .customBlack
-        textLabel?.textColor = .white
-        textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        detailTextLabel?.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+        detailTextLabel?.font = UIFont.systemFont(ofSize: 14)
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        textLabel?.textColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1843137255, alpha: 1)
+        textLabel?.font = UIFont.systemFont(ofSize: 16)
         accessoryView = checkBox
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        selectionStyle = .none
         selectedBackgroundView = view
     }
     
@@ -86,7 +100,7 @@ public class TodoListCell: UITableViewCell {
         guard let todo = viewModel else { return }
         do {
             var datesArray = Unarchive.unarchiveStringArrayData(from: todo.isDone)
-            let currentDateString = DatesString.getDatesString(format: "EEEE, d MMMM yyyy",
+            let currentDateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",
                                                                date: date)
             if !datesArray.contains(currentDateString) {
                 datesArray.append(currentDateString)

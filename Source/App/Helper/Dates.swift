@@ -8,11 +8,18 @@
 
 import Foundation
 
-class DatesString {
-    static func getDatesString(format: String, date: Date) -> String {
+class Dates {
+    static func getDateString(format: String, date: Date) -> String {
         let longDateFormatter = DateFormatter()
         longDateFormatter.dateFormat = format
         let dateString = longDateFormatter.string(from: date)
         return dateString
+    }
+    
+    static func getDateFromString(dateString: String, format: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        let date = dateFormatter.date(from: dateString)
+        return date
     }
 }

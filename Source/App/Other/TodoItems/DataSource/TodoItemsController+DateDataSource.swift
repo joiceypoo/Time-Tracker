@@ -24,9 +24,47 @@ extension TodoItemsController: UICollectionViewDataSource {
         if let cellDate = currentCellDate {
             cell.date = cellDate
             let dayOfMonth = Calendar.current.component(.day, from: cellDate)
-            cell.dayOfMonth.text = String(describing: dayOfMonth)
+            cell.dayOfMonthLabel.text = String(describing: dayOfMonth)
+            
+            let dayOfWeek = Calendar.current.component(.weekday, from: cellDate)
+            cell.dayOfWeekLabel.text = String(describing: UsedDates.shared.getDayOfWeekLetterFromDayOfWeekNumber(dayOfWeekNumber: dayOfWeek))
+        }
+        
+        let order = Calendar.current.compare(cell.date, to: UsedDates.shared.currentDate, toGranularity: .day)
+        if order == ComparisonResult.orderedSame {
+            currentIndexPath = indexPath
+            cell.dayOfWeekLabel.textColor = UIColor.customBlue
+            cell.dayOfMonthLabel.textColor = UIColor.customBlue
+        } else if let newIndexPath = currentIndexPath, newIndexPath == indexPath {
+            cell.dayOfWeekLabel.textColor = UIColor.customBlue
+            cell.dayOfMonthLabel.textColor = UIColor.customBlue
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let currentIndexPath = currentIndexPath else { return }
+        if !selectedCellIndexPath.isEmpty {
+            let newIndexPath = selectedCellIndexPath[0]
+            let cell = collectionView.cellForItem(at: newIndexPath) as? DateCollectionViewCell
+            cell?.contentView.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
+            cell?.dayOfMonthLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+            cell?.dayOfWeekLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+        }
+        else if let cell = cell as? DateCollectionViewCell, currentIndexPath != indexPath {
+            cell.contentView.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
+            cell.dayOfMonthLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+            cell.dayOfWeekLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+        }
+        
+        if let cell = cell as? DateCollectionViewCell, currentIndexPath != indexPath {
+            if cell.dayOfMonthLabel.textColor == UIColor.customBlue {
+                cell.contentView.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
+                cell.dayOfMonthLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+                cell.dayOfWeekLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+            }
+        }
+        feedbackGenerator?.selectionChanged()
     }
     
     

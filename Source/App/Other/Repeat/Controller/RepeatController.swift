@@ -21,13 +21,13 @@ class RepeatController: UIViewController {
         "Sat"
     ]
     
-    let schedules = [ScheduleEnum.sunday.rawValue,
-                     ScheduleEnum.monday.rawValue,
-                     ScheduleEnum.tuesday.rawValue,
-                     ScheduleEnum.wednesday.rawValue,
-                     ScheduleEnum.thursday.rawValue,
-                     ScheduleEnum.friday.rawValue,
-                     ScheduleEnum.saturday.rawValue
+    let schedules = [WeekdaysEnum.sunday.rawValue,
+                     WeekdaysEnum.monday.rawValue,
+                     WeekdaysEnum.tuesday.rawValue,
+                     WeekdaysEnum.wednesday.rawValue,
+                     WeekdaysEnum.thursday.rawValue,
+                     WeekdaysEnum.friday.rawValue,
+                     WeekdaysEnum.saturday.rawValue
     ]
     
     override func viewDidLoad() {

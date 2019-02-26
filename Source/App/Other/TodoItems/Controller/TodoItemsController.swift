@@ -10,30 +10,41 @@ import UIKit
 import CoreData
 
 class TodoItemsController: UIViewController {
-    var todos: [(key: String, value: [TodoItem])] = []
-    var categories: [String] = []
-    private var lastContentOffSet: CGFloat = 0
-    var dayStr: String?
     
-    @IBOutlet weak var calenderView: UIView!
+    var addHabitView: AddHabitView?
+    var categories: [String] = []
+    var currentIndexPath: IndexPath?
+    var displayHabitView = false
+    var feedbackGenerator : UISelectionFeedbackGenerator? = nil
+    var isNoteTextViewTapped: Bool?
+    var isTextInputAreaTapped: Bool?
+    private var lastContentOffSet: CGFloat = 0
+    var selectedCellIndexPath: [IndexPath] = []
+    var todos: [(key: String, value: [TodoItem])] = []
+    
+    var categoryTextField: UITextField?
+    var noteTextView: UITextView?
+
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var todoListsTable: UITableView!
     @IBOutlet weak var dateCollectionView: UICollectionView!
     var displayedDayOfWeek: String?
     
-    @IBOutlet weak var weekDaysStackView: UIStackView!
-    @IBOutlet weak var selectedDate: UILabel!
-    
-    let topBorder = CALayer()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "To do"
+        setupKeyboardObservers()
+        feedbackGenerator = UISelectionFeedbackGenerator()
+        feedbackGenerator?.prepare()
         let longPressedGestureRecognizer = UILongPressGestureRecognizer(target: self,
                                                                         action: #selector(handleLongPress(recognizer:)))
         todoListsTable.addGestureRecognizer(longPressedGestureRecognizer)
         let day = Calendar.current.component(.weekday, from: Date())
+        let weekday = Weekdays.getDay(dayOfWeekNumber: day)
         setupView()
-        fetchTodos(from: UsedDates.shared.getDay(dayOfWeekNumber: day))
+        fetchTodos(from: weekday)
+    }
+    
+    @objc func calenderIcon() {
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,16 +56,23 @@ class TodoItemsController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        scrollToDate(date: Date())
+        let date = Date()
+        scrollToDate(date: date)
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        topBorder.frame = CGRect(x: 0,
-                                 y: 1,
-                                 width: calenderView.bounds.width,
-                                 height: 0.3)
+    var setMonthTitle: String? {
+        didSet {
+            guard let title = setMonthTitle else { return }
+            navigationItem.title = title
+            navigationController?.navigationBar.largeTitleTextAttributes
+                = [NSAttributedString.Key.foregroundColor: UIColor.customBlue]
+            navigationController?.navigationBar.shadowImage = UIImage()
+        }
+    }
+    
+    var getCategories: [Category] {
+        return CoreDataManager.shared.fetchCategories()
     }
     
     internal func fetchTodos(from day: String) {
@@ -81,22 +99,82 @@ class TodoItemsController: UIViewController {
     }
     
     private func setupView() {
-        topBorder.backgroundColor = UIColor.customLightGray.cgColor
-        calenderView.backgroundColor = .customBlack
-        calenderView.layer.addSublayer(topBorder)
+        guard let navigationBar = navigationController?.navigationBar else { return }
         
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navBarViewTapped))
         
-        todoListsTable.backgroundColor = .customDarkBlack
-        todoListsTable.separatorColor = .customLightGray
+        navigationBar.addGestureRecognizer(gestureRecognizer)
+        
+        let todayButton = UIButton()
+        todayButton.addTarget(self, action: #selector(displayTodayDate),
+                              for: .touchUpInside)
+        todayButton.setImage(#imageLiteral(resourceName: "today"), for: .normal)
+        navigationBar.addSubview(todayButton)
+        todayButton.translatesAutoresizingMaskIntoConstraints = false
+        todayButton.layer.cornerRadius = 4
+        todayButton.layer.masksToBounds = true
+        todayButton.rightAnchor.constraint(equalTo: navigationBar.rightAnchor,
+                                           constant: -20).isActive = true
+        todayButton.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor,
+                                            constant: -15).isActive = true
+        todayButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        todayButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        todoListsTable.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
+        todoListsTable.separatorColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
         todoListsTable.tableFooterView = UIView()
     }
     
+    
+    @objc func displayTodayDate() {
+       scrollToDate(date: Date())
+    }
+    
+    @objc private func navBarViewTapped() {
+        if let view = view.viewWithTag(1), view == addHabitView {
+            dismissViewHandler()
+        }
+    }
+    
+    func dismissViewHandler() {
+        displayHabitView = false
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
+            self.addHabitView?.center.y += self.view.bounds.height + 100
+        }) { _ in
+            self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            self.addHabitView?.removeFromSuperview()
+        }
+    }
+    
     @IBAction private func addTodoItemButtonPressed(_ sender: AddButton) {
-        guard let addHabitController = AddHabitController.instantiate(from: .main)
-            else { return }
-        addHabitController.delegate = self
-        let navController = CustomNavigationController(rootViewController: addHabitController)
-        present(navController, animated: true, completion: nil)
+        displayHabitView.toggle()
+        setupAddHabitView(for: nil)
+    }
+    
+    internal func setupAddHabitView(for habit: TodoItem?) {
+        addHabitView = AddHabitView(frame: view.frame)
+        guard let addHabitView = addHabitView else { return }
+        addHabitView.viewModel = AddHabitViewModel(todo: habit, categories: getCategories)
+        addHabitView.translatesAutoresizingMaskIntoConstraints = false
+        addHabitView.delegate = self
+        categoryTextField = addHabitView.categoryTextField
+        noteTextView = addHabitView.notesTextView
+        if displayHabitView {
+            addHabitView.tag = 1
+            view.addSubview(addHabitView)
+            addHabitView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            addHabitView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            addHabitView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+            addHabitView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+                addHabitView.center.y -= self.view.bounds.height - 100
+            }, completion: { _ in
+                self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1)
+            })
+        } else {
+            return
+        }
     }
     
     public func deleteHandler(action: UITableViewRowAction, indexPath: IndexPath) {
@@ -120,16 +198,11 @@ class TodoItemsController: UIViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
-    private func getDayOfWeek(from dayNumber: Int) -> String {
-        return UsedDates.shared.getDay(dayOfWeekNumber: dayNumber)
-    }
-    
     func displayDate(date: Date) {
         UsedDates.shared.displayedDate = date
         UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date)
-        highlightDayOfWeek(UsedDates.shared.selectdDayOfWeek)
-        self.selectedDate.text = UsedDates.shared.displayedDateString
-        let dayString = UsedDates.shared.getDay(dayOfWeekNumber: UsedDates.shared.selectdDayOfWeek)
+        setMonthTitle = UsedDates.shared.displayedDateString
+        let dayString = Weekdays.getDay(dayOfWeekNumber: UsedDates.shared.selectdDayOfWeek)
         displayedDayOfWeek = dayString
         UsedDates.shared.currentDate = date
     }
@@ -188,18 +261,51 @@ class TodoItemsController: UIViewController {
         displayDate(date: displayedDate)
     }
     
-    func highlightDayOfWeek(_ weekDay: Int) {
-        let selectedWeekDayIndex = weekDay - 1
-        for index in 0...6 {
-            let label = weekDaysStackView.arrangedSubviews[index] as! UILabel
-            if index == selectedWeekDayIndex {
-                label.textColor = UIColor.white
-            }
-            else {
-                label.textColor = UIColor.customLightGray
-            }
-        }
+    private func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillChange),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillChange),
+                                               name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillChange),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    private func animateKeyboard(_ duration: TimeInterval, _ options: UIView.AnimationOptions) {
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       options: options,
+                       animations: ({
+                        self.view.layoutIfNeeded()
+                       }))
+    }
+    
+    @objc
+    private func keyboardWillChange(notification: Notification) {
+        guard
+            let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let rawCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+            else { return }
         
+        let options = UIView.AnimationOptions(rawValue: rawCurve << 16)
+        
+        if notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
+
+            if let success = isTextInputAreaTapped, success == true {
+                addHabitView?.frame.origin.y = -keyboardFrame.height + 170
+                isTextInputAreaTapped = false
+            }
+            animateKeyboard(duration, options)
+        } else {
+            addHabitView?.frame.origin.y = 0
+            animateKeyboard(duration, options)
+            isTextInputAreaTapped = false
+        }
     }
     
 }
