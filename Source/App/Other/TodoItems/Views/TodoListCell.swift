@@ -58,9 +58,9 @@ public class TodoListCell: UITableViewCell {
     }
     
     private lazy var checkBox: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
         let image = #imageLiteral(resourceName: "unchecked")
-        button.layer.cornerRadius = button.frame.height / 2
+        button.layer.cornerRadius = button.frame.width / 2
         button.layer.masksToBounds = true
         button.backgroundColor = .white
         button.setImage(image, for: .normal)
@@ -73,12 +73,24 @@ public class TodoListCell: UITableViewCell {
         let currentDate = UsedDates.shared.displayedDate
         if sender.currentImage == #imageLiteral(resourceName: "unchecked") {
             sender.setImage(#imageLiteral(resourceName: "checked"), for: .normal)
-            updateDateRecord(from: currentDate)
+            animateButton(sender: sender)
             impact.impactOccurred()
+            updateDateRecord(from: currentDate)
         } else if sender.currentImage == #imageLiteral(resourceName: "checked") {
             sender.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
             updateDateRecord(from: currentDate)
         }
+    }
+    
+    private func animateButton(sender: UIButton) {
+        sender.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        UIView.animate(withDuration: 1, delay: 0,
+                       usingSpringWithDamping: 0.3,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseIn,
+                       animations: {
+                        sender.transform = .identity
+        }, completion: nil)
     }
     
     private func setupView() {

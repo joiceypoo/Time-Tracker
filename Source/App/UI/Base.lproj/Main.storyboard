@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPG-cJ-lXH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1JK-dg-Acx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,13 +13,13 @@
         <!--Todo Items Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="TodoItemsController" customModule="Habbbit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TodoItemsControllerID" id="BYZ-38-t0r" customClass="TodoItemsController" customModule="Habbbit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G1L-ms-s5B">
-                                <rect key="frame" x="8" y="72" width="359" height="50"/>
+                                <rect key="frame" x="8" y="28" width="359" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="IRa-r1-TbJ"/>
@@ -75,7 +75,7 @@
                                 </connections>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0ww-Ks-kEg">
-                                <rect key="frame" x="0.0" y="142" width="375" height="525"/>
+                                <rect key="frame" x="0.0" y="98" width="375" height="569"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoListCell" textLabel="rsn-lL-D9b" detailTextLabel="xrY-qw-fMt" style="IBUITableViewCellStyleSubtitle" id="oLH-sH-hmD" customClass="TodoListCell" customModule="Habbbit" customModuleProvider="target">
@@ -109,7 +109,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faD-9z-eRI" customClass="AddButton" customModule="Habbbit" customModuleProvider="target">
-                                <rect key="frame" x="164.5" y="611" width="46" height="46"/>
+                                <rect key="frame" x="164.5" y="581" width="46" height="46"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="98p-IW-wSN"/>
@@ -128,7 +128,7 @@
                             <constraint firstAttribute="bottom" secondItem="0ww-Ks-kEg" secondAttribute="bottom" id="adB-ym-ebp"/>
                             <constraint firstItem="faD-9z-eRI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dKt-Pk-sqX"/>
                             <constraint firstItem="G1L-ms-s5B" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-8" id="eDb-xu-Zfi"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="faD-9z-eRI" secondAttribute="bottom" constant="10" id="mgK-Yf-dZ3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="faD-9z-eRI" secondAttribute="bottom" constant="40" id="mgK-Yf-dZ3"/>
                             <constraint firstItem="G1L-ms-s5B" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="obJ-NM-hoB"/>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="top" secondItem="G1L-ms-s5B" secondAttribute="bottom" constant="20" id="rHr-bh-NaS"/>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ua8-Xu-h5G"/>
@@ -138,13 +138,13 @@
                     <navigationItem key="navigationItem" id="Afw-ob-4ae"/>
                     <connections>
                         <outlet property="addButton" destination="faD-9z-eRI" id="SSa-iq-hW4"/>
-                        <outlet property="dateCollectionView" destination="G1L-ms-s5B" id="tOO-7d-4N2"/>
+                        <outlet property="dateCollectionView" destination="G1L-ms-s5B" id="IVI-8o-GXM"/>
                         <outlet property="todoListsTable" destination="0ww-Ks-kEg" id="FJg-IX-aOI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="845.60000000000002" y="111.0944527736132"/>
+            <point key="canvasLocation" x="1049" y="110"/>
         </scene>
         <!--Add Habit Controller-->
         <scene sceneID="wYh-mM-JYJ">
@@ -277,23 +277,34 @@
             </objects>
             <point key="canvasLocation" x="2449" y="85"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="zf5-fh-Xsa">
+        <!--Launch Controller-->
+        <scene sceneID="bfZ-Wz-ZpM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GPG-cJ-lXH" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kWs-rB-d2h">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                <viewController storyboardIdentifier="LaunchControllerID" id="1JK-dg-Acx" customClass="LaunchController" customModule="Habbbit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L3e-Z5-2Us">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="cND-hY-6pi">
+                                <rect key="frame" x="-234" y="198" width="843" height="271"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cND-hY-6pi" secondAttribute="trailing" constant="-234" id="BLl-7t-ag1"/>
+                            <constraint firstItem="cND-hY-6pi" firstAttribute="leading" secondItem="L3e-Z5-2Us" secondAttribute="leading" constant="-234" id="FQy-Rp-Yq7"/>
+                            <constraint firstItem="cND-hY-6pi" firstAttribute="top" secondItem="NcL-TL-KuK" secondAttribute="top" constant="178" id="bBx-yH-jq6"/>
+                            <constraint firstItem="NcL-TL-KuK" firstAttribute="bottom" secondItem="cND-hY-6pi" secondAttribute="bottom" constant="198" id="gK9-u7-35e"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NcL-TL-KuK"/>
+                    </view>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zYe-jn-krw"/>
+                        <outlet property="launchIcon" destination="cND-hY-6pi" id="B7u-J6-exr"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bs8-ar-V1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0s6-AQ-wPn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-92" y="111.99400299850076"/>
+            <point key="canvasLocation" x="-36" y="109"/>
         </scene>
         <!--Edit Todo Controller-->
         <scene sceneID="KIs-N8-fDg">
@@ -530,5 +541,6 @@
     </scenes>
     <resources>
         <image name="addIcon" width="60" height="60"/>
+        <image name="launchIcon" width="300.5" height="300.5"/>
     </resources>
 </document>

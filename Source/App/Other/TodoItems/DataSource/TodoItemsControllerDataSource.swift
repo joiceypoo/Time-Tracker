@@ -18,6 +18,7 @@ extension TodoItemsController: UITableViewDataSource {
         if categories.count == 0 {
             return 0
         }
+        
         let todosForThisKey = todos[section].value
         let todosCount = todosForThisKey.count
         return todosCount

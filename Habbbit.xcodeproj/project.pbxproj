@@ -18,6 +18,8 @@
 		CE14E4BC22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE14E4BB22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf */; };
 		CE14E4BE2218AE98009C4432 /* AddHabitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE14E4BD2218AE98009C4432 /* AddHabitView.xib */; };
 		CE14E4C02218AEDB009C4432 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */; };
+		CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CE25422280F9700877EDE /* AnimationController.swift */; };
+		CE1CE2582228102B00877EDE /* LaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CE2572228102B00877EDE /* LaunchController.swift */; };
 		CE6EDA7E221F8982009DB063 /* CustomCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6EDA7D221F8982009DB063 /* CustomCollectionViewFlowLayout.swift */; };
 		CE776B1122024D9F003E617C /* UsedDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1022024D9F003E617C /* UsedDates.swift */; };
 		CE776B1322024DDF003E617C /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */; };
@@ -83,6 +85,8 @@
 		CE14E4BB22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CustomSF-Pro-Text-Light.otf"; sourceTree = "<group>"; };
 		CE14E4BD2218AE98009C4432 /* AddHabitView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddHabitView.xib; sourceTree = "<group>"; };
 		CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
+		CE1CE25422280F9700877EDE /* AnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
+		CE1CE2572228102B00877EDE /* LaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchController.swift; sourceTree = "<group>"; };
 		CE6EDA7D221F8982009DB063 /* CustomCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		CE776B1022024D9F003E617C /* UsedDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedDates.swift; sourceTree = "<group>"; };
 		CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -208,6 +212,8 @@
 		242FB85921C046B700931945 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				CE1CE2562228100300877EDE /* LaunchController */,
+				CE1CE25322280F5B00877EDE /* AnimationController */,
 				CE8C9AE721FB2730002947EE /* AddCategory */,
 				CE8F24EC21F771C90028AC7F /* AddHabit */,
 				CE8C9ADA21FB066F002947EE /* Categories */,
@@ -248,6 +254,22 @@
 				CE14E4BB22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		CE1CE25322280F5B00877EDE /* AnimationController */ = {
+			isa = PBXGroup;
+			children = (
+				CE1CE25422280F9700877EDE /* AnimationController.swift */,
+			);
+			path = AnimationController;
+			sourceTree = "<group>";
+		};
+		CE1CE2562228100300877EDE /* LaunchController */ = {
+			isa = PBXGroup;
+			children = (
+				CE1CE2572228102B00877EDE /* LaunchController.swift */,
+			);
+			path = LaunchController;
 			sourceTree = "<group>";
 		};
 		CE776B0F22024D5F003E617C /* Dates */ = {
@@ -694,6 +716,7 @@
 				CE776B1C220275CB003E617C /* AddCategoryDelegates.swift in Sources */,
 				CE8C9AE621FB1179002947EE /* CategoriesDelegates.swift in Sources */,
 				CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */,
+				CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */,
 				CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */,
 				CE8F24F621F7AB9E0028AC7F /* AddHabitCell.swift in Sources */,
 				CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */,
@@ -710,6 +733,7 @@
 				CE0C6CBD221AF6B70007F68F /* AddHabitViewModel.swift in Sources */,
 				CE8F250F21F888920028AC7F /* RepeatDataSource.swift in Sources */,
 				CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */,
+				CE1CE2582228102B00877EDE /* LaunchController.swift in Sources */,
 				CE8C9AE021FB06CE002947EE /* CategoriesController.swift in Sources */,
 				CE8F24FB21F7AE7A0028AC7F /* DescriptionVM.swift in Sources */,
 				CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 
 extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, AddHabitDelegate,
-AddHabitViewDelegate {
+AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
     func showTextInputArea() {
         isTextInputAreaTapped = true
     }
@@ -133,5 +133,9 @@ AddHabitViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return todos.count == 0 ? todoListsTable.frame.height - 200 : 0
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return AnimationController(animationDuration: 0.5, animationType: .present)
     }
 }

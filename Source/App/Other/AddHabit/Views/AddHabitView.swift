@@ -20,6 +20,7 @@ public class AddHabitView: UIView {
     
     var categories: [Category] = []
     var delegate: AddHabitViewDelegate?
+    let calendar = Calendar.current
     var categoriesPlaceholder: [Category] = []
     var weekdays = [WeekdaysEnum.sunday.rawValue,
                     WeekdaysEnum.monday.rawValue,
@@ -30,6 +31,7 @@ public class AddHabitView: UIView {
                     WeekdaysEnum.saturday.rawValue]
     var weekdayButtons: [UIButton]? = []
     
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var categoriesTable: UITableView!
     @IBOutlet var contentView: UIView!
@@ -38,6 +40,7 @@ public class AddHabitView: UIView {
     @IBOutlet weak var habitTitleTextField: UITextField!
     @IBOutlet weak var lineSeparator: UIView!
     @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var weekdaysStackView: UIStackView!
     
 
@@ -71,6 +74,7 @@ public class AddHabitView: UIView {
             let creationDate = viewModel.todo?.creationDate
             let attributedText = constructAttributedString(for: count, dateString: creationDate)
           
+            cancelButton.isHidden = true
             categories = viewModel.categories
             categoriesPlaceholder = viewModel.categories
             categories = categories.filter { $0.name != "None" }
@@ -78,6 +82,7 @@ public class AddHabitView: UIView {
             completedCountLabel.attributedText = attributedText
             habitTitleTextField.text = viewModel.todo?.title
             notesTextView.text = viewModel.todo?.notes
+            saveButton.setTitle("Done", for: .normal)
             weekdays = Unarchive.unarchiveStringArrayData(from: data)
             
             let weekdaysPlaceholder = weekdays.map { transformDay(for: $0)}
@@ -98,20 +103,28 @@ public class AddHabitView: UIView {
         dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
         dateFormatter.timeZone = TimeZone(abbreviation: currentTimeZone)
         
-        let currentDateString = dateFormatter.string(from: Date())
+        let endDateString = dateFormatter.string(from: Date())
+        var expectedCompletionCount = 0
         
         guard let dateString = dateString,
-            let date = dateFormatter.date(from: dateString),
-            let currentDate = dateFormatter.date(from: currentDateString)
+            var startDate = dateFormatter.date(from: dateString),
+            let endDate = dateFormatter.date(from: endDateString)
             else { return nil }
+
+        while startDate.compare(endDate) != .orderedDescending {
+            let weekday = calendar.weekdaySymbols[calendar.component(.weekday, from: startDate)]
+            if weekdays.contains(weekday) {
+                expectedCompletionCount += 1
+            }
+            startDate = calendar.date(byAdding: .day, value: 1, to: endDate)!
+        }
         
-        let differenceInDays = Calendar.current.dateComponents([.day], from: currentDate, to: date).day ?? 0
-        let differenceInDaysString = " / \(differenceInDays + 1)"
         let completionCountString = "\(completionCount)"
+        let expectedCompletionCountString = " / \(expectedCompletionCount)"
         
         let attributedText = NSMutableAttributedString(string: completionCountString, attributes: [NSAttributedString.Key.foregroundColor : UIColor.customBlue])
         
-        attributedText.append(NSMutableAttributedString(string: differenceInDaysString, attributes: [NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)]))
+        attributedText.append(NSMutableAttributedString(string: expectedCompletionCountString, attributes: [NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)]))
         return attributedText
     }
     
@@ -158,8 +171,8 @@ public class AddHabitView: UIView {
             !habitTitle.trimmingCharacters(in: .whitespaces).isEmpty,
             var categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespaces), !weekdays.isEmpty else { return }
         
-        let calendar = Calendar.current
         let currentTimeZone = UsedDates.shared.currentTimeZone
+        var date: Date?
         var dateComponent = DateComponents()
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: currentTimeZone)
@@ -168,12 +181,25 @@ public class AddHabitView: UIView {
             return weekdays.contains(day)
         }
         
+
         var currentDayIntegerValue = Int(Dates.getDateString(format: "d", date: Date())) ?? 0
         let month = Dates.getDateString(format: "MMMM", date: Date())
         let year = Int(Dates.getDateString(format: "yyyy", date: Date())) ?? 0
-        let weekdayIntegerValue = Weekdays.getIntegerWeekDay(from: newWeekdays[0])
-        let currentWeekdayIntegerValue = calendar.component(.weekday, from: Date())
-        var diff = weekdayIntegerValue - currentWeekdayIntegerValue
+        var startWeekdayInt = Weekdays.getIntegerWeekDay(from: newWeekdays[0])
+        let currentWeekdayInt = calendar.component(.weekday, from: Date())
+        var diff = startWeekdayInt - currentWeekdayInt
+        
+        let weekday = Weekdays.getDay(dayOfWeekNumber: currentWeekdayInt)
+        
+        if newWeekdays.count == 7 || weekdays.contains(weekday) {
+            date = Date()
+        } else if !weekdays.contains(weekday) {
+            let filteredWeekday = filterFirstWeekday(currentDay: currentDayIntegerValue)
+            startWeekdayInt = Weekdays.getIntegerWeekDay(from: filteredWeekday)
+            
+            
+//            date = calendar.date(from: dateComponent)
+        }
         
         if diff < 0 {
             diff += 7
@@ -186,11 +212,11 @@ public class AddHabitView: UIView {
         dateComponent.day = currentDayIntegerValue
         dateComponent.month = dateFormatter.monthSymbols.index(of: month)! + 1
         dateComponent.year = year
-        let date = calendar.date(from: dateComponent)
         
+        guard let startDate = date else { return }
         
         let isRepeating = weekdays.count == 7 ? true : false
-        let dateString = Dates.getDateString(format: "EEEE, MMMM d, yyyy", date: date!)
+        let dateString = Dates.getDateString(format: "EEEE, MMMM d, yyyy", date: startDate)
         
         if categoryName == "" {
             categoryName = "None"
@@ -204,6 +230,26 @@ public class AddHabitView: UIView {
                                                      notes: notesTextView.text)
         delegate?.didAddHabit(todo: todo)
         removeFromSuperview()
+    }
+    
+    private func filterFirstWeekday (currentDay: Int) -> String {
+        let currentWeekdayInt = calendar.component(.weekday, from: Date())
+        var currentIntValue = currentDay
+        var newWeekday = String()
+        for weekday in weekdays  {
+            let startWeekdayInt = Weekdays.getIntegerWeekDay(from: weekday)
+            if calendar.weekdaySymbols.contains(weekday) && (startWeekdayInt - currentWeekdayInt) < 0 {
+                let diff = (startWeekdayInt - currentWeekdayInt) + 7
+                currentIntValue = currentIntValue + diff
+                
+            } else if calendar.weekdaySymbols.contains(weekday) && (startWeekdayInt - currentWeekdayInt) > 0 {
+                currentIntValue = currentIntValue + (startWeekdayInt - currentWeekdayInt)
+                newWeekday = Weekdays.getDay(dayOfWeekNumber: currentWeekdayInt)
+                break
+                
+            }
+        }
+        return newWeekday
     }
     
     private func editHabitHandler() {

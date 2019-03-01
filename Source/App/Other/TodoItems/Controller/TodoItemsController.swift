@@ -32,6 +32,7 @@ class TodoItemsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        transitioningDelegate = self
         setupKeyboardObservers()
         feedbackGenerator = UISelectionFeedbackGenerator()
         feedbackGenerator?.prepare()
@@ -104,7 +105,7 @@ class TodoItemsController: UIViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navBarViewTapped))
         
         navigationBar.addGestureRecognizer(gestureRecognizer)
-        
+        setMonthTitle = Dates.getDateString(format: "MMMM", date: Date())
         let todayButton = UIButton()
         todayButton.addTarget(self, action: #selector(displayTodayDate),
                               for: .touchUpInside)
@@ -127,7 +128,11 @@ class TodoItemsController: UIViewController {
     
     
     @objc func displayTodayDate() {
-       scrollToDate(date: Date())
+        let day = Calendar.current.component(.weekday, from: Date())
+        let weekday = Weekdays.getDay(dayOfWeekNumber: day)
+        scrollToDate(date: Date())
+        fetchTodos(from: weekday)
+        todoListsTable.reloadData()
     }
     
     @objc private func navBarViewTapped() {
