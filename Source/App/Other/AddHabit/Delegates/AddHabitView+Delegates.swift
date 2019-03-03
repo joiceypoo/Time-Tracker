@@ -19,16 +19,16 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
         categoryTextField.text = category
     }
     
-    public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == categoryTextField {
-            delegate?.showTextInputArea()
             shouldShowCategories = true
+            moveTextField(textField: textField, moveDistance: -60, up: true)
         }
-        return true
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == categoryTextField {
+            moveTextField(textField: textField, moveDistance: -60, up: false)
             shouldShowCategories = false
         }
         textField.resignFirstResponder()

@@ -8,13 +8,14 @@
 
 import UIKit
 
-extension TodoItemsController: UITableViewDelegate, EditTodoControllerDelegate, AddHabitDelegate,
+extension TodoItemsController: UITableViewDelegate,
 AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
     func showTextInputArea() {
         isTextInputAreaTapped = true
     }
     
     func didDeleteHabit(todo: TodoItem?) {
+        resetNavBar()
         guard let category = todo?.categoryName,
             let todo = todo,
             let section = categories.index(of: category),
@@ -25,8 +26,7 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
     }
     
     func didEditHabit(todo: TodoItem?) {
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        displayHabitView = false
+        resetNavBar()
         guard let category = todo?.categoryName,
             let section = categories.index(of: category),
             let todo = todo,
@@ -39,18 +39,8 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
         dismissViewHandler()
     }
     
-    func didEditTodo(todoItem: TodoItem?) {
-        guard let category = todoItem?.categoryName,
-            let section = categories.index(of: category),
-            let todo = todoItem,
-            let row = todos[section].value.index(of: todo) else { return }
-        let reloadIndexPath = IndexPath(row: row, section: section)
-        todoListsTable.reloadRows(at: [reloadIndexPath], with: .middle)
-    }
-    
     func didAddHabit(todo: TodoItem) {
-        displayHabitView = false
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        resetNavBar()
         if categories.count == 0, let category = todo.categoryName {
             categories.append(category)
             let newTodo = (key: category, value: [todo])
@@ -123,16 +113,6 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
         }
         
         return label
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let label = DisplayMessage(frame: todoListsTable.frame)
-        label.messageLabel.text = "Time to add some habits 🐰🥕"
-        return label
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return todos.count == 0 ? todoListsTable.frame.height - 200 : 0
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

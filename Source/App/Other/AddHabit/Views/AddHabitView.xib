@@ -56,7 +56,7 @@
                     </constraints>
                 </stackView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Habit Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R0D-kI-AOB">
-                    <rect key="frame" x="26" y="116" width="187" height="28"/>
+                    <rect key="frame" x="26" y="113.5" width="187" height="28"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="28" id="45W-qx-fXe"/>
                     </constraints>
@@ -65,25 +65,25 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4a-0u-o1a">
-                    <rect key="frame" x="0.0" y="164" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="161.5" width="375" height="1"/>
                     <color key="backgroundColor" red="0.93725490196078431" green="0.95294117647058818" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="Lfs-rB-zy0"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SzY-r5-1Ka">
-                    <rect key="frame" x="0.0" y="244" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="241.5" width="375" height="1"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="LTq-ZB-40S"/>
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="Qxy-sd-H1o">
-                    <rect key="frame" x="11.5" y="185" width="352" height="40"/>
+                    <rect key="frame" x="11.5" y="182.5" width="352" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJ3-9b-QMi">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.98039215690000003" green="0.44705882349999998" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.13725490196078433" green="0.43137254901960786" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="cgh-lS-O9q"/>
                                 <constraint firstAttribute="height" constant="40" id="o7T-XJ-ADP"/>
@@ -92,13 +92,18 @@
                             <state key="normal" title="M">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="weekdayButtonPressed:" destination="-1" eventType="touchUpInside" id="Cjd-rD-Esa"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Onx-JU-5pu">
                             <rect key="frame" x="52" y="0.0" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.83921568629999999" green="0.43529411759999997" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.13725490196078433" green="0.43137254901960786" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Rgd-uE-WGc"/>
                                 <constraint firstAttribute="width" constant="40" id="Ufw-gn-6Pv"/>
@@ -107,13 +112,18 @@
                             <state key="normal" title="T">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="weekdayButtonPressed:" destination="-1" eventType="touchUpInside" id="O7v-wl-AJB"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdg-LV-EBy">
                             <rect key="frame" x="104" y="0.0" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.98039215690000003" green="0.44705882349999998" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.13725490196078433" green="0.43137254901960786" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="gbc-ed-JIp"/>
                                 <constraint firstAttribute="width" constant="40" id="iYh-RL-4aK"/>
@@ -122,13 +132,18 @@
                             <state key="normal" title="W">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="weekdayButtonPressed:" destination="-1" eventType="touchUpInside" id="wjF-PN-DXt"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTZ-rK-mFo">
                             <rect key="frame" x="156" y="0.0" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.83921568629999999" green="0.43529411759999997" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.13725490196078433" green="0.43137254901960786" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="TaD-rJ-3Fb"/>
                                 <constraint firstAttribute="height" constant="40" id="h4o-Bk-Ngb"/>
@@ -137,13 +152,18 @@
                             <state key="normal" title="TH">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="weekdayButtonPressed:" destination="-1" eventType="touchUpInside" id="TLO-V3-oKV"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEJ-pk-bYV">
                             <rect key="frame" x="208" y="0.0" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.98039215690000003" green="0.44705882349999998" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.13725490196078433" green="0.43137254901960786" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="LIA-pE-ceP"/>
                                 <constraint firstAttribute="height" constant="40" id="eW6-JT-dx9"/>
@@ -152,13 +172,18 @@
                             <state key="normal" title="F">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="weekdayButtonPressed:" destination="-1" eventType="touchUpInside" id="92o-By-KTY"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xwu-Oi-I3y">
                             <rect key="frame" x="260" y="0.0" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.83921568629999999" green="0.43529411759999997" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.13725490196078433" green="0.43137254901960786" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="577-DX-dFW"/>
                                 <constraint firstAttribute="width" constant="40" id="649-hZ-JAN"/>
@@ -167,13 +192,18 @@
                             <state key="normal" title="S">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="weekdayButtonPressed:" destination="-1" eventType="touchUpInside" id="Os2-5B-MRX"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUn-JS-Wp8">
                             <rect key="frame" x="312" y="0.0" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.98039215690000003" green="0.44705882349999998" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.13725490196078433" green="0.43137254901960786" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="4Lq-w7-jk9"/>
                                 <constraint firstAttribute="width" constant="40" id="QRK-VU-RVo"/>
@@ -182,6 +212,11 @@
                             <state key="normal" title="SU">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="weekdayButtonPressed:" destination="-1" eventType="touchUpInside" id="Da4-4K-OMT"/>
                             </connections>
@@ -192,14 +227,14 @@
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hb-cQ-c7i">
-                    <rect key="frame" x="0.0" y="300" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="297.5" width="375" height="1"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="bnp-i0-FMO"/>
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" text="Add notes" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vmt-k1-OQ1">
-                    <rect key="frame" x="16" y="303" width="359" height="128"/>
+                    <rect key="frame" x="16" y="300.5" width="359" height="128"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="128" id="rHt-bX-R2c"/>
@@ -209,14 +244,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4/32" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAV-nj-xHD">
-                    <rect key="frame" x="283" y="127" width="68" height="17"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.98039215690000003" green="0.44705882349999998" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnL-L4-Upk">
-                    <rect key="frame" x="16" y="259" width="10.5" height="30"/>
+                    <rect key="frame" x="16" y="256.5" width="10.5" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="nKJ-Dd-TKx"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="pRl-JI-Q6j"/>
@@ -227,7 +256,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add a hashtag to organize your habit by" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v1k-u8-gsJ">
-                    <rect key="frame" x="31.5" y="259" width="292" height="30"/>
+                    <rect key="frame" x="31.5" y="256.5" width="292" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="WRa-1t-rLr"/>
                         <constraint firstAttribute="width" constant="292" id="xJY-lO-p7J"/>
@@ -237,7 +266,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tb6-yY-1H5">
-                    <rect key="frame" x="5" y="302" width="240" height="189"/>
+                    <rect key="frame" x="5" y="299.5" width="240" height="189"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="jK0-nV-8jJ"/>
@@ -266,6 +295,12 @@
                         <action selector="deleteButtonPressed:" destination="-1" eventType="touchUpInside" id="aM8-iA-KeT"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4/32" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAV-nj-xHD">
+                    <rect key="frame" x="287" y="121" width="68" height="14.5"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <color key="textColor" red="0.98039215690000003" green="0.44705882349999998" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -285,16 +320,16 @@
                 <constraint firstItem="4s8-5Z-kPs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NCa-kc-oB8"/>
                 <constraint firstItem="SzY-r5-1Ka" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="P9Z-js-ywL"/>
                 <constraint firstItem="9zL-CR-Bcb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="Qfc-wf-b7N"/>
-                <constraint firstItem="OAV-nj-xHD" firstAttribute="leading" secondItem="R0D-kI-AOB" secondAttribute="trailing" constant="70" id="SP3-op-PiR"/>
+                <constraint firstItem="OAV-nj-xHD" firstAttribute="leading" secondItem="R0D-kI-AOB" secondAttribute="trailing" constant="74" id="SP3-op-PiR"/>
                 <constraint firstItem="Tb6-yY-1H5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="Wyf-Hs-CfW"/>
                 <constraint firstItem="SzY-r5-1Ka" firstAttribute="top" secondItem="Qxy-sd-H1o" secondAttribute="bottom" constant="19" id="ZWu-tK-j6y"/>
                 <constraint firstItem="Y4a-0u-o1a" firstAttribute="top" secondItem="R0D-kI-AOB" secondAttribute="bottom" constant="20" id="a0T-0S-0w4"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OAV-nj-xHD" secondAttribute="trailing" constant="24" id="aEg-Fi-IGk"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OAV-nj-xHD" secondAttribute="trailing" constant="20" id="aEg-Fi-IGk"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Qxy-sd-H1o" secondAttribute="trailing" constant="11.5" id="bTt-6m-2n8"/>
                 <constraint firstAttribute="trailing" secondItem="3hb-cQ-c7i" secondAttribute="trailing" id="dgz-hy-Qlg"/>
                 <constraint firstItem="Qxy-sd-H1o" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="11.5" id="hMS-V0-piL"/>
                 <constraint firstItem="Vmt-k1-OQ1" firstAttribute="top" secondItem="3hb-cQ-c7i" secondAttribute="bottom" constant="2" id="hXk-EM-tU2"/>
-                <constraint firstItem="Y4a-0u-o1a" firstAttribute="top" secondItem="OAV-nj-xHD" secondAttribute="bottom" constant="20" id="i6J-vW-0sI"/>
+                <constraint firstItem="Y4a-0u-o1a" firstAttribute="top" secondItem="OAV-nj-xHD" secondAttribute="bottom" constant="26" id="i6J-vW-0sI"/>
                 <constraint firstItem="Tb6-yY-1H5" firstAttribute="top" secondItem="3hb-cQ-c7i" secondAttribute="bottom" constant="1" id="ipv-lc-fX4"/>
                 <constraint firstItem="Qxy-sd-H1o" firstAttribute="top" secondItem="Y4a-0u-o1a" secondAttribute="bottom" constant="20" id="lJo-0a-LtF"/>
                 <constraint firstAttribute="trailing" secondItem="SzY-r5-1Ka" secondAttribute="trailing" id="oPL-iL-BOw"/>
@@ -304,7 +339,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9zL-CR-Bcb" secondAttribute="trailing" constant="20" id="qaf-By-t9I"/>
                 <constraint firstItem="9zL-CR-Bcb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="26" id="s0q-oI-CYj"/>
                 <constraint firstItem="v1k-u8-gsJ" firstAttribute="top" secondItem="SzY-r5-1Ka" secondAttribute="bottom" constant="14" id="sd1-Ch-zmR"/>
-                <constraint firstItem="OAV-nj-xHD" firstAttribute="top" secondItem="9zL-CR-Bcb" secondAttribute="bottom" constant="48" id="v1a-Ov-OOe"/>
+                <constraint firstItem="OAV-nj-xHD" firstAttribute="top" secondItem="9zL-CR-Bcb" secondAttribute="bottom" constant="42" id="v1a-Ov-OOe"/>
                 <constraint firstAttribute="trailing" secondItem="4s8-5Z-kPs" secondAttribute="trailing" id="x8g-eq-jVu"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -51,13 +51,18 @@ public class AddHabitView: UIView {
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setupView()
     }
     
-    var viewModel: AddHabitViewModel? {
-        didSet { bindViewModel() }
+    convenience init(frame: CGRect, viewModel: AddHabitViewModel?) {
+        self.init(frame: frame)
+        self.viewModel = viewModel
+        bindViewModel(viewModel: viewModel)
     }
     
-    private func bindViewModel() {
+    var viewModel: AddHabitViewModel?
+    
+    private func bindViewModel(viewModel: AddHabitViewModel?) {
         guard let viewModel = viewModel else { return }
         if viewModel.todo == nil {
             completedCountLabel.isHidden = true
@@ -110,9 +115,9 @@ public class AddHabitView: UIView {
             var startDate = dateFormatter.date(from: dateString),
             let endDate = dateFormatter.date(from: endDateString)
             else { return nil }
-
+     
         while startDate.compare(endDate) != .orderedDescending {
-            let weekday = calendar.weekdaySymbols[calendar.component(.weekday, from: startDate)]
+            let weekday = calendar.weekdaySymbols[calendar.component(.weekday, from: startDate) - 1]
             if weekdays.contains(weekday) {
                 expectedCompletionCount += 1
             }
@@ -172,55 +177,64 @@ public class AddHabitView: UIView {
             var categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespaces), !weekdays.isEmpty else { return }
         
         let currentTimeZone = UsedDates.shared.currentTimeZone
-        var date: Date?
         var dateComponent = DateComponents()
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: currentTimeZone)
-        
-        let newWeekdays = dateFormatter.weekdaySymbols.filter { day in
-            return weekdays.contains(day)
-        }
         
 
         var currentDayIntegerValue = Int(Dates.getDateString(format: "d", date: Date())) ?? 0
         let month = Dates.getDateString(format: "MMMM", date: Date())
         let year = Int(Dates.getDateString(format: "yyyy", date: Date())) ?? 0
-        var startWeekdayInt = Weekdays.getIntegerWeekDay(from: newWeekdays[0])
         let currentWeekdayInt = calendar.component(.weekday, from: Date())
-        var diff = startWeekdayInt - currentWeekdayInt
+   
+        var newWeekdaysIntValue: [Int] = []
+        let weekdaysIntValues = Weekdays.getWeekdayIntValue(for: weekdays)
         
-        let weekday = Weekdays.getDay(dayOfWeekNumber: currentWeekdayInt)
-        
-        if newWeekdays.count == 7 || weekdays.contains(weekday) {
-            date = Date()
-        } else if !weekdays.contains(weekday) {
-            let filteredWeekday = filterFirstWeekday(currentDay: currentDayIntegerValue)
-            startWeekdayInt = Weekdays.getIntegerWeekDay(from: filteredWeekday)
-            
-            
-//            date = calendar.date(from: dateComponent)
+        weekdaysIntValues.forEach { weekdayInt in
+            var diff = weekdayInt - currentWeekdayInt
+            if diff < 0 {
+                diff += 7
+                newWeekdaysIntValue.append(diff)
+            } else {
+                newWeekdaysIntValue.append(diff)
+            }
         }
         
-        if diff < 0 {
-            diff += 7
-            currentDayIntegerValue = currentDayIntegerValue + diff
-        } else {
-            currentDayIntegerValue = currentDayIntegerValue + diff
-        }
+        guard
+            let minValue = newWeekdaysIntValue.min(),
+            let range = calendar.range(of: .day, in: .month, for: Date())
+            else { return }
         
+        var monthInt = dateFormatter.monthSymbols.index(of: month)! + 1
+        let numDays = range.count
+        currentDayIntegerValue += minValue
+        
+        if numDays == 31 && currentDayIntegerValue > 31 {
+            currentDayIntegerValue -= 31
+            monthInt += 1
+        } else if numDays == 30 && currentDayIntegerValue > 30 {
+            currentDayIntegerValue -= 30
+            monthInt += 1
+        } else if numDays == 29 && currentDayIntegerValue > 29 {
+            currentDayIntegerValue -= 29
+            monthInt += 1
+        } else if numDays == 28 && currentDayIntegerValue > 28 {
+            currentDayIntegerValue -= 28
+            monthInt += 1
+        }
         
         dateComponent.day = currentDayIntegerValue
-        dateComponent.month = dateFormatter.monthSymbols.index(of: month)! + 1
+        dateComponent.month = monthInt
         dateComponent.year = year
+        
+        let date = calendar.date(from: dateComponent)
         
         guard let startDate = date else { return }
         
         let isRepeating = weekdays.count == 7 ? true : false
         let dateString = Dates.getDateString(format: "EEEE, MMMM d, yyyy", date: startDate)
         
-        if categoryName == "" {
-            categoryName = "None"
-        }
+        categoryName = categoryName.isEmpty ? "None": categoryName
         
         let todo = CoreDataManager.shared.createTodo(todo: habitTitle,
                                                      repeatDays: weekdays,
@@ -232,37 +246,19 @@ public class AddHabitView: UIView {
         removeFromSuperview()
     }
     
-    private func filterFirstWeekday (currentDay: Int) -> String {
-        let currentWeekdayInt = calendar.component(.weekday, from: Date())
-        var currentIntValue = currentDay
-        var newWeekday = String()
-        for weekday in weekdays  {
-            let startWeekdayInt = Weekdays.getIntegerWeekDay(from: weekday)
-            if calendar.weekdaySymbols.contains(weekday) && (startWeekdayInt - currentWeekdayInt) < 0 {
-                let diff = (startWeekdayInt - currentWeekdayInt) + 7
-                currentIntValue = currentIntValue + diff
-                
-            } else if calendar.weekdaySymbols.contains(weekday) && (startWeekdayInt - currentWeekdayInt) > 0 {
-                currentIntValue = currentIntValue + (startWeekdayInt - currentWeekdayInt)
-                newWeekday = Weekdays.getDay(dayOfWeekNumber: currentWeekdayInt)
-                break
-                
-            }
-        }
-        return newWeekday
-    }
-    
     private func editHabitHandler() {
         
         guard let habitTitle = habitTitleTextField.text,
             !habitTitle.trimmingCharacters(in: .whitespaces).isEmpty,
-            let categoryName = categoryTextField.text?.capitalized else { return }
+            var categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespaces) else { return }
         
         let context = CoreDataManager.shared.persistentContainer.viewContext
         
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: weekdays,
                                                         requiringSecureCoding: false)
+            
+            categoryName = categoryName.isEmpty ? "None": categoryName
             viewModel?.todo?.categoryName = categoryName
             viewModel?.todo?.notes = notesTextView.text
             viewModel?.todo?.title = habitTitle
@@ -381,6 +377,9 @@ public class AddHabitView: UIView {
     private func setupView() {
         Bundle.main.loadNibNamed("AddHabitView", owner: self, options: nil)
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        let gestureRecognizer = UITapGestureRecognizer(target: self,
+                                                       action: #selector(dismissView))
+        self.addGestureRecognizer(gestureRecognizer)
         self.addSubview(contentView)
         categoriesTable.register(UITableViewCell.self, forCellReuseIdentifier: "CategoriesCell")
         categoriesTable.delegate = self
@@ -394,22 +393,26 @@ public class AddHabitView: UIView {
         contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
         weekdayButtons = weekdaysStackView.arrangedSubviews as? [UIButton]
-        guard let weekdayButtons = weekdayButtons  else { return }
-        
-        for button in weekdayButtons {
-            button.backgroundColor = UIColor.customBlue
-            button.isSelected = true
-            button.tintColor = .clear
-            button.layer.cornerRadius = button.frame.height / 2
-            button.layer.masksToBounds = true
-        }
         categoriesTable.tableFooterView = UIView()
         shouldShowCategories = false
+    }
+    
+    @objc func dismissView() {
+        delegate?.didDismissView()
     }
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
         let todo = viewModel?.todo
         delegate?.didDeleteHabit(todo: todo)
         removeFromSuperview()
+    }
+    
+    func moveTextField(textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement = CGFloat(up ? moveDistance: -moveDistance)
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.frame = self.frame.offsetBy(dx: 0, dy: movement)
     }
 }

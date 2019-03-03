@@ -43,6 +43,7 @@ extension TodoItemsController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
         guard let currentIndexPath = currentIndexPath else { return }
         if !selectedCellIndexPath.isEmpty {
             let newIndexPath = selectedCellIndexPath[0]
@@ -64,6 +65,13 @@ extension TodoItemsController: UICollectionViewDataSource {
                 cell.dayOfWeekLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
             }
         }
+        
+        if let cell = cell as? DateCollectionViewCell, cell.contentView.backgroundColor == .customBlue {
+            cell.contentView.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
+            cell.dayOfMonthLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+            cell.dayOfWeekLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+        }
+    
         feedbackGenerator?.selectionChanged()
     }
     

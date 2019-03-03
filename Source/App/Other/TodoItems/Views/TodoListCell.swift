@@ -22,6 +22,8 @@ public class TodoListCell: UITableViewCell {
         setupView()
     }
     
+    let calendar = Calendar.current
+    
     var viewModel: TodoItem? {
         didSet { bindViewModel() }
     }
@@ -30,12 +32,16 @@ public class TodoListCell: UITableViewCell {
         guard let viewModel = viewModel else { return }
         let data = viewModel.repeatTodos?.weekday
         
-        var daysArray = Unarchive.unarchiveStringArrayData(from: data)
-        daysArray = daysArray.map { day in
-            return Weekdays.getShortWeekday(for: day)
+        let daysArray = Unarchive.unarchiveStringArrayData(from: data)
+        var newDaysArray: [String] = []
+        for day in calendar.weekdaySymbols {
+            if daysArray.contains(day) {
+                let shortWeekday = Weekdays.getShortWeekday(for: day)
+                newDaysArray.append(shortWeekday)
+            }
         }
         
-        let daysString = daysArray.joined(separator: " ")
+        let daysString = newDaysArray.joined(separator: " ")
         
         let currentDate = UsedDates.shared.currentDate
         let dateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",
@@ -95,10 +101,10 @@ public class TodoListCell: UITableViewCell {
     
     private func setupView() {
         detailTextLabel?.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
-        detailTextLabel?.font = UIFont.systemFont(ofSize: 14)
+        detailTextLabel?.font = UIFont.systemFont(ofSize: 12)
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         textLabel?.textColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1843137255, alpha: 1)
-        textLabel?.font = UIFont.systemFont(ofSize: 16)
+        textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         accessoryView = checkBox
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)

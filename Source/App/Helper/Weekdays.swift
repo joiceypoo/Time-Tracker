@@ -86,4 +86,29 @@ class Weekdays {
             return "Sunday"
         }
     }
+    
+    class func getWeekdayIntValue(for weekdays: [String]) -> [Int] {
+        var result: [Int] = []
+        
+        for weekday in weekdays {
+            switch weekday {
+            case "Sunday":
+                result.append(1)
+            case "Monday":
+                result.append(2)
+            case "Tuesday":
+                result.append(3)
+            case "Wednesday":
+                result.append(4)
+            case "Thursday":
+                result.append(5)
+            case "Friday":
+                result.append(6)
+            default:
+                result.append(7)
+            }
+        }
+        
+        return result
+    }
 }

@@ -44,10 +44,10 @@ extension TodoItemsController {
     }
     
     public func gestureChangedHandler(_ locationInView: CGPoint, _ indexPath: IndexPath?) {
-        if CellDetail.cellSnapshot != nil {
-            var center = CellDetail.cellSnapshot!.center
+        if CellDetail.cellSnapshot != nil, let cellSnapshot = CellDetail.cellSnapshot {
+            var center = cellSnapshot.center
             center.y = locationInView.y
-            CellDetail.cellSnapshot?.center = center
+            cellSnapshot.center = center
             if ((indexPath != nil) && (indexPath != CellIndexPath.initialIndexPath)),
                 let cellIndexPath = CellIndexPath.initialIndexPath,
                 let indexPath = indexPath {
@@ -80,19 +80,18 @@ extension TodoItemsController {
     }
     
     public func handleDefault() {
-        if let cellIndexPath = CellIndexPath.initialIndexPath {
-            let cell = todoListsTable.cellForRow(at: cellIndexPath)
+        if let cellIndexPath = CellIndexPath.initialIndexPath, let cell = todoListsTable.cellForRow(at: cellIndexPath) {
             if CellDetail.cellIsAnimating {
                 CellDetail.cellNeedToShow = true
             } else {
-                cell?.isHidden = false
-                cell?.alpha = 0.0
+                cell.isHidden = false
+                cell.alpha = 0.0
             }
             UIView.animate(withDuration: 0.25, animations: { () -> Void in
-                CellDetail.cellSnapshot?.center = (cell?.center)!
+                CellDetail.cellSnapshot?.center = cell.center
                 CellDetail.cellSnapshot?.transform = CGAffineTransform.identity
                 CellDetail.cellSnapshot?.alpha = 0.0
-                cell?.alpha = 1.0
+                cell.alpha = 1.0
             }, completion: { (finished) -> Void in
                 if finished {
                     CellIndexPath.initialIndexPath = nil

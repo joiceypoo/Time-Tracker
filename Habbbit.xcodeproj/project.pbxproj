@@ -25,28 +25,16 @@
 		CE776B1322024DDF003E617C /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */; };
 		CE776B1522024F61003E617C /* TodoItemsController+DateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */; };
 		CE776B19220251DE003E617C /* TodoItemsController+DateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B18220251DE003E617C /* TodoItemsController+DateDelegate.swift */; };
-		CE776B1C220275CB003E617C /* AddCategoryDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1B220275CB003E617C /* AddCategoryDelegates.swift */; };
 		CE776B1E2202939C003E617C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1D2202939C003E617C /* Alert.swift */; };
 		CE776B202205F3D4003E617C /* Unarchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1F2205F3D4003E617C /* Unarchive.swift */; };
-		CE776B222205F9CE003E617C /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B212205F9CE003E617C /* CustomCell.swift */; };
 		CE776B242205FF82003E617C /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B232205FF82003E617C /* EditViewModel.swift */; };
 		CE84D6BF21F8CF40000C9D89 /* DisplayMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */; };
-		CE84D6C321F8FBAF000C9D89 /* EditTodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6C221F8FBAF000C9D89 /* EditTodoController.swift */; };
 		CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */; };
-		CE84D6CC21F95539000C9D89 /* EditTodoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6CB21F95539000C9D89 /* EditTodoDataSource.swift */; };
-		CE84D6CE21F95985000C9D89 /* EditTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6CD21F95985000C9D89 /* EditTodoCell.swift */; };
 		CE8C9AD521FA62DC002947EE /* CellDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AD421FA62DC002947EE /* CellDetail.swift */; };
 		CE8C9AD721FA638F002947EE /* CellIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AD621FA638F002947EE /* CellIndexPath.swift */; };
 		CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AD821FA67EA002947EE /* TodoItemsController+extension.swift */; };
-		CE8C9AE021FB06CE002947EE /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9ADF21FB06CE002947EE /* CategoriesController.swift */; };
-		CE8C9AE221FB0817002947EE /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AE121FB0817002947EE /* CategoriesCell.swift */; };
-		CE8C9AE421FB0C66002947EE /* CategoriesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AE321FB0C66002947EE /* CategoriesDataSource.swift */; };
-		CE8C9AE621FB1179002947EE /* CategoriesDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AE521FB1179002947EE /* CategoriesDelegates.swift */; };
-		CE8C9AEB21FB2782002947EE /* AddCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AEA21FB2782002947EE /* AddCategoryController.swift */; };
-		CE8C9AED21FB38D8002947EE /* EditTodoItemDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AEC21FB38D8002947EE /* EditTodoItemDelegates.swift */; };
 		CE8C9AEF21FC203E002947EE /* IndentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AEE21FC203E002947EE /* IndentLabel.swift */; };
 		CE8C9B1221FE1103002947EE /* HabbbitModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9B1021FE1103002947EE /* HabbbitModels.xcdatamodeld */; };
-		CE8C9B1921FFEC40002947EE /* Notification+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9B1821FFEC40002947EE /* Notification+extension.swift */; };
 		CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24CD21F656050028AC7F /* UIColor+theme.swift */; };
 		CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D021F65F5B0028AC7F /* AddButton.swift */; };
 		CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */; };
@@ -55,18 +43,9 @@
 		CE8F24E721F767CD0028AC7F /* TodoItemsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24E621F767CD0028AC7F /* TodoItemsControllerDataSource.swift */; };
 		CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24E821F76BAD0028AC7F /* TodoListCell.swift */; };
 		CE8F24EB21F76C2B0028AC7F /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */; };
-		CE8F24EE21F771FB0028AC7F /* AddHabitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24ED21F771FB0028AC7F /* AddHabitController.swift */; };
 		CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */; };
-		CE8F24F421F7AB460028AC7F /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24F321F7AB460028AC7F /* TitleCell.swift */; };
-		CE8F24F621F7AB9E0028AC7F /* AddHabitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24F521F7AB9E0028AC7F /* AddHabitCell.swift */; };
 		CE8F24FB21F7AE7A0028AC7F /* DescriptionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24FA21F7AE7A0028AC7F /* DescriptionVM.swift */; };
-		CE8F24FF21F7B37F0028AC7F /* AddHabitDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24FE21F7B37F0028AC7F /* AddHabitDataSource.swift */; };
-		CE8F250321F880740028AC7F /* RepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250221F880740028AC7F /* RepeatController.swift */; };
-		CE8F250521F880B90028AC7F /* AddHabitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250421F880B90028AC7F /* AddHabitDelegate.swift */; };
-		CE8F250821F8859A0028AC7F /* RepeatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250721F8859A0028AC7F /* RepeatCell.swift */; };
 		CE8F250B21F886730028AC7F /* WeekdaysEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250A21F886730028AC7F /* WeekdaysEnum.swift */; };
-		CE8F250F21F888920028AC7F /* RepeatDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250E21F888920028AC7F /* RepeatDataSource.swift */; };
-		CE8F251121F88DA20028AC7F /* RepeatDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F251021F88DA20028AC7F /* RepeatDelegates.swift */; };
 		CECAEE37221C3C9B002F1D4B /* Weekdays.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECAEE36221C3C9B002F1D4B /* Weekdays.swift */; };
 		CEF78BDF220B150900DB0031 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF78BDE220B150900DB0031 /* Dates.swift */; };
 /* End PBXBuildFile section */
@@ -92,28 +71,16 @@
 		CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+DateDataSource.swift"; sourceTree = "<group>"; };
 		CE776B18220251DE003E617C /* TodoItemsController+DateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+DateDelegate.swift"; sourceTree = "<group>"; };
-		CE776B1B220275CB003E617C /* AddCategoryDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryDelegates.swift; sourceTree = "<group>"; };
 		CE776B1D2202939C003E617C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		CE776B1F2205F3D4003E617C /* Unarchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unarchive.swift; sourceTree = "<group>"; };
-		CE776B212205F9CE003E617C /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		CE776B232205FF82003E617C /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
 		CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessage.swift; sourceTree = "<group>"; };
-		CE84D6C221F8FBAF000C9D89 /* EditTodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoController.swift; sourceTree = "<group>"; };
 		CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModel.swift; sourceTree = "<group>"; };
-		CE84D6CB21F95539000C9D89 /* EditTodoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoDataSource.swift; sourceTree = "<group>"; };
-		CE84D6CD21F95985000C9D89 /* EditTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoCell.swift; sourceTree = "<group>"; };
 		CE8C9AD421FA62DC002947EE /* CellDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetail.swift; sourceTree = "<group>"; };
 		CE8C9AD621FA638F002947EE /* CellIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIndexPath.swift; sourceTree = "<group>"; };
 		CE8C9AD821FA67EA002947EE /* TodoItemsController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+extension.swift"; sourceTree = "<group>"; };
-		CE8C9ADF21FB06CE002947EE /* CategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
-		CE8C9AE121FB0817002947EE /* CategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
-		CE8C9AE321FB0C66002947EE /* CategoriesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesDataSource.swift; sourceTree = "<group>"; };
-		CE8C9AE521FB1179002947EE /* CategoriesDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesDelegates.swift; sourceTree = "<group>"; };
-		CE8C9AEA21FB2782002947EE /* AddCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryController.swift; sourceTree = "<group>"; };
-		CE8C9AEC21FB38D8002947EE /* EditTodoItemDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoItemDelegates.swift; sourceTree = "<group>"; };
 		CE8C9AEE21FC203E002947EE /* IndentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentLabel.swift; sourceTree = "<group>"; };
 		CE8C9B1121FE1103002947EE /* HabbbitModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HabbbitModels.xcdatamodel; sourceTree = "<group>"; };
-		CE8C9B1821FFEC40002947EE /* Notification+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+extension.swift"; sourceTree = "<group>"; };
 		CE8F24CD21F656050028AC7F /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		CE8F24D021F65F5B0028AC7F /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -122,18 +89,9 @@
 		CE8F24E621F767CD0028AC7F /* TodoItemsControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemsControllerDataSource.swift; sourceTree = "<group>"; };
 		CE8F24E821F76BAD0028AC7F /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
 		CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
-		CE8F24ED21F771FB0028AC7F /* AddHabitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitController.swift; sourceTree = "<group>"; };
 		CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
-		CE8F24F321F7AB460028AC7F /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
-		CE8F24F521F7AB9E0028AC7F /* AddHabitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitCell.swift; sourceTree = "<group>"; };
 		CE8F24FA21F7AE7A0028AC7F /* DescriptionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionVM.swift; sourceTree = "<group>"; };
-		CE8F24FE21F7B37F0028AC7F /* AddHabitDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitDataSource.swift; sourceTree = "<group>"; };
-		CE8F250221F880740028AC7F /* RepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatController.swift; sourceTree = "<group>"; };
-		CE8F250421F880B90028AC7F /* AddHabitDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitDelegate.swift; sourceTree = "<group>"; };
-		CE8F250721F8859A0028AC7F /* RepeatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCell.swift; sourceTree = "<group>"; };
 		CE8F250A21F886730028AC7F /* WeekdaysEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysEnum.swift; sourceTree = "<group>"; };
-		CE8F250E21F888920028AC7F /* RepeatDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatDataSource.swift; sourceTree = "<group>"; };
-		CE8F251021F88DA20028AC7F /* RepeatDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatDelegates.swift; sourceTree = "<group>"; };
 		CECAEE36221C3C9B002F1D4B /* Weekdays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekdays.swift; sourceTree = "<group>"; };
 		CEF78BDE220B150900DB0031 /* Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,11 +172,7 @@
 			children = (
 				CE1CE2562228100300877EDE /* LaunchController */,
 				CE1CE25322280F5B00877EDE /* AnimationController */,
-				CE8C9AE721FB2730002947EE /* AddCategory */,
 				CE8F24EC21F771C90028AC7F /* AddHabit */,
-				CE8C9ADA21FB066F002947EE /* Categories */,
-				CE84D6C021F8FB62000C9D89 /* EditTodoItem */,
-				CE8F250021F880420028AC7F /* Repeat */,
 				CE8F24E021F767060028AC7F /* TodoItems */,
 			);
 			path = Other;
@@ -280,118 +234,6 @@
 			path = Dates;
 			sourceTree = "<group>";
 		};
-		CE776B1A220275A2003E617C /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				CE776B1B220275CB003E617C /* AddCategoryDelegates.swift */,
-			);
-			path = Delegates;
-			sourceTree = "<group>";
-		};
-		CE84D6C021F8FB62000C9D89 /* EditTodoItem */ = {
-			isa = PBXGroup;
-			children = (
-				CE84D6C121F8FB85000C9D89 /* Controller */,
-				CE84D6CA21F954B7000C9D89 /* DataSource */,
-				CE84D6C921F954AD000C9D89 /* Delegates */,
-				CE84D6C621F9543D000C9D89 /* Views */,
-			);
-			path = EditTodoItem;
-			sourceTree = "<group>";
-		};
-		CE84D6C121F8FB85000C9D89 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				CE84D6C221F8FBAF000C9D89 /* EditTodoController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		CE84D6C621F9543D000C9D89 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CE84D6CD21F95985000C9D89 /* EditTodoCell.swift */,
-				CE776B212205F9CE003E617C /* CustomCell.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		CE84D6C921F954AD000C9D89 /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				CE8C9AEC21FB38D8002947EE /* EditTodoItemDelegates.swift */,
-			);
-			path = Delegates;
-			sourceTree = "<group>";
-		};
-		CE84D6CA21F954B7000C9D89 /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-				CE84D6CB21F95539000C9D89 /* EditTodoDataSource.swift */,
-			);
-			path = DataSource;
-			sourceTree = "<group>";
-		};
-		CE8C9ADA21FB066F002947EE /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				CE8C9ADD21FB0697002947EE /* DataSource */,
-				CE8C9ADC21FB068D002947EE /* Delegates */,
-				CE8C9ADB21FB067A002947EE /* ViewController */,
-				CE8C9ADE21FB06A8002947EE /* Views */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		CE8C9ADB21FB067A002947EE /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				CE8C9ADF21FB06CE002947EE /* CategoriesController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		CE8C9ADC21FB068D002947EE /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				CE8C9AE521FB1179002947EE /* CategoriesDelegates.swift */,
-			);
-			path = Delegates;
-			sourceTree = "<group>";
-		};
-		CE8C9ADD21FB0697002947EE /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-				CE8C9AE321FB0C66002947EE /* CategoriesDataSource.swift */,
-			);
-			path = DataSource;
-			sourceTree = "<group>";
-		};
-		CE8C9ADE21FB06A8002947EE /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CE8C9AE121FB0817002947EE /* CategoriesCell.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		CE8C9AE721FB2730002947EE /* AddCategory */ = {
-			isa = PBXGroup;
-			children = (
-				CE776B1A220275A2003E617C /* Delegates */,
-				CE8C9AE821FB273C002947EE /* ViewController */,
-			);
-			path = AddCategory;
-			sourceTree = "<group>";
-		};
-		CE8C9AE821FB273C002947EE /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				CE8C9AEA21FB2782002947EE /* AddCategoryController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		CE8C9B1321FEF54F002947EE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,7 +261,6 @@
 		CE8F24CC21F655EA0028AC7F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				CE8C9B1821FFEC40002947EE /* Notification+extension.swift */,
 				CE8F24CD21F656050028AC7F /* UIColor+theme.swift */,
 				CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */,
 				CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */,
@@ -498,29 +339,16 @@
 		CE8F24EC21F771C90028AC7F /* AddHabit */ = {
 			isa = PBXGroup;
 			children = (
-				CE8F24EF21F772030028AC7F /* Controller */,
-				CE8F24FD21F7B3520028AC7F /* DataSource */,
-				CE8F24FC21F7B3470028AC7F /* Delegates */,
+				CE0C6CB6221AEE040007F68F /* Delegates */,
+				CE0C6CB7221AEE110007F68F /* DataSource */,
 				CE8F24F221F7AA870028AC7F /* Views */,
 			);
 			path = AddHabit;
 			sourceTree = "<group>";
 		};
-		CE8F24EF21F772030028AC7F /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				CE8F24ED21F771FB0028AC7F /* AddHabitController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		CE8F24F221F7AA870028AC7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CE0C6CB7221AEE110007F68F /* DataSource */,
-				CE0C6CB6221AEE040007F68F /* Delegates */,
-				CE8F24F321F7AB460028AC7F /* TitleCell.swift */,
-				CE8F24F521F7AB9E0028AC7F /* AddHabitCell.swift */,
 				CE14E4BD2218AE98009C4432 /* AddHabitView.xib */,
 				CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */,
 			);
@@ -538,49 +366,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		CE8F24FC21F7B3470028AC7F /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				CE8F250421F880B90028AC7F /* AddHabitDelegate.swift */,
-			);
-			path = Delegates;
-			sourceTree = "<group>";
-		};
-		CE8F24FD21F7B3520028AC7F /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-				CE8F24FE21F7B37F0028AC7F /* AddHabitDataSource.swift */,
-			);
-			path = DataSource;
-			sourceTree = "<group>";
-		};
-		CE8F250021F880420028AC7F /* Repeat */ = {
-			isa = PBXGroup;
-			children = (
-				CE8F250121F8804C0028AC7F /* Controller */,
-				CE8F250D21F887790028AC7F /* DataSource */,
-				CE8F250C21F8876F0028AC7F /* Delegates */,
-				CE8F250621F885760028AC7F /* Views */,
-			);
-			path = Repeat;
-			sourceTree = "<group>";
-		};
-		CE8F250121F8804C0028AC7F /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				CE8F250221F880740028AC7F /* RepeatController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		CE8F250621F885760028AC7F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CE8F250721F8859A0028AC7F /* RepeatCell.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		CE8F250921F886350028AC7F /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -593,22 +378,6 @@
 				CECAEE36221C3C9B002F1D4B /* Weekdays.swift */,
 			);
 			path = Helper;
-			sourceTree = "<group>";
-		};
-		CE8F250C21F8876F0028AC7F /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				CE8F251021F88DA20028AC7F /* RepeatDelegates.swift */,
-			);
-			path = Delegates;
-			sourceTree = "<group>";
-		};
-		CE8F250D21F887790028AC7F /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-				CE8F250E21F888920028AC7F /* RepeatDataSource.swift */,
-			);
-			path = DataSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -685,56 +454,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE776B242205FF82003E617C /* EditViewModel.swift in Sources */,
-				CE84D6CC21F95539000C9D89 /* EditTodoDataSource.swift in Sources */,
-				CE8F250521F880B90028AC7F /* AddHabitDelegate.swift in Sources */,
-				CE8F251121F88DA20028AC7F /* RepeatDelegates.swift in Sources */,
 				CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */,
 				CE776B1122024D9F003E617C /* UsedDates.swift in Sources */,
-				CE8C9AE421FB0C66002947EE /* CategoriesDataSource.swift in Sources */,
 				CE776B1322024DDF003E617C /* DateCollectionViewCell.swift in Sources */,
-				CE8F24F421F7AB460028AC7F /* TitleCell.swift in Sources */,
 				CE8C9B1221FE1103002947EE /* HabbbitModels.xcdatamodeld in Sources */,
 				CE776B19220251DE003E617C /* TodoItemsController+DateDelegate.swift in Sources */,
 				CE84D6BF21F8CF40000C9D89 /* DisplayMessage.swift in Sources */,
 				CE0C6CB9221AEE460007F68F /* AddHabitView+DataSource.swift in Sources */,
 				CE8F24EB21F76C2B0028AC7F /* UITableViewCell+Extension.swift in Sources */,
 				CECAEE37221C3C9B002F1D4B /* Weekdays.swift in Sources */,
-				CE8F24EE21F771FB0028AC7F /* AddHabitController.swift in Sources */,
-				CE8F250321F880740028AC7F /* RepeatController.swift in Sources */,
 				242FB84421C0447B00931945 /* TodoItemsController.swift in Sources */,
-				CE8C9B1921FFEC40002947EE /* Notification+extension.swift in Sources */,
-				CE8C9AED21FB38D8002947EE /* EditTodoItemDelegates.swift in Sources */,
-				CE776B222205F9CE003E617C /* CustomCell.swift in Sources */,
 				CE14E4C02218AEDB009C4432 /* AddHabitView.swift in Sources */,
-				CE84D6CE21F95985000C9D89 /* EditTodoCell.swift in Sources */,
 				CE776B1E2202939C003E617C /* Alert.swift in Sources */,
 				242FB84221C0447B00931945 /* AppDelegate.swift in Sources */,
 				CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */,
-				CE84D6C321F8FBAF000C9D89 /* EditTodoController.swift in Sources */,
 				CE8F250B21F886730028AC7F /* WeekdaysEnum.swift in Sources */,
 				CE6EDA7E221F8982009DB063 /* CustomCollectionViewFlowLayout.swift in Sources */,
-				CE776B1C220275CB003E617C /* AddCategoryDelegates.swift in Sources */,
-				CE8C9AE621FB1179002947EE /* CategoriesDelegates.swift in Sources */,
 				CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */,
 				CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */,
 				CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */,
-				CE8F24F621F7AB9E0028AC7F /* AddHabitCell.swift in Sources */,
 				CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */,
 				CEF78BDF220B150900DB0031 /* Dates.swift in Sources */,
 				CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */,
-				CE8F250821F8859A0028AC7F /* RepeatCell.swift in Sources */,
-				CE8C9AE221FB0817002947EE /* CategoriesCell.swift in Sources */,
 				CE8F24E721F767CD0028AC7F /* TodoItemsControllerDataSource.swift in Sources */,
 				CE776B202205F3D4003E617C /* Unarchive.swift in Sources */,
 				CE8C9AEF21FC203E002947EE /* IndentLabel.swift in Sources */,
-				CE8F24FF21F7B37F0028AC7F /* AddHabitDataSource.swift in Sources */,
 				CE8C9AD521FA62DC002947EE /* CellDetail.swift in Sources */,
-				CE8C9AEB21FB2782002947EE /* AddCategoryController.swift in Sources */,
 				CE0C6CBD221AF6B70007F68F /* AddHabitViewModel.swift in Sources */,
-				CE8F250F21F888920028AC7F /* RepeatDataSource.swift in Sources */,
 				CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */,
 				CE1CE2582228102B00877EDE /* LaunchController.swift in Sources */,
-				CE8C9AE021FB06CE002947EE /* CategoriesController.swift in Sources */,
 				CE8F24FB21F7AE7A0028AC7F /* DescriptionVM.swift in Sources */,
 				CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */,
 				CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */,

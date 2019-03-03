@@ -33,7 +33,7 @@ public class DisplayMessage: UIView {
     private func setupView() {
         backgroundColor = .clear
         addSubview(messageLabel)
-        messageLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 70).isActive = true
+        messageLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -42).isActive = true
         messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
 }

@@ -11,7 +11,14 @@ import UIKit
 extension TodoItemsController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return categories.count == 0 ? 1: categories.count
+        if categories.count == 0 {
+            let label = DisplayMessage(frame: todoListsTable.frame)
+            label.messageLabel.text = "Time to add some habits 🐰🥕"
+            todoListsTable.backgroundView = label
+            return categories.count
+        }
+        todoListsTable.backgroundView?.isHidden = true
+        return categories.count 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
