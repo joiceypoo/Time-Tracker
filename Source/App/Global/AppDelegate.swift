@@ -15,6 +15,24 @@ class CustomNavigationController: UINavigationController {
     }
 }
 
+extension UINavigationController {
+    func overlayBlurredBackgroundView() {
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        let blurredBackgroundView = UIVisualEffectView(effect: blurEffect)
+        blurredBackgroundView.frame = view.frame
+        view.addSubview(blurredBackgroundView)
+    }
+    
+    func removeBlurredBackgroundView() {
+        
+        for subview in view.subviews {
+            if subview.isKind(of: UIVisualEffectView.self) {
+                subview.removeFromSuperview()
+            }
+        }
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

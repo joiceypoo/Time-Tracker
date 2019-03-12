@@ -27,6 +27,7 @@ class UsedDates {
     private let formatter: DateFormatter
     var displayedDate = Date()
     var currentDate = Date()
+    var selectedWeekday = String()
     var displayedMondayDate = Date()
     var selectdDayOfWeek = 2
     

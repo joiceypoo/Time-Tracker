@@ -10,7 +10,7 @@ import UIKit
 
 protocol AddHabitViewDelegate {
     func didAddHabit(todo: TodoItem)
-    func didEditHabit(todo: TodoItem?)
+    func didEditHabit(todo: TodoItem?, categoryName: String)
     func didDeleteHabit(todo: TodoItem?)
     func didDismissView()
     func showTextInputArea()
@@ -18,10 +18,14 @@ protocol AddHabitViewDelegate {
 
 public class AddHabitView: UIView {
     
-    var categories: [Category] = []
-    var delegate: AddHabitViewDelegate?
+    // MARK: Instance Properties
+    
     let calendar = Calendar.current
+    var categories: [Category] = []
     var categoriesPlaceholder: [Category] = []
+    var delegate: AddHabitViewDelegate?
+    var keyboardHeight: CGFloat = 0
+    var originalYPosition: CGFloat = 0
     var weekdays = [WeekdaysEnum.sunday.rawValue,
                     WeekdaysEnum.monday.rawValue,
                     WeekdaysEnum.tuesday.rawValue,
@@ -31,21 +35,40 @@ public class AddHabitView: UIView {
                     WeekdaysEnum.saturday.rawValue]
     var weekdayButtons: [UIButton]? = []
     
+    var shouldShowCategories: Bool? {
+        didSet {
+            if let shouldShowCategories = shouldShowCategories, shouldShowCategories {
+                categoriesTable.isHidden = false
+            } else {
+                categoriesTable.isHidden = true
+            }
+        }
+    }
+    
+    let weekdaysStackView = UIStackView()
+    
+    // MARK: Outlets
+    
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var categoriesTable: UITableView!
-    @IBOutlet var contentView: UIView!
     @IBOutlet weak var completedCountLabel: UILabel!
+    @IBOutlet var contentView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var firstLineSeparator: UIView!
     @IBOutlet weak var habitTitleTextField: UITextField!
+    @IBOutlet weak var hashTagLabel: UILabel!
     @IBOutlet weak var lineSeparator: UIView!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var weekdaysStackView: UIStackView!
     
-
+    @IBOutlet weak var secondLineSeparator: UIView!
+    
+    // MARK: Initialization
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        setupKeyboardObservers()
         setupView()
     }
     
@@ -54,15 +77,173 @@ public class AddHabitView: UIView {
         setupView()
     }
     
-    convenience init(frame: CGRect, viewModel: AddHabitViewModel?) {
-        self.init(frame: frame)
-        self.viewModel = viewModel
-        bindViewModel(viewModel: viewModel)
+    // MARK: ViewModel
+    
+    var viewModel: AddHabitViewModel? {
+        didSet { bindViewModel() }
     }
     
-    var viewModel: AddHabitViewModel?
+    lazy var mondayButton: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.isSelected = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor.customBlue
+        button.setTitle("M", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
+        
+        return button
+    }()
     
-    private func bindViewModel(viewModel: AddHabitViewModel?) {
+    lazy var tuesdayButton: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.isSelected = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor.customBlue
+        button.setTitle("T", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    lazy var wednesdayButton: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.isSelected = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor.customBlue
+        button.setTitle("W", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    lazy var thursdayButton: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.isSelected = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor.customBlue
+        button.setTitle("TH", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    lazy var fridayButton: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.isSelected = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor.customBlue
+        button.setTitle("F", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    lazy var saturdayButton: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.isSelected = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor.customBlue
+        button.setTitle("S", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    lazy var sundayButton: UIButton = {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.isSelected = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor.customBlue
+        button.setTitle("SU", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    
+    func setupStackView() {
+        weekdaysStackView.addArrangedSubview(mondayButton)
+        weekdaysStackView.addArrangedSubview(tuesdayButton)
+        weekdaysStackView.addArrangedSubview(wednesdayButton)
+        weekdaysStackView.addArrangedSubview(thursdayButton)
+        weekdaysStackView.addArrangedSubview(fridayButton)
+        weekdaysStackView.addArrangedSubview(saturdayButton)
+        weekdaysStackView.addArrangedSubview(sundayButton)
+        
+        weekdaysStackView.axis = NSLayoutConstraint.Axis.horizontal
+        weekdaysStackView.distribution = UIStackView.Distribution.equalSpacing
+        weekdaysStackView.alignment = UIStackView.Alignment.fill
+        weekdaysStackView.spacing = 10
+        
+        contentView.addSubview(weekdaysStackView)
+        setStackViewConstraints()
+    }
+    
+    func setStackViewConstraints() {
+        weekdaysStackView.translatesAutoresizingMaskIntoConstraints = false
+        weekdaysStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15.5).isActive = true
+        weekdaysStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15.5).isActive = true
+        weekdaysStackView.topAnchor.constraint(equalTo: firstLineSeparator.bottomAnchor, constant: 20).isActive = true        
+    }
+    
+    // MARK: Private Instance Methods
+    
+    private func addItemToWeekdays(from day: String) {
+        let dayString = Weekdays.getWeekday(for: day)
+        
+        switch day {
+        case "M":
+            appendDay(from: dayString)
+        case "T":
+            appendDay(from: dayString)
+        case "W":
+            appendDay(from: dayString)
+        case "TH":
+            appendDay(from: dayString)
+        case "F":
+            appendDay(from: dayString)
+        case "S":
+            appendDay(from: dayString)
+        default:
+            appendDay(from: dayString)
+        }
+    }
+    
+    private func appendDay(from day: String) {
+        if !weekdays.contains(day) {
+            weekdays.append(day)
+        }
+    }
+    
+    private func bindViewModel() {
         guard let viewModel = viewModel else { return }
         if viewModel.todo == nil {
             completedCountLabel.isHidden = true
@@ -70,7 +251,7 @@ public class AddHabitView: UIView {
             lineSeparator.isHidden = true
             categories = viewModel.categories
             categoriesPlaceholder = viewModel.categories
-            categories = categories.filter { $0.name != "None" }
+            categories = categories.filter { $0.name != "" }
         } else {
             let data = viewModel.todo?.repeatTodos?.weekday
             let dateStringsData = viewModel.todo?.isDone
@@ -79,10 +260,9 @@ public class AddHabitView: UIView {
             let creationDate = viewModel.todo?.creationDate
             let attributedText = constructAttributedString(for: count, dateString: creationDate)
           
-            cancelButton.isHidden = true
             categories = viewModel.categories
             categoriesPlaceholder = viewModel.categories
-            categories = categories.filter { $0.name != "None" }
+            categories = categories.filter { $0.name != "" }
             categoryTextField.text = viewModel.todo?.categoryName == "None" ? "" : viewModel.todo?.categoryName
             completedCountLabel.attributedText = attributedText
             habitTitleTextField.text = viewModel.todo?.title
@@ -102,6 +282,10 @@ public class AddHabitView: UIView {
         }
     }
     
+    @IBAction private func cancelButtonPressed(_ sender: UIButton) {
+        delegate?.didDismissView()
+    }
+    
     private func constructAttributedString(for completionCount: Int, dateString: String?) -> NSMutableAttributedString?  {
         let currentTimeZone = UsedDates.shared.currentTimeZone
         let dateFormatter = DateFormatter()
@@ -115,13 +299,13 @@ public class AddHabitView: UIView {
             var startDate = dateFormatter.date(from: dateString),
             let endDate = dateFormatter.date(from: endDateString)
             else { return nil }
-     
+        
         while startDate.compare(endDate) != .orderedDescending {
             let weekday = calendar.weekdaySymbols[calendar.component(.weekday, from: startDate) - 1]
             if weekdays.contains(weekday) {
                 expectedCompletionCount += 1
             }
-            startDate = calendar.date(byAdding: .day, value: 1, to: endDate)!
+            startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
         }
         
         let completionCountString = "\(completionCount)"
@@ -133,46 +317,9 @@ public class AddHabitView: UIView {
         return attributedText
     }
     
-    @IBAction func saveButtonPressed(_ sender: UIButton) {
-        validateUsersInput()
-        if viewModel?.todo == nil {
-            guard let categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-            let filteredCategory = categoriesPlaceholder.filter { $0.name == categoryName}
-            if filteredCategory.isEmpty {
-                CoreDataManager.shared.createCategory(from: categoryName)
-                createHabit()
-            } else if !filteredCategory.isEmpty {
-                createHabit()
-            }
-        } else {
-           editHabitHandler()
-        }
-    }
-    
-    
-    private func displayAlertMessage(with message: String, title: String) {
-        let alertController = Alert.displayMessage(with: message,
-                                                   title: title)
-        self.window?.rootViewController?.present(alertController,
-                                                 animated: true,
-                                                 completion: nil)
-    }
-    
-    private func validateUsersInput() {
-        guard let habitTitle = habitTitleTextField.text else { return }
-        
-        if habitTitle.isEmpty || habitTitle.trimmingCharacters(in: .whitespaces).isEmpty {
-            displayAlertMessage(with: "The habit name field should not be empty", title: "Empty field")
-            
-        } else if weekdays.isEmpty  {
-            displayAlertMessage(with: "Please select a week day(s)", title: "Unselected weekday")
-        }
-    }
-    
-    
     private func createHabit() {
         
-        guard let habitTitle = habitTitleTextField.text,
+        guard let habitTitle = habitTitleTextField.text?.capitalized,
             !habitTitle.trimmingCharacters(in: .whitespaces).isEmpty,
             var categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespaces), !weekdays.isEmpty else { return }
         
@@ -181,12 +328,12 @@ public class AddHabitView: UIView {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: currentTimeZone)
         
-
+        
         var currentDayIntegerValue = Int(Dates.getDateString(format: "d", date: Date())) ?? 0
         let month = Dates.getDateString(format: "MMMM", date: Date())
         let year = Int(Dates.getDateString(format: "yyyy", date: Date())) ?? 0
         let currentWeekdayInt = calendar.component(.weekday, from: Date())
-   
+        
         var newWeekdaysIntValue: [Int] = []
         let weekdaysIntValues = Weekdays.getWeekdayIntValue(for: weekdays)
         
@@ -246,11 +393,57 @@ public class AddHabitView: UIView {
         removeFromSuperview()
     }
     
+    @IBAction private func deleteButtonPressed(_ sender: UIButton) {
+        let todo = viewModel?.todo
+        let alertController = UIAlertController(title: "Delete all habits",
+                                                message: "Are you sure you want to delete all repeating habits?",
+                                                preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes",
+                                      style: .default,
+                                      handler: { _ in
+                                        self.delegate?.didDeleteHabit(todo: todo)
+                                        self.removeFromSuperview()
+        })
+        
+        
+        alertController.addAction(yesAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        var currentWindow = self.window?.rootViewController
+        
+        while currentWindow?.presentedViewController != nil {
+            currentWindow = currentWindow?.presentedViewController
+        }
+        
+        currentWindow?.present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func dismissView() {
+        delegate?.didDismissView()
+    }
+    
+    private func displayAlertMessage(with message: String, title: String) {
+        let alertController = Alert.displayMessage(with: message,
+                                                   title: title, actionTitle: "Ok")
+        
+        var currentWindow = self.window?.rootViewController
+        
+        while currentWindow?.presentedViewController != nil {
+            currentWindow = currentWindow?.presentedViewController
+        }
+        
+        currentWindow?.present(alertController, animated: true, completion: nil)
+    }
+    
     private func editHabitHandler() {
         
-        guard let habitTitle = habitTitleTextField.text,
+        guard let habitTitle = habitTitleTextField.text?.capitalized,
             !habitTitle.trimmingCharacters(in: .whitespaces).isEmpty,
-            var categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespaces) else { return }
+            var categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespaces),
+            let persistedCategoryName = viewModel?.todo?.categoryName else { return }
         
         let context = CoreDataManager.shared.persistentContainer.viewContext
         
@@ -263,63 +456,18 @@ public class AddHabitView: UIView {
             viewModel?.todo?.notes = notesTextView.text
             viewModel?.todo?.title = habitTitle
             viewModel?.todo?.repeatTodos?.weekday = data
-            try context.save()
             let todo = viewModel?.todo
-            delegate?.didEditHabit(todo: todo)
+            try context.save()
+            delegate?.didEditHabit(todo: todo, categoryName: persistedCategoryName)
             removeFromSuperview()
         } catch let error {
             print("Failed to save data", error)
         }
     }
     
-    @IBAction func weekdayButtonPressed(_ sender: UIButton) {
-        let day = sender.titleLabel?.text ?? ""
-        if sender.isSelected {
-            sender.isSelected = false
-            sender.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
-            sender.setTitleColor(#colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1), for: .normal)
-            removeItemFromWeekdays(for: day)
-        } else {
-            sender.isSelected = true
-            sender.backgroundColor = UIColor.customBlue
-            sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-            addItemToWeekdays(from: day)
-        }
-        
-    }
-    
-    var shouldShowCategories: Bool? {
-        didSet {
-            if let shouldShowCategories = shouldShowCategories, shouldShowCategories {
-                categoriesTable.isHidden = false
-            } else {
-                categoriesTable.isHidden = true
-            }
-        }
-    }
-    
-    @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        delegate?.didDismissView()
-    }
-    
-    private func addItemToWeekdays(from day: String) {
-        let dayString = Weekdays.getWeekday(for: day)
-        
-        switch day {
-        case "M":
-           appendDay(from: dayString)
-        case "T":
-            appendDay(from: dayString)
-        case "W":
-            appendDay(from: dayString)
-        case "TH":
-            appendDay(from: dayString)
-        case "F":
-            appendDay(from: dayString)
-        case "S":
-            appendDay(from: dayString)
-        default:
-            appendDay(from: dayString)
+    private func removeDay(from day: String) {
+        if weekdays.contains(day), let index = weekdays.index(of: day) {
+            weekdays.remove(at: index)
         }
     }
     
@@ -343,6 +491,52 @@ public class AddHabitView: UIView {
         }
     }
     
+    @IBAction private func saveButtonPressed(_ sender: UIButton) {
+        validateUsersInput()
+        if viewModel?.todo == nil, let categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespacesAndNewlines) {
+      
+            let filteredCategory = categoriesPlaceholder.filter { $0.name == categoryName}
+            if filteredCategory.isEmpty {
+                CoreDataManager.shared.createCategory(from: categoryName)
+                createHabit()
+            } else if !filteredCategory.isEmpty {
+                createHabit()
+            }
+        } else if let categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespacesAndNewlines) {
+            let filteredCategory = categoriesPlaceholder.filter { $0.name == categoryName}
+            if filteredCategory.isEmpty {
+                CoreDataManager.shared.createCategory(from: categoryName)
+                editHabitHandler()
+            } else if !filteredCategory.isEmpty {
+                editHabitHandler()
+            }
+        }
+    }
+    
+    private func setupView() {
+        Bundle.main.loadNibNamed("AddHabitView", owner: self, options: nil)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+//        let gestureRecognizer = UITapGestureRecognizer(target: self,
+//                                                       action: #selector(dismissView))
+//                self.addGestureRecognizer(gestureRecognizer)
+        setupStackView()
+        self.addSubview(contentView)
+        categoriesTable.register(UITableViewCell.self, forCellReuseIdentifier: "CategoriesCell")
+        categoriesTable.delegate = self
+        categoriesTable.dataSource = self
+        categoryTextField.delegate = self
+        habitTitleTextField.delegate = self
+        notesTextView.delegate = self
+        contentView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        contentView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        contentView.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
+        weekdayButtons = weekdaysStackView.arrangedSubviews as? [UIButton]
+        categoriesTable.tableFooterView = UIView()
+        shouldShowCategories = false
+    }
+    
     private func transformDay(for day: String) -> String {
         switch day {
         case WeekdaysEnum.monday.rawValue:
@@ -362,57 +556,49 @@ public class AddHabitView: UIView {
         }
     }
     
-    private func appendDay(from day: String) {
-        if !weekdays.contains(day) {
-            weekdays.append(day)
+    @objc private func weekdayButtonPressed(_ sender: UIButton) {
+        let day = sender.titleLabel?.text ?? ""
+        if sender.isSelected {
+            sender.isSelected = false
+            sender.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
+            sender.setTitleColor(#colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1), for: .normal)
+            removeItemFromWeekdays(for: day)
+        } else {
+            sender.isSelected = true
+            sender.backgroundColor = UIColor.customBlue
+            sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+            addItemToWeekdays(from: day)
         }
     }
     
-    private func removeDay(from day: String) {
-        if weekdays.contains(day), let index = weekdays.index(of: day) {
-            weekdays.remove(at: index)
+    private func validateUsersInput() {
+        guard let habitTitle = habitTitleTextField.text else { return }
+        
+        if habitTitle.isEmpty || habitTitle.trimmingCharacters(in: .whitespaces).isEmpty {
+            displayAlertMessage(with: "The name field for the habit should not be empty",
+                                title: "Empty field")
+            
+        } else if weekdays.isEmpty  {
+            displayAlertMessage(with: "Please select a week day(s)",
+                                title: "Unselected weekday")
         }
     }
     
-    private func setupView() {
-        Bundle.main.loadNibNamed("AddHabitView", owner: self, options: nil)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        let gestureRecognizer = UITapGestureRecognizer(target: self,
-                                                       action: #selector(dismissView))
-        self.addGestureRecognizer(gestureRecognizer)
-        self.addSubview(contentView)
-        categoriesTable.register(UITableViewCell.self, forCellReuseIdentifier: "CategoriesCell")
-        categoriesTable.delegate = self
-        categoriesTable.dataSource = self
-        categoryTextField.delegate = self
-        habitTitleTextField.delegate = self
-        notesTextView.delegate = self
-        contentView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        contentView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
-        weekdayButtons = weekdaysStackView.arrangedSubviews as? [UIButton]
-        categoriesTable.tableFooterView = UIView()
-        shouldShowCategories = false
+    private func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func dismissView() {
-        delegate?.didDismissView()
+    @objc func keyboardWillShow(notification: Notification) {
+        guard let keyBoardInf = notification.userInfo else { return }
+        
+        if let keyboardSize = (keyBoardInf[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size {
+            keyboardHeight = keyboardSize.height
+        }
     }
     
-    @IBAction func deleteButtonPressed(_ sender: UIButton) {
-        let todo = viewModel?.todo
-        delegate?.didDeleteHabit(todo: todo)
-        removeFromSuperview()
-    }
-    
-    func moveTextField(textField: UITextField, moveDistance: Int, up: Bool) {
-        let moveDuration = 0.3
-        let movement = CGFloat(up ? moveDistance: -moveDistance)
-        UIView.beginAnimations("animateTextField", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(moveDuration)
-        self.frame = self.frame.offsetBy(dx: 0, dy: movement)
+    @objc func keyboardWillHide(notification: Notification) {
+        keyboardHeight = 0
     }
 }

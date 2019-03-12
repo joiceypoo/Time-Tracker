@@ -20,15 +20,19 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
     }
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
+        originalYPosition = self.frame.origin.y
         if textField == categoryTextField {
+            hashTagLabel.textColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1843137255, alpha: 1)
             shouldShowCategories = true
-            moveTextField(textField: textField, moveDistance: -60, up: true)
+            self.frame.origin.y -= keyboardHeight + categoriesTable.frame.height + 5
+        } else {
+            self.frame.origin.y = originalYPosition
         }
     }
     
+    
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == categoryTextField {
-            moveTextField(textField: textField, moveDistance: -60, up: false)
             shouldShowCategories = false
         }
         textField.resignFirstResponder()
@@ -37,7 +41,19 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
     
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         delegate?.showTextInputArea()
+        originalYPosition = self.frame.origin.y
+        self.frame.origin.y -= keyboardHeight + categoriesTable.frame.height
         textView.text = ""
+        return true
+    }
+
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == categoryTextField {
+            if string == "#" {
+                return false
+            }
+        }
         return true
     }
     
@@ -45,6 +61,7 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
                          replacementText text: String) -> Bool {
         if text == "\n" {
             textView.resignFirstResponder()
+            self.frame.origin.y = originalYPosition
             return false
         }
         return true

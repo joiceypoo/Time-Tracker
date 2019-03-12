@@ -14,20 +14,18 @@ class TodoItemsController: UIViewController {
     var addHabitView: AddHabitView?
     var categories: [String] = []
     var currentIndexPath: IndexPath?
-    let customView = UIView()
     var displayHabitView = false
     var feedbackGenerator : UISelectionFeedbackGenerator? = nil
     var isNoteTextViewTapped: Bool?
     var isTextInputAreaTapped: Bool?
     private var lastContentOffSet: CGFloat = 0
     var selectedCellIndexPath: [IndexPath] = []
+    var selectedDay = String()
     var todos: [(key: String, value: [TodoItem])] = []
-    let todayButton = UIButton()
     
-    var categoryTextField: UITextField?
-    var noteTextView: UITextView?
+    let addButton = UIButton()
+    let todayButton = UIButton()
 
-    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var todoListsTable: UITableView!
     @IBOutlet weak var dateCollectionView: UICollectionView!
     var displayedDayOfWeek: String?
@@ -35,7 +33,6 @@ class TodoItemsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         transitioningDelegate = self
-//        setupKeyboardObservers()
         feedbackGenerator = UISelectionFeedbackGenerator()
         feedbackGenerator?.prepare()
         let longPressedGestureRecognizer = UILongPressGestureRecognizer(target: self,
@@ -43,6 +40,7 @@ class TodoItemsController: UIViewController {
         todoListsTable.addGestureRecognizer(longPressedGestureRecognizer)
         let day = Calendar.current.component(.weekday, from: Date())
         let weekday = Weekdays.getDay(dayOfWeekNumber: day)
+        selectedDay = weekday
         setupView()
         fetchTodos(from: weekday)
     }
@@ -99,20 +97,31 @@ class TodoItemsController: UIViewController {
         }
     }
     
+    private func setupAddButton() {
+        addButton.layer.cornerRadius = 30
+        addButton.setImage(UIImage(named: "addIcon"), for: .normal)
+        addButton.addTarget(self, action: #selector(addTodoItemButtonPressed), for: .touchUpInside)
+        addButton.layer.shadowColor = #colorLiteral(red: 0, green: 0.05098039216, blue: 0.5137254902, alpha: 0.1634203767)
+        addButton.layer.shadowRadius = 3
+        addButton.layer.shadowOffset = CGSize(width: 2, height: 12)
+        addButton.layer.shadowOpacity = 0.3
+        addButton.layer.shouldRasterize = true
+        
+        view.addSubview(addButton)
+        setAddButtonConstraints()
+    }
+    
+    func setAddButtonConstraints() {
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        addButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 7).isActive = true
+        addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -26).isActive = true
+    }
+    
     private func setupView() {
         navigationController?.view.backgroundColor = .white
         guard let navigationBar = navigationController?.navigationBar else { return }
-        
-        customView.translatesAutoresizingMaskIntoConstraints = false
-        customView.backgroundColor = .white
-        navigationBar.addSubview(customView)
-        
-        customView.leftAnchor.constraint(equalTo: navigationBar.leftAnchor).isActive = true
-        customView.heightAnchor.constraint(equalToConstant: 12).isActive = true
-        customView.rightAnchor.constraint(equalTo: navigationBar.rightAnchor).isActive = true
-        customView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor).isActive = true
-        customView.widthAnchor.constraint(equalTo: navigationBar.widthAnchor).isActive = true
-        
         navigationBar.addSubview(monthLabel)
         monthLabel.leftAnchor.constraint(equalTo: navigationBar.leftAnchor, constant: 20).isActive = true
         monthLabel.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: 80).isActive = true
@@ -135,6 +144,7 @@ class TodoItemsController: UIViewController {
         
         monthLabel.text = Dates.getDateString(format: "MMMM", date: Date())
         
+        setupAddButton()
         
         todoListsTable.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
         todoListsTable.separatorColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
@@ -145,39 +155,40 @@ class TodoItemsController: UIViewController {
     @objc func displayTodayDate() {
         let day = Calendar.current.component(.weekday, from: Date())
         let weekday = Weekdays.getDay(dayOfWeekNumber: day)
+        selectedDay = weekday
         scrollToDate(date: Date())
         fetchTodos(from: weekday)
-        todoListsTable.reloadData()
+        if categories.count > 0 {
+            todoListsTable.reloadData()
+        }
     }
     
     func dismissViewHandler() {
         displayHabitView = false
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
             self.addHabitView?.center.y += self.view.bounds.height + 100
-        }) { _ in
-            self.customView.backgroundColor = .white
-            self.navigationController?.view.backgroundColor = .white
+            self.navigationController?.removeBlurredBackgroundView()
+        }, completion: { _ in
             self.addHabitView?.removeFromSuperview()
-        }
+        })
     }
     
-    @IBAction private func addTodoItemButtonPressed(_ sender: AddButton) {
+    @objc private func addTodoItemButtonPressed(_ sender: UIButton) {
         displayHabitView.toggle()
         setupAddHabitView(for: nil)
     }
     
     internal func setupAddHabitView(for habit: TodoItem?) {
         let addHabitViewModel = AddHabitViewModel(todo: habit, categories: getCategories)
-        addHabitView = AddHabitView(frame: view.frame, viewModel: addHabitViewModel)
+        addHabitView = AddHabitView(frame: view.frame)
         guard
             let addHabitView = addHabitView,
             let navigationBar = navigationController?.navigationBar
             else { return }
         
+        addHabitView.viewModel = addHabitViewModel
         addHabitView.translatesAutoresizingMaskIntoConstraints = false
         addHabitView.delegate = self
-        categoryTextField = addHabitView.categoryTextField
-        noteTextView = addHabitView.notesTextView
         if displayHabitView {
             let currentWindow = UIApplication.shared.keyWindow
             currentWindow?.addSubview(addHabitView)
@@ -187,51 +198,95 @@ class TodoItemsController: UIViewController {
             addHabitView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
             
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+                self.navigationController?.overlayBlurredBackgroundView()
                 addHabitView.center.y -= self.view.bounds.height - 100
-            }, completion: { _ in
-                self.customView.backgroundColor = #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1)
-                self.navigationController?.view.backgroundColor = #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1)
-            })
+            }, completion: nil)
         } else {
             return
         }
     }
-    
-    public func deleteHandler(action: UITableViewRowAction, indexPath: IndexPath) {
+ 
+    internal func deleteHandler(action: UITableViewRowAction, indexPath: IndexPath) {
         let section = indexPath.section
         let todo = todos[section].value[indexPath.row]
-        if todos[section].value.count == 1 {
-            let sectionIndexSet = IndexSet(integer: section)
-            categories.remove(at: section)
-            todos.remove(at: section)
-            todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
-        } else {
-            todos[section].value.remove(at: indexPath.row)
-            todoListsTable.deleteRows(at: [indexPath], with: .automatic)
-        }
-        let context = CoreDataManager.shared.persistentContainer.viewContext
-        context.delete(todo)
-        do {
-            try context.save()
-        } catch {
-            print("Failed deletion: \(error)")
-        }
+        let alertController = UIAlertController(title: "Delete habit",
+                                                message: "Are you sure you want to delete this habit?", preferredStyle: .alert)
+        present(alertController, animated: true,
+                completion: nil)
+        
+        alertController.addAction(UIAlertAction(title: "Yes",
+                                                style: .default,
+                                                handler: { _ in
+            if self.todos[section].value.count == 1 {
+                let sectionIndexSet = IndexSet(integer: section)
+                self.categories.remove(at: section)
+                self.todos.remove(at: section)
+                self.todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+            } else {
+                self.todos[section].value.remove(at: indexPath.row)
+                self.todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+            }
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(todo)
+            CoreDataManager.shared.recreateHabit(for: todo)
+            do {
+                try context.save()
+            } catch {
+                print("Failed deletion: \(error)")
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
     }
+    
+//    internal func deleteAllHabitsHandler(action: UITableViewRowAction, indexPath: IndexPath) {
+//        let section = indexPath.section
+//        let todo = todos[section].value[indexPath.row]
+//        let alertController = UIAlertController(title: "Delete All habits",
+//                                                message: "Are you sure you want to delete all repeating habits?", preferredStyle: .alert)
+//        present(alertController, animated: true,
+//                completion: nil)
+//        
+//        alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+//            if self.todos[section].value.count == 1 {
+//                let sectionIndexSet = IndexSet(integer: section)
+//                self.categories.remove(at: section)
+//                self.todos.remove(at: section)
+//                self.todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+//            } else {
+//                self.todos[section].value.remove(at: indexPath.row)
+//                self.todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+//            }
+//            let context = CoreDataManager.shared.persistentContainer.viewContext
+//            context.delete(todo)
+//            do {
+//                try context.save()
+//            } catch {
+//                print("Failed deletion: \(error)")
+//            }
+//        }))
+//        
+//        alertController.addAction(UIAlertAction(title: "Cancel",
+//                                                style: .cancel,
+//                                                handler: nil))
+//        
+//    }
     
     func displayDate(date: Date) {
         UsedDates.shared.displayedDate = date
         UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date)
         monthLabel.text = UsedDates.shared.displayedDateString
         let dayString = Weekdays.getDay(dayOfWeekNumber: UsedDates.shared.selectdDayOfWeek)
+        selectedDay = dayString
         displayedDayOfWeek = dayString
         UsedDates.shared.currentDate = date
     }
     
     func resetNavBar() {
         displayHabitView = false
-        customView.backgroundColor = .white
-        navigationController?.view.backgroundColor = .white
-        todayButton.isEnabled = true
+        navigationController?.removeBlurredBackgroundView()
     }
     
     func scrollToDate(date: Date)
@@ -253,19 +308,14 @@ class TodoItemsController: UIViewController {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if lastContentOffSet > scrollView.contentOffset.x,
+        if lastContentOffSet < scrollView.contentOffset.x,
             let displayedDayOfWeek = displayedDayOfWeek {
             displayWeek()
             fetchTodos(from: displayedDayOfWeek)
-            todoListsTable.reloadData()
-        } else if lastContentOffSet < scrollView.contentOffset.x,
-            let displayedDayOfWeek = displayedDayOfWeek {
-            displayWeek()
-            fetchTodos(from: displayedDayOfWeek)
-            todoListsTable.reloadData()
+            if categories.count > 0 {
+                todoListsTable.reloadData()
+            }
         }
-        
-        
     }
     
     func displayWeek() {
@@ -287,53 +337,6 @@ class TodoItemsController: UIViewController {
                                                                               requiredDayOfWeek: UsedDates.shared.selectdDayOfWeek)
         displayDate(date: displayedDate)
     }
-    
-//    private func setupKeyboardObservers() {
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(keyboardWillChange),
-//                                               name: UIResponder.keyboardWillShowNotification,
-//                                               object: nil)
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(keyboardWillChange),
-//                                               name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(keyboardWillChange),
-//                                               name: UIResponder.keyboardWillHideNotification,
-//                                               object: nil)
-//    }
-//
-//    private func animateKeyboard(_ duration: TimeInterval, _ options: UIView.AnimationOptions) {
-//        UIView.animate(withDuration: duration,
-//                       delay: 0,
-//                       options: options,
-//                       animations: ({
-//                        self.view.layoutIfNeeded()
-//                       }))
-//    }
-//
-//    @objc
-//    private func keyboardWillChange(notification: Notification) {
-//        guard
-//            let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-//            let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
-//            let rawCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
-//            else { return }
-//
-//        let options = UIView.AnimationOptions(rawValue: rawCurve << 16)
-//
-//        if notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
-////            if let success = isTextInputAreaTapped, success == true {
-////                addHabitView?.frame.origin.y = -keyboardFrame.height + 170
-////                isTextInputAreaTapped = false
-////            }
-////            animateKeyboard(duration, options)
-//        } else {
-////            addHabitView?.frame.origin.y = 0
-////            animateKeyboard(duration, options)
-////            isTextInputAreaTapped = false
-//        }
-//    }
-    
 }
 
 

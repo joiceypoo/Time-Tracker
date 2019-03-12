@@ -68,7 +68,7 @@ public class TodoListCell: UITableViewCell {
         let image = #imageLiteral(resourceName: "unchecked")
         button.layer.cornerRadius = button.frame.width / 2
         button.layer.masksToBounds = true
-        button.backgroundColor = .white
+        button.backgroundColor = .clear
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(checkboxPressed(sender:)), for: .touchUpInside)
         return button

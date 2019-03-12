@@ -20,7 +20,6 @@
 		CE14E4C02218AEDB009C4432 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */; };
 		CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CE25422280F9700877EDE /* AnimationController.swift */; };
 		CE1CE2582228102B00877EDE /* LaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CE2572228102B00877EDE /* LaunchController.swift */; };
-		CE6EDA7E221F8982009DB063 /* CustomCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6EDA7D221F8982009DB063 /* CustomCollectionViewFlowLayout.swift */; };
 		CE776B1122024D9F003E617C /* UsedDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1022024D9F003E617C /* UsedDates.swift */; };
 		CE776B1322024DDF003E617C /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */; };
 		CE776B1522024F61003E617C /* TodoItemsController+DateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */; };
@@ -36,7 +35,6 @@
 		CE8C9AEF21FC203E002947EE /* IndentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AEE21FC203E002947EE /* IndentLabel.swift */; };
 		CE8C9B1221FE1103002947EE /* HabbbitModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9B1021FE1103002947EE /* HabbbitModels.xcdatamodeld */; };
 		CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24CD21F656050028AC7F /* UIColor+theme.swift */; };
-		CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D021F65F5B0028AC7F /* AddButton.swift */; };
 		CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */; };
 		CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24DE21F766250028AC7F /* StoryboardName.swift */; };
 		CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24E421F7678B0028AC7F /* TodoItemsControllerDelegate.swift */; };
@@ -66,7 +64,6 @@
 		CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 		CE1CE25422280F9700877EDE /* AnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		CE1CE2572228102B00877EDE /* LaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchController.swift; sourceTree = "<group>"; };
-		CE6EDA7D221F8982009DB063 /* CustomCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		CE776B1022024D9F003E617C /* UsedDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedDates.swift; sourceTree = "<group>"; };
 		CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+DateDataSource.swift"; sourceTree = "<group>"; };
@@ -82,7 +79,6 @@
 		CE8C9AEE21FC203E002947EE /* IndentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentLabel.swift; sourceTree = "<group>"; };
 		CE8C9B1121FE1103002947EE /* HabbbitModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HabbbitModels.xcdatamodel; sourceTree = "<group>"; };
 		CE8F24CD21F656050028AC7F /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
-		CE8F24D021F65F5B0028AC7F /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CE8F24DE21F766250028AC7F /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		CE8F24E421F7678B0028AC7F /* TodoItemsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemsControllerDelegate.swift; sourceTree = "<group>"; };
@@ -271,7 +267,6 @@
 		CE8F24CF21F65F2D0028AC7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CE8F24D021F65F5B0028AC7F /* AddButton.swift */,
 				CE8C9AEE21FC203E002947EE /* IndentLabel.swift */,
 				CE8F24E821F76BAD0028AC7F /* TodoListCell.swift */,
 				CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */,
@@ -313,7 +308,6 @@
 			isa = PBXGroup;
 			children = (
 				242FB84321C0447B00931945 /* TodoItemsController.swift */,
-				CE6EDA7D221F8982009DB063 /* CustomCollectionViewFlowLayout.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -469,7 +463,6 @@
 				242FB84221C0447B00931945 /* AppDelegate.swift in Sources */,
 				CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */,
 				CE8F250B21F886730028AC7F /* WeekdaysEnum.swift in Sources */,
-				CE6EDA7E221F8982009DB063 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */,
 				CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */,
 				CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */,
@@ -484,7 +477,6 @@
 				CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */,
 				CE1CE2582228102B00877EDE /* LaunchController.swift in Sources */,
 				CE8F24FB21F7AE7A0028AC7F /* DescriptionVM.swift in Sources */,
-				CE8F24D121F65F5B0028AC7F /* AddButton.swift in Sources */,
 				CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */,
 				CE8C9AD721FA638F002947EE /* CellIndexPath.swift in Sources */,
 				CE0C6CBB221AEEA80007F68F /* AddHabitView+Delegates.swift in Sources */,

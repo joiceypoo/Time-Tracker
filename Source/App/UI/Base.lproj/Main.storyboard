@@ -108,27 +108,13 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="UkR-ik-FB0"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faD-9z-eRI" customClass="AddButton" customModule="Habbbit" customModuleProvider="target">
-                                <rect key="frame" x="164.5" y="581" width="46" height="46"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="98p-IW-wSN"/>
-                                    <constraint firstAttribute="width" constant="46" id="ofN-4J-vVN"/>
-                                </constraints>
-                                <state key="normal" image="addIcon"/>
-                                <connections>
-                                    <action selector="addTodoItemButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Ue-Jk-E4i"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Z2-ZP-191"/>
                             <constraint firstItem="G1L-ms-s5B" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="V8u-te-cj6"/>
                             <constraint firstAttribute="bottom" secondItem="0ww-Ks-kEg" secondAttribute="bottom" id="adB-ym-ebp"/>
-                            <constraint firstItem="faD-9z-eRI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dKt-Pk-sqX"/>
                             <constraint firstItem="G1L-ms-s5B" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-8" id="eDb-xu-Zfi"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="faD-9z-eRI" secondAttribute="bottom" constant="40" id="mgK-Yf-dZ3"/>
                             <constraint firstItem="G1L-ms-s5B" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="obJ-NM-hoB"/>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="top" secondItem="G1L-ms-s5B" secondAttribute="bottom" constant="10" id="rHr-bh-NaS"/>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ua8-Xu-h5G"/>
@@ -137,7 +123,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Afw-ob-4ae"/>
                     <connections>
-                        <outlet property="addButton" destination="faD-9z-eRI" id="SSa-iq-hW4"/>
                         <outlet property="dateCollectionView" destination="G1L-ms-s5B" id="IVI-8o-GXM"/>
                         <outlet property="todoListsTable" destination="0ww-Ks-kEg" id="FJg-IX-aOI"/>
                     </connections>
@@ -177,7 +162,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="addIcon" width="60" height="60"/>
         <image name="launchIcon" width="300.5" height="300.5"/>
     </resources>
 </document>

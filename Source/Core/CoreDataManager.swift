@@ -73,6 +73,7 @@ struct CoreDataManager {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<TodoItem>(entityName: "TodoItem")
         var todosDictionary: [String: [TodoItem]] = [:]
+        UsedDates.shared.selectedWeekday = day
         do {
             let todos = try context.fetch(fetchRequest)
             for todo in todos {
@@ -111,7 +112,28 @@ struct CoreDataManager {
         return sortedTodos
     }
     
-    
+    func recreateHabit(for todo: TodoItem) {
+        let selectedWeekday = UsedDates.shared.selectedWeekday
+        var repeatWeekdays = Unarchive.unarchiveStringArrayData(from: todo.repeatTodos?.weekday)
+        guard let habitTitle = todo.title,
+            let categoryName = todo.categoryName,
+            let creationDate = todo.creationDate,
+            let isRepeating = todo.repeatTodos?.isRepeating,
+            let indexOfSelectedWeekday = repeatWeekdays.index(of: selectedWeekday),
+            let notes = todo.notes
+            else { return }
+        
+        repeatWeekdays.remove(at: indexOfSelectedWeekday)
+        
+        if !repeatWeekdays.isEmpty {
+            let _ = CoreDataManager.shared.createTodo(todo: habitTitle,
+                                                      repeatDays: repeatWeekdays,
+                                                      categoryName: categoryName,
+                                                      isRepeating: isRepeating,
+                                                      creationDate: creationDate,
+                                                      notes: notes)
+        }
+    }
     
     func reorderTodo(from todoOne: TodoItem, to todoTwo: TodoItem) {
         let context = persistentContainer.viewContext

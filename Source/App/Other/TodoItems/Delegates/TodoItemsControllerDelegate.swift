@@ -20,19 +20,85 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
             let todo = todo,
             let section = categories.index(of: category),
             let index = todos[section].value.index(of: todo) else { return }
-        let newIndexPath = IndexPath(row: index, section: section)
-        todos[section].value.remove(at: index)
-        todoListsTable.deleteRows(at: [newIndexPath], with: .automatic)
+        
+        if todos[section].value.count == 1 {
+            let sectionIndexSet = IndexSet(integer: section)
+            categories.remove(at: section)
+            todos.remove(at: section)
+            todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+        } else {
+            todos[section].value.remove(at: index)
+            let indexPath = IndexPath(row: index, section: section)
+            todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+        }
+        
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        context.delete(todo)
+//        CoreDataManager.shared.recreateHabit(for: todo)
+        do {
+            try context.save()
+        } catch {
+            print("Failed deletion: \(error)")
+        }
     }
     
-    func didEditHabit(todo: TodoItem?) {
+    func didEditHabit(todo: TodoItem?, categoryName: String) {
         resetNavBar()
-        guard let category = todo?.categoryName,
-            let section = categories.index(of: category),
-            let todo = todo,
+        
+        guard
+            let name = todo?.categoryName, let todo = todo,
+            let section = categories.index(of: categoryName),
             let row = todos[section].value.index(of: todo) else { return }
-        let reloadIndexPath = IndexPath(row: row, section: section)
-        todoListsTable.reloadRows(at: [reloadIndexPath], with: .middle)
+        
+        let todoItem = todos[section].value[row]
+        
+        if name == categoryName {
+            let reloadIndexPath = IndexPath(row: row, section: section)
+            todoListsTable.reloadRows(at: [reloadIndexPath], with: .middle)
+        } else if !categories.contains(name) {
+            guard let section = categories.index(of: categoryName) else { return }
+            
+            if todos[section].value.count == 1 {
+                let sectionIndexSet = IndexSet(integer: section)
+                categories.remove(at: section)
+                
+                var newTodo = todos.remove(at: section)
+                todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+                categories.append(name)
+                newTodo.key = name
+                todos.append(newTodo)
+                todoListsTable.reloadData()
+            } else if let index = todos[section].value.index(of: todo) {
+                todos[section].value.remove(at: index)
+                let indexPath = IndexPath(row: index, section: section)
+                todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+                categories.append(name)
+                let newTodo = (key: name, value: [todoItem])
+                todos.append(newTodo)
+                todoListsTable.reloadData()
+            }
+        } else if let newSection = categories.index(of: name), newSection == 0 || newSection > 0  {
+            if todos[section].value.count == 1 {
+                let sectionIndexSet = IndexSet(integer: section)
+                categories.remove(at: section)
+                todos.remove(at: section)
+                todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+                
+                if newSection > section {
+                    todos[section].value.append(todoItem)
+                } else {
+                    todos[newSection].value.append(todoItem)
+                }
+                
+                todoListsTable.reloadData()
+            } else if let index = todos[section].value.index(of: todo)  {
+                todos[section].value.remove(at: index)
+                let indexPath = IndexPath(row: index, section: section)
+                todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+                todos[newSection].value.append(todoItem)
+                todoListsTable.reloadData()
+            }
+        }
     }
     
     func didDismissView() {
