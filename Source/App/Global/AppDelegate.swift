@@ -9,12 +9,6 @@
 import UIKit
 
 
-class CustomNavigationController: UINavigationController {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-}
-
 extension UINavigationController {
     func overlayBlurredBackgroundView() {
         let blurEffect = UIBlurEffect(style: .extraLight)
@@ -32,6 +26,8 @@ extension UINavigationController {
         }
     }
 }
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

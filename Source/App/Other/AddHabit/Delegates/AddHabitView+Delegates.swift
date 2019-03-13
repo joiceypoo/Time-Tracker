@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate {
+extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 30
@@ -62,6 +62,13 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
         if text == "\n" {
             textView.resignFirstResponder()
             self.frame.origin.y = originalYPosition
+            return false
+        }
+        return true
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let view = touch.view, view.isDescendant(of: contentView) {
             return false
         }
         return true

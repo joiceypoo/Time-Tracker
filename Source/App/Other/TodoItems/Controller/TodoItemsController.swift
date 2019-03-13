@@ -185,6 +185,7 @@ class TodoItemsController: UIViewController {
             let addHabitView = addHabitView,
             let navigationBar = navigationController?.navigationBar
             else { return }
+
         
         addHabitView.viewModel = addHabitViewModel
         addHabitView.translatesAutoresizingMaskIntoConstraints = false
@@ -196,9 +197,9 @@ class TodoItemsController: UIViewController {
             addHabitView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
             addHabitView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
             addHabitView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-            
-            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
-                self.navigationController?.overlayBlurredBackgroundView()
+     
+            navigationController?.overlayBlurredBackgroundView()
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
                 addHabitView.center.y -= self.view.bounds.height - 100
             }, completion: nil)
         } else {

@@ -259,7 +259,7 @@ public class AddHabitView: UIView {
             let count = completionDateStrings.count
             let creationDate = viewModel.todo?.creationDate
             let attributedText = constructAttributedString(for: count, dateString: creationDate)
-          
+            cancelButton.isHidden = true
             categories = viewModel.categories
             categoriesPlaceholder = viewModel.categories
             categories = categories.filter { $0.name != "" }
@@ -516,9 +516,10 @@ public class AddHabitView: UIView {
     private func setupView() {
         Bundle.main.loadNibNamed("AddHabitView", owner: self, options: nil)
         contentView.translatesAutoresizingMaskIntoConstraints = false
-//        let gestureRecognizer = UITapGestureRecognizer(target: self,
-//                                                       action: #selector(dismissView))
-//                self.addGestureRecognizer(gestureRecognizer)
+        let gestureRecognizer = UITapGestureRecognizer(target: self,
+                                                       action: #selector(dismissView))
+        gestureRecognizer.delegate = self
+                self.addGestureRecognizer(gestureRecognizer)
         setupStackView()
         self.addSubview(contentView)
         categoriesTable.register(UITableViewCell.self, forCellReuseIdentifier: "CategoriesCell")
