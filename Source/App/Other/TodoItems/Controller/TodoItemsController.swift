@@ -45,9 +45,6 @@ class TodoItemsController: UIViewController {
         fetchTodos(from: weekday)
     }
     
-    @objc func calenderIcon() {
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let index = self.todoListsTable.indexPathForSelectedRow {
@@ -57,9 +54,7 @@ class TodoItemsController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        let date = Date()
-        scrollToDate(date: date)
-        
+        scrollToDate(date: Date())
     }
     
     var monthLabel: UILabel = {
@@ -99,13 +94,12 @@ class TodoItemsController: UIViewController {
     
     private func setupAddButton() {
         addButton.layer.cornerRadius = 30
-        addButton.setImage(UIImage(named: "addIcon"), for: .normal)
+        addButton.setImage(UIImage(named: "add"), for: .normal)
         addButton.addTarget(self, action: #selector(addTodoItemButtonPressed), for: .touchUpInside)
         addButton.layer.shadowColor = #colorLiteral(red: 0, green: 0.05098039216, blue: 0.5137254902, alpha: 0.1634203767)
         addButton.layer.shadowRadius = 3
         addButton.layer.shadowOffset = CGSize(width: 2, height: 12)
         addButton.layer.shadowOpacity = 0.3
-        addButton.layer.shouldRasterize = true
         
         view.addSubview(addButton)
         setAddButtonConstraints()
@@ -133,8 +127,6 @@ class TodoItemsController: UIViewController {
         todayButton.setImage(#imageLiteral(resourceName: "today"), for: .normal)
         navigationBar.addSubview(todayButton)
         todayButton.translatesAutoresizingMaskIntoConstraints = false
-        todayButton.layer.cornerRadius = 4
-        todayButton.layer.masksToBounds = true
         
         todayButton.topAnchor.constraint(equalTo: monthLabel.topAnchor).isActive = true
         todayButton.rightAnchor.constraint(equalTo: navigationBar.rightAnchor,
@@ -146,7 +138,7 @@ class TodoItemsController: UIViewController {
         
         setupAddButton()
         
-        todoListsTable.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
+        todoListsTable.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
         todoListsTable.separatorColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
         todoListsTable.tableFooterView = UIView()
     }
@@ -165,7 +157,7 @@ class TodoItemsController: UIViewController {
     
     func dismissViewHandler() {
         displayHabitView = false
-        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.28, delay: 0, options: .curveEaseIn, animations: {
             self.addHabitView?.center.y += self.view.bounds.height + 100
             self.navigationController?.removeBlurredBackgroundView()
         }, completion: { _ in
@@ -186,7 +178,6 @@ class TodoItemsController: UIViewController {
             let navigationBar = navigationController?.navigationBar
             else { return }
 
-        
         addHabitView.viewModel = addHabitViewModel
         addHabitView.translatesAutoresizingMaskIntoConstraints = false
         addHabitView.delegate = self
@@ -199,7 +190,7 @@ class TodoItemsController: UIViewController {
             addHabitView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
      
             navigationController?.overlayBlurredBackgroundView()
-            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
+            UIView.animate(withDuration: 0.28, delay: 0, options: .curveEaseIn, animations: {
                 addHabitView.center.y -= self.view.bounds.height - 100
             }, completion: nil)
         } else {
@@ -210,79 +201,34 @@ class TodoItemsController: UIViewController {
     internal func deleteHandler(action: UITableViewRowAction, indexPath: IndexPath) {
         let section = indexPath.section
         let todo = todos[section].value[indexPath.row]
-        let alertController = UIAlertController(title: "Delete habit",
-                                                message: "Are you sure you want to delete this habit?", preferredStyle: .alert)
-        present(alertController, animated: true,
-                completion: nil)
         
-        alertController.addAction(UIAlertAction(title: "Yes",
-                                                style: .default,
-                                                handler: { _ in
-            if self.todos[section].value.count == 1 {
-                let sectionIndexSet = IndexSet(integer: section)
-                self.categories.remove(at: section)
-                self.todos.remove(at: section)
-                self.todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
-            } else {
-                self.todos[section].value.remove(at: indexPath.row)
-                self.todoListsTable.deleteRows(at: [indexPath], with: .automatic)
-            }
-            let context = CoreDataManager.shared.persistentContainer.viewContext
-            context.delete(todo)
-            CoreDataManager.shared.recreateHabit(for: todo)
-            do {
-                try context.save()
-            } catch {
-                print("Failed deletion: \(error)")
-            }
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
+        if self.todos[section].value.count == 1 {
+            let sectionIndexSet = IndexSet(integer: section)
+            self.categories.remove(at: section)
+            self.todos.remove(at: section)
+            self.todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+        } else {
+            self.todos[section].value.remove(at: indexPath.row)
+            self.todoListsTable.deleteRows(at: [indexPath], with: .automatic)
+        }
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        context.delete(todo)
+        CoreDataManager.shared.recreateHabit(for: todo)
+        do {
+            try context.save()
+        } catch {
+            print("Failed deletion: \(error)")
+        }
     }
-    
-//    internal func deleteAllHabitsHandler(action: UITableViewRowAction, indexPath: IndexPath) {
-//        let section = indexPath.section
-//        let todo = todos[section].value[indexPath.row]
-//        let alertController = UIAlertController(title: "Delete All habits",
-//                                                message: "Are you sure you want to delete all repeating habits?", preferredStyle: .alert)
-//        present(alertController, animated: true,
-//                completion: nil)
-//        
-//        alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-//            if self.todos[section].value.count == 1 {
-//                let sectionIndexSet = IndexSet(integer: section)
-//                self.categories.remove(at: section)
-//                self.todos.remove(at: section)
-//                self.todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
-//            } else {
-//                self.todos[section].value.remove(at: indexPath.row)
-//                self.todoListsTable.deleteRows(at: [indexPath], with: .automatic)
-//            }
-//            let context = CoreDataManager.shared.persistentContainer.viewContext
-//            context.delete(todo)
-//            do {
-//                try context.save()
-//            } catch {
-//                print("Failed deletion: \(error)")
-//            }
-//        }))
-//        
-//        alertController.addAction(UIAlertAction(title: "Cancel",
-//                                                style: .cancel,
-//                                                handler: nil))
-//        
-//    }
     
     func displayDate(date: Date) {
         UsedDates.shared.displayedDate = date
+        UsedDates.shared.currentDate = date
         UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date)
         monthLabel.text = UsedDates.shared.displayedDateString
         let dayString = Weekdays.getDay(dayOfWeekNumber: UsedDates.shared.selectdDayOfWeek)
         selectedDay = dayString
         displayedDayOfWeek = dayString
-        UsedDates.shared.currentDate = date
     }
     
     func resetNavBar() {

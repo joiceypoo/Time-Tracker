@@ -257,9 +257,7 @@
 		CE8F24CC21F655EA0028AC7F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				CE8F24CD21F656050028AC7F /* UIColor+theme.swift */,
-				CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */,
-				CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */,
+				CEB2793F2241DCD9004A2BE4 /* Extensions */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -372,6 +370,16 @@
 				CECAEE36221C3C9B002F1D4B /* Weekdays.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		CEB2793F2241DCD9004A2BE4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F24CD21F656050028AC7F /* UIColor+theme.swift */,
+				CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */,
+				CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

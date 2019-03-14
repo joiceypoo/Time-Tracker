@@ -258,6 +258,9 @@ public class AddHabitView: UIView {
             let completionDateStrings = Unarchive.unarchiveStringArrayData(from: dateStringsData)
             let count = completionDateStrings.count
             let creationDate = viewModel.todo?.creationDate
+            
+            weekdays = Unarchive.unarchiveStringArrayData(from: data)
+            
             let attributedText = constructAttributedString(for: count, dateString: creationDate)
             cancelButton.isHidden = true
             categories = viewModel.categories
@@ -268,7 +271,6 @@ public class AddHabitView: UIView {
             habitTitleTextField.text = viewModel.todo?.title
             notesTextView.text = viewModel.todo?.notes
             saveButton.setTitle("Done", for: .normal)
-            weekdays = Unarchive.unarchiveStringArrayData(from: data)
             
             let weekdaysPlaceholder = weekdays.map { transformDay(for: $0)}
             weekdayButtons?.forEach { button in
@@ -292,13 +294,14 @@ public class AddHabitView: UIView {
         dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
         dateFormatter.timeZone = TimeZone(abbreviation: currentTimeZone)
         
-        let endDateString = dateFormatter.string(from: Date())
         var expectedCompletionCount = 0
         
+        
         guard let dateString = dateString,
-            var startDate = dateFormatter.date(from: dateString),
-            let endDate = dateFormatter.date(from: endDateString)
+            var startDate = dateFormatter.date(from: dateString)
             else { return nil }
+        
+        let endDate = UsedDates.shared.currentDate
         
         while startDate.compare(endDate) != .orderedDescending {
             let weekday = calendar.weekdaySymbols[calendar.component(.weekday, from: startDate) - 1]
@@ -307,7 +310,7 @@ public class AddHabitView: UIView {
             }
             startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
         }
-        
+            
         let completionCountString = "\(completionCount)"
         let expectedCompletionCountString = " / \(expectedCompletionCount)"
         
@@ -370,13 +373,16 @@ public class AddHabitView: UIView {
             monthInt += 1
         }
         
+        let components = calendar.dateComponents([.hour, .minute, .second], from: Date())
         dateComponent.day = currentDayIntegerValue
         dateComponent.month = monthInt
         dateComponent.year = year
+        dateComponent.hour = components.hour
+        dateComponent.minute = components.minute
+        dateComponent.second = components.second
+        dateComponent.timeZone = TimeZone(abbreviation: currentTimeZone)
         
-        let date = calendar.date(from: dateComponent)
-        
-        guard let startDate = date else { return }
+        guard let startDate = calendar.date(from: dateComponent) else { return }
         
         let isRepeating = weekdays.count == 7 ? true : false
         let dateString = Dates.getDateString(format: "EEEE, MMMM d, yyyy", date: startDate)
@@ -395,8 +401,9 @@ public class AddHabitView: UIView {
     
     @IBAction private func deleteButtonPressed(_ sender: UIButton) {
         let todo = viewModel?.todo
-        let alertController = UIAlertController(title: "Delete all habits",
-                                                message: "Are you sure you want to delete all repeating habits?",
+        let title = viewModel?.todo?.title ?? ""
+        let alertController = UIAlertController(title: "Delete \(title)",
+                                                message: "Are you sure you want to delete this habit? \n It'll delete this and all future occurrences.",
                                                 preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes",
                                       style: .default,
@@ -409,7 +416,7 @@ public class AddHabitView: UIView {
         alertController.addAction(yesAction)
         
         let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .cancel, handler: nil)
+                                         style: .destructive, handler: nil)
         alertController.addAction(cancelAction)
         
         var currentWindow = self.window?.rootViewController
@@ -521,6 +528,8 @@ public class AddHabitView: UIView {
         gestureRecognizer.delegate = self
                 self.addGestureRecognizer(gestureRecognizer)
         setupStackView()
+        contentView.layer.cornerRadius = 4
+        contentView.layer.masksToBounds = true
         self.addSubview(contentView)
         categoriesTable.register(UITableViewCell.self, forCellReuseIdentifier: "CategoriesCell")
         categoriesTable.delegate = self

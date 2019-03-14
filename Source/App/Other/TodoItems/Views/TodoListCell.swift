@@ -49,7 +49,7 @@ public class TodoListCell: UITableViewCell {
         
         let datesArray = Unarchive.unarchiveStringArrayData(from: viewModel.isDone)
         if datesArray.contains(dateString) {
-            checkBox.setImage(#imageLiteral(resourceName: "checked"), for: .normal)
+            checkBox.setImage(#imageLiteral(resourceName: "Checked"), for: .normal)
         } else {
             checkBox.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
         }
@@ -78,11 +78,11 @@ public class TodoListCell: UITableViewCell {
         let impact = UIImpactFeedbackGenerator(style: .light)
         let currentDate = UsedDates.shared.displayedDate
         if sender.currentImage == #imageLiteral(resourceName: "unchecked") {
-            sender.setImage(#imageLiteral(resourceName: "checked"), for: .normal)
+            sender.setImage(#imageLiteral(resourceName: "Checked"), for: .normal)
             animateButton(sender: sender)
             impact.impactOccurred()
             updateDateRecord(from: currentDate)
-        } else if sender.currentImage == #imageLiteral(resourceName: "checked") {
+        } else if sender.currentImage == #imageLiteral(resourceName: "Checked") {
             sender.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
             updateDateRecord(from: currentDate)
         }

@@ -43,7 +43,9 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
         delegate?.showTextInputArea()
         originalYPosition = self.frame.origin.y
         self.frame.origin.y -= keyboardHeight + categoriesTable.frame.height
-        textView.text = ""
+        if textView.text == "Add notes" {
+            textView.text = ""
+        }
         return true
     }
 

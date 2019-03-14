@@ -79,15 +79,21 @@ struct CoreDataManager {
             for todo in todos {
                 
                 let data = todo.repeatTodos?.weekday
+                let creationDateString = todo.creationDate ?? ""
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+                let creationDate = dateFormatter.date(from: creationDateString)!
+                let currentDate = UsedDates.shared.currentDate
+      
                 let daysArray = Unarchive.unarchiveStringArrayData(from: data)
                 let isValidDay = daysArray.contains(day) || daysArray.count == 7
-                if let name = todo.categoryName, name == "None" && todosDictionary[name] == nil && isValidDay  {
+                if let name = todo.categoryName, name == "None" && todosDictionary[name] == nil && isValidDay && creationDate.compare(currentDate) != .orderedDescending  {
                     todosDictionary["None"] = [todo]
-                } else if let name = todo.categoryName, name == "None" && todosDictionary[name] != nil && isValidDay {
+                } else if let name = todo.categoryName, name == "None" && todosDictionary[name] != nil && isValidDay && creationDate.compare(currentDate) != .orderedDescending {
                     todosDictionary["None"]?.append(todo)
-                } else if let name = todo.categoryName, todosDictionary[name] == nil && name != "None" && isValidDay  {
+                } else if let name = todo.categoryName, todosDictionary[name] == nil && name != "None" && isValidDay && creationDate.compare(currentDate) != .orderedDescending {
                     todosDictionary[todo.categoryName!] = [todo]
-                } else if let name = todo.categoryName, todosDictionary[name] != nil && name != "None" && isValidDay {
+                } else if let name = todo.categoryName, todosDictionary[name] != nil && name != "None" && isValidDay && creationDate.compare(currentDate) != .orderedDescending {
                     todosDictionary[todo.categoryName!]?.append(todo)
                 }
                 

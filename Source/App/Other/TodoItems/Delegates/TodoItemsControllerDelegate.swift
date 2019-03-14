@@ -34,7 +34,6 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
         
         let context = CoreDataManager.shared.persistentContainer.viewContext
         context.delete(todo)
-//        CoreDataManager.shared.recreateHabit(for: todo)
         do {
             try context.save()
         } catch {

@@ -41,9 +41,9 @@ class UsedDates {
     var startDate: Date {
         var startComponents = DateComponents()
         startComponents.calendar = Calendar.current
-        startComponents.year = 2000
-        startComponents.month = 12
-        startComponents.day = 31
+        startComponents.year = 2001
+        startComponents.month = 1
+        startComponents.day = 1
         startComponents.timeZone = TimeZone(abbreviation: currentTimeZone)
         
         let res = Calendar.current.date(from: startComponents) ?? Date()
@@ -57,6 +57,7 @@ class UsedDates {
         startComponents.year = 2034
         startComponents.month = 12
         startComponents.day = 31
+        startComponents.timeZone = TimeZone(abbreviation: currentTimeZone)
         return Calendar.current.date(from: startComponents) ?? Date()
     }
     
