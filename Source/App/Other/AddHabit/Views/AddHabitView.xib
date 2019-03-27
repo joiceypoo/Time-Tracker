@@ -23,6 +23,7 @@
                 <outlet property="hashTagLabel" destination="dnL-L4-Upk" id="IoA-0K-wZn"/>
                 <outlet property="lineSeparator" destination="4s8-5Z-kPs" id="feS-mK-XeS"/>
                 <outlet property="notesTextView" destination="Vmt-k1-OQ1" id="rYZ-2F-GcK"/>
+                <outlet property="notesTextViewHeightConstraint" destination="rHt-bX-R2c" id="IEu-Cp-q12"/>
                 <outlet property="saveButton" destination="qMh-pU-46m" id="q0A-nr-5Rv"/>
                 <outlet property="secondLineSeparator" destination="SzY-r5-1Ka" id="Mux-Ct-iBa"/>
             </connections>
@@ -47,13 +48,13 @@
                     </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Habit Name" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R0D-kI-AOB">
-                    <rect key="frame" x="26" y="114" width="247" height="28"/>
+                    <rect key="frame" x="26" y="114" width="259" height="28"/>
                     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="28" id="45W-qx-fXe"/>
                     </constraints>
                     <color key="textColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4a-0u-o1a">
@@ -84,7 +85,7 @@
                         <constraint firstAttribute="height" constant="120" id="rHt-bX-R2c"/>
                     </constraints>
                     <inset key="scrollIndicatorInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <color key="textColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.6470588235294118" green="0.6588235294117647" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
@@ -99,7 +100,7 @@
                     <color key="textColor" red="0.6470588235294118" green="0.6588235294117647" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add a hashtag to organize your habit by" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v1k-u8-gsJ">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add a hashtag to organize your habit by" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v1k-u8-gsJ" customClass="CategoryTextField" customModule="Habbbit" customModuleProvider="target">
                     <rect key="frame" x="31.5" y="257" width="292" height="30"/>
                     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -107,7 +108,7 @@
                         <constraint firstAttribute="width" constant="292" id="xJY-lO-p7J"/>
                     </constraints>
                     <color key="textColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tb6-yY-1H5">
@@ -141,7 +142,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4/32" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAV-nj-xHD">
-                    <rect key="frame" x="287" y="121" width="68" height="15"/>
+                    <rect key="frame" x="295" y="121" width="60" height="15"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                     <color key="textColor" red="0.98039215690000003" green="0.44705882349999998" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -169,7 +170,7 @@
                 <constraint firstAttribute="trailing" secondItem="Y4a-0u-o1a" secondAttribute="trailing" id="4rt-gN-0Sf"/>
                 <constraint firstItem="F38-Gp-sbt" firstAttribute="top" secondItem="4s8-5Z-kPs" secondAttribute="bottom" constant="8" id="636-eA-Ra2"/>
                 <constraint firstItem="qMh-pU-46m" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="27" id="6tW-cv-hvH"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="R0D-kI-AOB" secondAttribute="trailing" constant="102" id="DA6-AH-nG7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="R0D-kI-AOB" secondAttribute="trailing" constant="90" id="DA6-AH-nG7"/>
                 <constraint firstItem="7GM-BP-JJW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="23" id="DPC-C4-mZf"/>
                 <constraint firstItem="dnL-L4-Upk" firstAttribute="top" secondItem="SzY-r5-1Ka" secondAttribute="bottom" constant="14" id="FsO-oV-Bx2"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="F38-Gp-sbt" secondAttribute="bottom" constant="8" id="FxM-sK-59u"/>
@@ -179,7 +180,7 @@
                 <constraint firstItem="R0D-kI-AOB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="26" id="Kyf-1S-bQq"/>
                 <constraint firstItem="4s8-5Z-kPs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NCa-kc-oB8"/>
                 <constraint firstItem="SzY-r5-1Ka" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="P9Z-js-ywL"/>
-                <constraint firstItem="OAV-nj-xHD" firstAttribute="leading" secondItem="R0D-kI-AOB" secondAttribute="trailing" constant="14" id="SP3-op-PiR"/>
+                <constraint firstItem="OAV-nj-xHD" firstAttribute="leading" secondItem="R0D-kI-AOB" secondAttribute="trailing" constant="10" id="SP3-op-PiR"/>
                 <constraint firstItem="Tb6-yY-1H5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="Wyf-Hs-CfW"/>
                 <constraint firstItem="Y4a-0u-o1a" firstAttribute="top" secondItem="R0D-kI-AOB" secondAttribute="bottom" constant="20" id="a0T-0S-0w4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OAV-nj-xHD" secondAttribute="trailing" constant="20" id="aEg-Fi-IGk"/>

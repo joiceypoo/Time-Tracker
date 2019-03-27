@@ -25,7 +25,7 @@ public class DisplayMessage: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = #colorLiteral(red: 0.6039215686, green: 0.6156862745, blue: 0.6745098039, alpha: 1)
         return label
     }()

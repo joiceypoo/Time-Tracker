@@ -20,6 +20,8 @@
 		CE14E4C02218AEDB009C4432 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */; };
 		CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CE25422280F9700877EDE /* AnimationController.swift */; };
 		CE1CE2582228102B00877EDE /* LaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CE2572228102B00877EDE /* LaunchController.swift */; };
+		CE261D6C22475C5B009C05C2 /* CategoryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE261D6B22475C5B009C05C2 /* CategoryTextField.swift */; };
+		CE261D6E2247BA46009C05C2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE261D6D2247BA46009C05C2 /* String+Extension.swift */; };
 		CE776B1122024D9F003E617C /* UsedDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1022024D9F003E617C /* UsedDates.swift */; };
 		CE776B1322024DDF003E617C /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */; };
 		CE776B1522024F61003E617C /* TodoItemsController+DateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */; };
@@ -27,12 +29,13 @@
 		CE776B1E2202939C003E617C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1D2202939C003E617C /* Alert.swift */; };
 		CE776B202205F3D4003E617C /* Unarchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1F2205F3D4003E617C /* Unarchive.swift */; };
 		CE776B242205FF82003E617C /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B232205FF82003E617C /* EditViewModel.swift */; };
+		CE8423402245AD1E00343C78 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84233F2245AD1E00343C78 /* UIDevice+Extension.swift */; };
 		CE84D6BF21F8CF40000C9D89 /* DisplayMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */; };
 		CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */; };
 		CE8C9AD521FA62DC002947EE /* CellDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AD421FA62DC002947EE /* CellDetail.swift */; };
 		CE8C9AD721FA638F002947EE /* CellIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AD621FA638F002947EE /* CellIndexPath.swift */; };
 		CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AD821FA67EA002947EE /* TodoItemsController+extension.swift */; };
-		CE8C9AEF21FC203E002947EE /* IndentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AEE21FC203E002947EE /* IndentLabel.swift */; };
+		CE8C9AEF21FC203E002947EE /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AEE21FC203E002947EE /* SectionHeaderView.swift */; };
 		CE8C9B1221FE1103002947EE /* HabbbitModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9B1021FE1103002947EE /* HabbbitModels.xcdatamodeld */; };
 		CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24CD21F656050028AC7F /* UIColor+theme.swift */; };
 		CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */; };
@@ -64,6 +67,8 @@
 		CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 		CE1CE25422280F9700877EDE /* AnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		CE1CE2572228102B00877EDE /* LaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchController.swift; sourceTree = "<group>"; };
+		CE261D6B22475C5B009C05C2 /* CategoryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTextField.swift; sourceTree = "<group>"; };
+		CE261D6D2247BA46009C05C2 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CE776B1022024D9F003E617C /* UsedDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedDates.swift; sourceTree = "<group>"; };
 		CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+DateDataSource.swift"; sourceTree = "<group>"; };
@@ -71,12 +76,13 @@
 		CE776B1D2202939C003E617C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		CE776B1F2205F3D4003E617C /* Unarchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unarchive.swift; sourceTree = "<group>"; };
 		CE776B232205FF82003E617C /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
+		CE84233F2245AD1E00343C78 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessage.swift; sourceTree = "<group>"; };
 		CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModel.swift; sourceTree = "<group>"; };
 		CE8C9AD421FA62DC002947EE /* CellDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetail.swift; sourceTree = "<group>"; };
 		CE8C9AD621FA638F002947EE /* CellIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIndexPath.swift; sourceTree = "<group>"; };
 		CE8C9AD821FA67EA002947EE /* TodoItemsController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+extension.swift"; sourceTree = "<group>"; };
-		CE8C9AEE21FC203E002947EE /* IndentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentLabel.swift; sourceTree = "<group>"; };
+		CE8C9AEE21FC203E002947EE /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		CE8C9B1121FE1103002947EE /* HabbbitModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HabbbitModels.xcdatamodel; sourceTree = "<group>"; };
 		CE8F24CD21F656050028AC7F /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -250,6 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				CE8C9AD821FA67EA002947EE /* TodoItemsController+extension.swift */,
+				CE84233F2245AD1E00343C78 /* UIDevice+Extension.swift */,
+				CE261D6D2247BA46009C05C2 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -265,7 +273,7 @@
 		CE8F24CF21F65F2D0028AC7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CE8C9AEE21FC203E002947EE /* IndentLabel.swift */,
+				CE8C9AEE21FC203E002947EE /* SectionHeaderView.swift */,
 				CE8F24E821F76BAD0028AC7F /* TodoListCell.swift */,
 				CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */,
 				CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */,
@@ -322,8 +330,8 @@
 		CE8F24E321F767680028AC7F /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */,
 				CE8F24E621F767CD0028AC7F /* TodoItemsControllerDataSource.swift */,
+				CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -343,6 +351,7 @@
 			children = (
 				CE14E4BD2218AE98009C4432 /* AddHabitView.xib */,
 				CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */,
+				CE261D6B22475C5B009C05C2 /* CategoryTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -463,6 +472,7 @@
 				CE776B19220251DE003E617C /* TodoItemsController+DateDelegate.swift in Sources */,
 				CE84D6BF21F8CF40000C9D89 /* DisplayMessage.swift in Sources */,
 				CE0C6CB9221AEE460007F68F /* AddHabitView+DataSource.swift in Sources */,
+				CE8423402245AD1E00343C78 /* UIDevice+Extension.swift in Sources */,
 				CE8F24EB21F76C2B0028AC7F /* UITableViewCell+Extension.swift in Sources */,
 				CECAEE37221C3C9B002F1D4B /* Weekdays.swift in Sources */,
 				242FB84421C0447B00931945 /* TodoItemsController.swift in Sources */,
@@ -471,6 +481,7 @@
 				242FB84221C0447B00931945 /* AppDelegate.swift in Sources */,
 				CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */,
 				CE8F250B21F886730028AC7F /* WeekdaysEnum.swift in Sources */,
+				CE261D6C22475C5B009C05C2 /* CategoryTextField.swift in Sources */,
 				CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */,
 				CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */,
 				CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */,
@@ -479,7 +490,7 @@
 				CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */,
 				CE8F24E721F767CD0028AC7F /* TodoItemsControllerDataSource.swift in Sources */,
 				CE776B202205F3D4003E617C /* Unarchive.swift in Sources */,
-				CE8C9AEF21FC203E002947EE /* IndentLabel.swift in Sources */,
+				CE8C9AEF21FC203E002947EE /* SectionHeaderView.swift in Sources */,
 				CE8C9AD521FA62DC002947EE /* CellDetail.swift in Sources */,
 				CE0C6CBD221AF6B70007F68F /* AddHabitViewModel.swift in Sources */,
 				CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */,
@@ -487,6 +498,7 @@
 				CE8F24FB21F7AE7A0028AC7F /* DescriptionVM.swift in Sources */,
 				CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */,
 				CE8C9AD721FA638F002947EE /* CellIndexPath.swift in Sources */,
+				CE261D6E2247BA46009C05C2 /* String+Extension.swift in Sources */,
 				CE0C6CBB221AEEA80007F68F /* AddHabitView+Delegates.swift in Sources */,
 				CE776B1522024F61003E617C /* TodoItemsController+DateDataSource.swift in Sources */,
 			);

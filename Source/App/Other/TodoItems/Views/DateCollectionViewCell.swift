@@ -18,5 +18,9 @@ class DateCollectionViewCell: UICollectionViewCell {
         backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
         self.layer.cornerRadius = 4
         self.layer.masksToBounds = true
+        if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            dayOfWeekLabel.font = UIFont.systemFont(ofSize: 9, weight: .semibold)
+            dayOfMonthLabel.font = UIFont.systemFont(ofSize: 14)
+        }
     }
 }

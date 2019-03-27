@@ -25,7 +25,7 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
             let sectionIndexSet = IndexSet(integer: section)
             categories.remove(at: section)
             todos.remove(at: section)
-            todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+            todoListsTable.deleteSections(sectionIndexSet, with: .right)
         } else {
             todos[section].value.remove(at: index)
             let indexPath = IndexPath(row: index, section: section)
@@ -53,7 +53,7 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
         
         if name == categoryName {
             let reloadIndexPath = IndexPath(row: row, section: section)
-            todoListsTable.reloadRows(at: [reloadIndexPath], with: .middle)
+            todoListsTable.reloadRows(at: [reloadIndexPath], with: .automatic)
         } else if !categories.contains(name) {
             guard let section = categories.index(of: categoryName) else { return }
             
@@ -163,21 +163,20 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
         return 40
     }
     
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = IndentLabel()
-        label.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
-        label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+        let sectionHeaderView = SectionHeaderView()
+        sectionHeaderView.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
+        sectionHeaderView.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        sectionHeaderView.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
         if categories.count == 1 && categories.contains("None") {
-            label.text = ""
+            sectionHeaderView.text = ""
         } else if categories[section] == "None" {
-            label.text = "No Tags"
+            sectionHeaderView.text = "No Tags"
         } else {
-            label.text = categories[section]
+            sectionHeaderView.text = categories[section]
         }
-        
-        return label
+        return sectionHeaderView
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

@@ -10,8 +10,9 @@ import UIKit
 extension TodoItemsController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (dateCollectionView.bounds.width - 56)/7,
-                      height: 40)
+        let width = (dateCollectionView.bounds.width - 56)/7
+        return CGSize(width: width,
+                      height: 43)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -26,10 +27,19 @@ extension TodoItemsController: UICollectionViewDelegateFlowLayout {
             cell.contentView.backgroundColor = UIColor.customBlue
             cell.dayOfMonthLabel.textColor = .white
             cell.dayOfWeekLabel.textColor = .white
+            
+            if let activeSelectedDateIndexPath = activeSelectedDateIndexPath, let currentCell = dateCollectionView.cellForItem(at: activeSelectedDateIndexPath) as? DateCollectionViewCell {
+                currentCell.dayOfMonthLabel.textColor = .customBlue
+                currentCell.dayOfWeekLabel.textColor = .customBlue
+            }
             displayDate(date: cell.date)
             fetchTodos(from: displayedDayOfWeek!)
             todoListsTable.reloadData()
         } else if let currentIndexPath = currentIndexPath, currentIndexPath == indexPath {
+            activeSelectedDateIndexPath = indexPath
+            cell.contentView.backgroundColor = UIColor.customBlue
+            cell.dayOfMonthLabel.textColor = .white
+            cell.dayOfWeekLabel.textColor = .white
             displayDate(date: cell.date)
             fetchTodos(from: displayedDayOfWeek!)
             todoListsTable.reloadData()
@@ -39,7 +49,7 @@ extension TodoItemsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         selectedCellIndexPath.removeAll()
         let cell = collectionView.cellForItem(at: indexPath)
-        if let myCell = cell as? DateCollectionViewCell, let currentIndexPath = currentIndexPath, currentIndexPath != indexPath {
+        if let myCell = cell as? DateCollectionViewCell {
             myCell.contentView.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
             myCell.dayOfMonthLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
             myCell.dayOfWeekLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)

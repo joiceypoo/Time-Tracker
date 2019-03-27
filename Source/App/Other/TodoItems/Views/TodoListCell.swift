@@ -101,10 +101,10 @@ public class TodoListCell: UITableViewCell {
     
     private func setupView() {
         detailTextLabel?.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
-        detailTextLabel?.font = UIFont.systemFont(ofSize: 12)
+        detailTextLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         textLabel?.textColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1843137255, alpha: 1)
-        textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         accessoryView = checkBox
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)

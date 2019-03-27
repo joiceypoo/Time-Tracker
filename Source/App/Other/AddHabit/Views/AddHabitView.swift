@@ -45,6 +45,14 @@ public class AddHabitView: UIView {
         }
     }
     
+    private var buttonWidth: CGFloat {
+        if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            return 32
+        } else {
+            return 40
+        }
+    }
+    
     let weekdaysStackView = UIStackView()
     
     // MARK: Outlets
@@ -60,6 +68,7 @@ public class AddHabitView: UIView {
     @IBOutlet weak var hashTagLabel: UILabel!
     @IBOutlet weak var lineSeparator: UIView!
     @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var notesTextViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var saveButton: UIButton!
     
     @IBOutlet weak var secondLineSeparator: UIView!
@@ -85,14 +94,14 @@ public class AddHabitView: UIView {
     
     lazy var mondayButton: UIButton = {
         let button = UIButton()
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.isSelected = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = buttonWidth / 2
         button.backgroundColor = UIColor.customBlue
         button.setTitle("M", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
         
         return button
@@ -100,14 +109,14 @@ public class AddHabitView: UIView {
     
     lazy var tuesdayButton: UIButton = {
         let button = UIButton()
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.isSelected = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = buttonWidth / 2
         button.backgroundColor = UIColor.customBlue
         button.setTitle("T", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
         
         return button
@@ -115,14 +124,14 @@ public class AddHabitView: UIView {
     
     lazy var wednesdayButton: UIButton = {
         let button = UIButton()
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.isSelected = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = buttonWidth / 2
         button.backgroundColor = UIColor.customBlue
         button.setTitle("W", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
         
         return button
@@ -130,14 +139,14 @@ public class AddHabitView: UIView {
     
     lazy var thursdayButton: UIButton = {
         let button = UIButton()
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.isSelected = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = buttonWidth / 2
         button.backgroundColor = UIColor.customBlue
         button.setTitle("TH", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
         
         return button
@@ -145,14 +154,14 @@ public class AddHabitView: UIView {
     
     lazy var fridayButton: UIButton = {
         let button = UIButton()
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.isSelected = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = buttonWidth / 2
         button.backgroundColor = UIColor.customBlue
         button.setTitle("F", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
         
         return button
@@ -160,14 +169,14 @@ public class AddHabitView: UIView {
     
     lazy var saturdayButton: UIButton = {
         let button = UIButton()
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.isSelected = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = buttonWidth / 2
         button.backgroundColor = UIColor.customBlue
         button.setTitle("S", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
         
         return button
@@ -175,14 +184,14 @@ public class AddHabitView: UIView {
     
     lazy var sundayButton: UIButton = {
         let button = UIButton()
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.isSelected = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = buttonWidth / 2
         button.backgroundColor = UIColor.customBlue
         button.setTitle("SU", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         button.addTarget(self, action: #selector(weekdayButtonPressed), for: .touchUpInside)
         
         return button
@@ -272,6 +281,9 @@ public class AddHabitView: UIView {
             notesTextView.text = viewModel.todo?.notes
             saveButton.setTitle("Done", for: .normal)
             
+            let textSize = estimateFrame(for: notesTextView.text)
+            notesTextViewHeightConstraint.constant = textSize.height + 30
+            
             let weekdaysPlaceholder = weekdays.map { transformDay(for: $0)}
             weekdayButtons?.forEach { button in
                 if let title = button.titleLabel?.text, !weekdaysPlaceholder.contains(title) {
@@ -322,7 +334,7 @@ public class AddHabitView: UIView {
     
     private func createHabit() {
         
-        guard let habitTitle = habitTitleTextField.text?.capitalized,
+        guard let habitTitle = habitTitleTextField.text,
             !habitTitle.trimmingCharacters(in: .whitespaces).isEmpty,
             var categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespaces), !weekdays.isEmpty else { return }
         
@@ -395,8 +407,8 @@ public class AddHabitView: UIView {
                                                      isRepeating: isRepeating,
                                                      creationDate: dateString,
                                                      notes: notesTextView.text)
-        delegate?.didAddHabit(todo: todo)
         removeFromSuperview()
+        delegate?.didAddHabit(todo: todo)
     }
     
     @IBAction private func deleteButtonPressed(_ sender: UIButton) {
@@ -447,7 +459,7 @@ public class AddHabitView: UIView {
     
     private func editHabitHandler() {
         
-        guard let habitTitle = habitTitleTextField.text?.capitalized,
+        guard let habitTitle = habitTitleTextField.text,
             !habitTitle.trimmingCharacters(in: .whitespaces).isEmpty,
             var categoryName = categoryTextField.text?.capitalized.trimmingCharacters(in: .whitespaces),
             let persistedCategoryName = viewModel?.todo?.categoryName else { return }
@@ -529,7 +541,6 @@ public class AddHabitView: UIView {
                 self.addGestureRecognizer(gestureRecognizer)
         setupStackView()
         contentView.layer.cornerRadius = 4
-        contentView.layer.masksToBounds = true
         self.addSubview(contentView)
         categoriesTable.register(UITableViewCell.self, forCellReuseIdentifier: "CategoriesCell")
         categoriesTable.delegate = self
@@ -610,5 +621,14 @@ public class AddHabitView: UIView {
     
     @objc func keyboardWillHide(notification: Notification) {
         keyboardHeight = 0
+    }
+    
+    public func estimateFrame(for text: String) -> CGRect {
+        let size = CGSize(width: frame.width - 16, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size,
+                                                   options: options,
+                                                   attributes: [.font: UIFont.systemFont(ofSize: 14)],
+                                                   context: nil)
     }
 }

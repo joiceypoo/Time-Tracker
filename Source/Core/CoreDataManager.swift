@@ -22,7 +22,7 @@ struct CoreDataManager {
         return container
     }()
     
-    func createTodo(todo title: String,
+    public func createTodo(todo title: String,
                     repeatDays: [String],
                     categoryName: String?,
                     isRepeating: Bool,
@@ -56,7 +56,7 @@ struct CoreDataManager {
         return todo
     }
     
-    func fetchCategories() -> [Category] {
+    public func fetchCategories() -> [Category] {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
         do {
@@ -69,7 +69,7 @@ struct CoreDataManager {
     }
 
     
-    func fetchAllTodos(for day: String) -> [(key: String, value: [TodoItem])]  {
+    public func fetchAllTodos(for day: String) -> [(key: String, value: [TodoItem])]  {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<TodoItem>(entityName: "TodoItem")
         var todosDictionary: [String: [TodoItem]] = [:]
@@ -80,20 +80,18 @@ struct CoreDataManager {
                 
                 let data = todo.repeatTodos?.weekday
                 let creationDateString = todo.creationDate ?? ""
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
-                let creationDate = dateFormatter.date(from: creationDateString)!
+                let creationDate = getCreationDate(from: creationDateString)
                 let currentDate = UsedDates.shared.currentDate
       
                 let daysArray = Unarchive.unarchiveStringArrayData(from: data)
                 let isValidDay = daysArray.contains(day) || daysArray.count == 7
-                if let name = todo.categoryName, name == "None" && todosDictionary[name] == nil && isValidDay && creationDate.compare(currentDate) != .orderedDescending  {
+                if let name = todo.categoryName, name == "None" && todosDictionary[name] == nil && isValidDay && creationDate?.compare(currentDate) != .orderedDescending  {
                     todosDictionary["None"] = [todo]
-                } else if let name = todo.categoryName, name == "None" && todosDictionary[name] != nil && isValidDay && creationDate.compare(currentDate) != .orderedDescending {
+                } else if let name = todo.categoryName, name == "None" && todosDictionary[name] != nil && isValidDay && creationDate?.compare(currentDate) != .orderedDescending {
                     todosDictionary["None"]?.append(todo)
-                } else if let name = todo.categoryName, todosDictionary[name] == nil && name != "None" && isValidDay && creationDate.compare(currentDate) != .orderedDescending {
+                } else if let name = todo.categoryName, todosDictionary[name] == nil && name != "None" && isValidDay && creationDate?.compare(currentDate) != .orderedDescending {
                     todosDictionary[todo.categoryName!] = [todo]
-                } else if let name = todo.categoryName, todosDictionary[name] != nil && name != "None" && isValidDay && creationDate.compare(currentDate) != .orderedDescending {
+                } else if let name = todo.categoryName, todosDictionary[name] != nil && name != "None" && isValidDay && creationDate?.compare(currentDate) != .orderedDescending {
                     todosDictionary[todo.categoryName!]?.append(todo)
                 }
                 
@@ -118,7 +116,7 @@ struct CoreDataManager {
         return sortedTodos
     }
     
-    func recreateHabit(for todo: TodoItem) {
+    public func recreateHabit(for todo: TodoItem) {
         let selectedWeekday = UsedDates.shared.selectedWeekday
         var repeatWeekdays = Unarchive.unarchiveStringArrayData(from: todo.repeatTodos?.weekday)
         guard let habitTitle = todo.title,
@@ -141,7 +139,7 @@ struct CoreDataManager {
         }
     }
     
-    func reorderTodo(from todoOne: TodoItem, to todoTwo: TodoItem) {
+    public func reorderTodo(from todoOne: TodoItem, to todoTwo: TodoItem) {
         let context = persistentContainer.viewContext
         let displayOrderOne = todoOne.displayOrder
         let displayOrderTwo = todoTwo.displayOrder
@@ -173,7 +171,7 @@ struct CoreDataManager {
         }
     }
     
-    func createCategory(from categoryName: String?) {
+    public func createCategory(from categoryName: String?) {
         let name = categoryName ?? ""
         let context = CoreDataManager.shared.persistentContainer.viewContext
         let category = NSEntityDescription.insertNewObject(forEntityName: "Category",
@@ -185,6 +183,13 @@ struct CoreDataManager {
         } catch let error {
             print("Failed to save Category", error)
         }
+    }
+    
+    private func getCreationDate(from dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+        let creationDate = dateFormatter.date(from: dateString)
+        return creationDate
     }
 }
 

@@ -43,6 +43,9 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
         delegate?.showTextInputArea()
         originalYPosition = self.frame.origin.y
         self.frame.origin.y -= keyboardHeight + categoriesTable.frame.height
+        if viewModel?.todo != nil {
+            notesTextViewHeightConstraint.constant = 120
+        }
         if textView.text == "Add notes" {
             textView.text = ""
         }
@@ -66,7 +69,13 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
             self.frame.origin.y = originalYPosition
             return false
         }
+        
         return true
+    }
+    
+    public func textViewDidEndEditing(_ textView: UITextView) {
+        let textSize = estimateFrame(for: notesTextView.text)
+        notesTextViewHeightConstraint.constant = textSize.height + 30
     }
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {

@@ -11,6 +11,7 @@ import CoreData
 
 class TodoItemsController: UIViewController {
     
+    var activeSelectedDateIndexPath: IndexPath?
     var addHabitView: AddHabitView?
     var categories: [String] = []
     var currentIndexPath: IndexPath?
@@ -114,6 +115,9 @@ class TodoItemsController: UIViewController {
     }
     
     private func setupView() {
+        
+        let headerNib = UINib.init(nibName: "TagHeaderView", bundle: Bundle.main)
+        todoListsTable.register(headerNib, forCellReuseIdentifier: "TagHeaderView")
         navigationController?.view.backgroundColor = .white
         guard let navigationBar = navigationController?.navigationBar else { return }
         navigationBar.addSubview(monthLabel)
@@ -127,17 +131,18 @@ class TodoItemsController: UIViewController {
         todayButton.setImage(#imageLiteral(resourceName: "today"), for: .normal)
         navigationBar.addSubview(todayButton)
         todayButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        todayButton.topAnchor.constraint(equalTo: monthLabel.topAnchor).isActive = true
         todayButton.rightAnchor.constraint(equalTo: navigationBar.rightAnchor,
                                            constant: -20).isActive = true
         todayButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
         todayButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        todayButton.bottomAnchor.constraint(equalTo: monthLabel.bottomAnchor).isActive = true
         
         monthLabel.text = Dates.getDateString(format: "MMMM", date: Date())
         
         setupAddButton()
         
+        todoListsTable.separatorInset = .zero
+        todoListsTable.layoutMargins = .zero
         todoListsTable.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
         todoListsTable.separatorColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
         todoListsTable.tableFooterView = UIView()
@@ -206,7 +211,7 @@ class TodoItemsController: UIViewController {
             let sectionIndexSet = IndexSet(integer: section)
             self.categories.remove(at: section)
             self.todos.remove(at: section)
-            self.todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+            self.todoListsTable.deleteSections(sectionIndexSet, with: .right)
         } else {
             self.todos[section].value.remove(at: indexPath.row)
             self.todoListsTable.deleteRows(at: [indexPath], with: .automatic)
@@ -245,11 +250,24 @@ class TodoItemsController: UIViewController {
                                                  to: date).day {
             let extraDays: Int = numberOfDays % 7
             let scrolledNumberOfDays = numberOfDays - extraDays
-            let firstMondayIndexPath = IndexPath(row: scrolledNumberOfDays,
+            let indexPath = IndexPath(row: scrolledNumberOfDays,
                                                  section: 0)
-            dateCollectionView.scrollToItem(at: firstMondayIndexPath,
+            dateCollectionView.scrollToItem(at: indexPath,
                                             at: .left ,
                                             animated: false)
+            
+            for cell in dateCollectionView.visibleCells as! [DateCollectionViewCell]{
+                if cell.contentView.backgroundColor == .customBlue {
+                    cell.contentView.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
+                    cell.dayOfMonthLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+                    cell.dayOfWeekLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+                }
+            }
+            
+            if let activeSelectedDateIndexPath = activeSelectedDateIndexPath, let cell = dateCollectionView.cellForItem(at: activeSelectedDateIndexPath) as? DateCollectionViewCell {
+                cell.dayOfMonthLabel.textColor = .customBlue
+                cell.dayOfWeekLabel.textColor = .customBlue
+            }
         }
         displayDate(date: date)
     }
@@ -262,6 +280,8 @@ class TodoItemsController: UIViewController {
             if categories.count > 0 {
                 todoListsTable.reloadData()
             }
+            
+
         }
     }
     
