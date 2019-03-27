@@ -15,7 +15,6 @@
 		CE0C6CB9221AEE460007F68F /* AddHabitView+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C6CB8221AEE460007F68F /* AddHabitView+DataSource.swift */; };
 		CE0C6CBB221AEEA80007F68F /* AddHabitView+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C6CBA221AEEA80007F68F /* AddHabitView+Delegates.swift */; };
 		CE0C6CBD221AF6B70007F68F /* AddHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C6CBC221AF6B70007F68F /* AddHabitViewModel.swift */; };
-		CE14E4BC22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE14E4BB22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf */; };
 		CE14E4BE2218AE98009C4432 /* AddHabitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE14E4BD2218AE98009C4432 /* AddHabitView.xib */; };
 		CE14E4C02218AEDB009C4432 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */; };
 		CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CE25422280F9700877EDE /* AnimationController.swift */; };
@@ -62,7 +61,6 @@
 		CE0C6CB8221AEE460007F68F /* AddHabitView+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHabitView+DataSource.swift"; sourceTree = "<group>"; };
 		CE0C6CBA221AEEA80007F68F /* AddHabitView+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHabitView+Delegates.swift"; sourceTree = "<group>"; };
 		CE0C6CBC221AF6B70007F68F /* AddHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitViewModel.swift; sourceTree = "<group>"; };
-		CE14E4BB22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CustomSF-Pro-Text-Light.otf"; sourceTree = "<group>"; };
 		CE14E4BD2218AE98009C4432 /* AddHabitView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddHabitView.xib; sourceTree = "<group>"; };
 		CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 		CE1CE25422280F9700877EDE /* AnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 		242FB83521C0447B00931945 = {
 			isa = PBXGroup;
 			children = (
-				CE14E4BA22170D7C009C4432 /* Fonts */,
 				242FB83F21C0447B00931945 /* Products */,
 				242FB85321C0463700931945 /* Resource */,
 				242FB85521C0467200931945 /* Source */,
@@ -202,14 +199,6 @@
 				CE0C6CB8221AEE460007F68F /* AddHabitView+DataSource.swift */,
 			);
 			path = DataSource;
-			sourceTree = "<group>";
-		};
-		CE14E4BA22170D7C009C4432 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				CE14E4BB22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		CE1CE25322280F5B00877EDE /* AnimationController */ = {
@@ -453,7 +442,6 @@
 				242FB84921C0447D00931945 /* Assets.xcassets in Resources */,
 				242FB84721C0447B00931945 /* Main.storyboard in Resources */,
 				CE14E4BE2218AE98009C4432 /* AddHabitView.xib in Resources */,
-				CE14E4BC22170DE3009C4432 /* CustomSF-Pro-Text-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
