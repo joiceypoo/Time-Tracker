@@ -281,6 +281,10 @@ public class AddHabitView: UIView {
             notesTextView.text = viewModel.todo?.notes
             saveButton.setTitle("Done", for: .normal)
             
+            if notesTextView.text != "Add notes" {
+                notesTextView.textColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1843137255, alpha: 1)
+            }
+            
             let textSize = estimateFrame(for: notesTextView.text)
             notesTextViewHeightConstraint.constant = textSize.height + 30
             

@@ -42,7 +42,7 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         delegate?.showTextInputArea()
         originalYPosition = self.frame.origin.y
-        self.frame.origin.y -= keyboardHeight + categoriesTable.frame.height
+        self.frame.origin.y -= keyboardHeight + categoriesTable.frame.height + 5
         if viewModel?.todo != nil {
             notesTextViewHeightConstraint.constant = 120
         }

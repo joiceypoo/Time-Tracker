@@ -36,7 +36,6 @@ extension TodoItemsController: UITableViewDataSource {
         guard let cell = TodoListCell.instantiate(from: tableView, for: indexPath) else {
             return UITableViewCell()
         }
-        
         let categoryIndex = indexPath.section
         var newTodos = todos[categoryIndex].value
         cell.viewModel = newTodos[indexPath.row]

@@ -58,13 +58,22 @@ class TodoItemsController: UIViewController {
         scrollToDate(date: Date())
     }
     
-    var monthLabel: UILabel = {
+    private var monthLabel: UILabel = {
         let label = UILabel()
         label.textColor = #colorLiteral(red: 0.137254902, green: 0.431372549, blue: 1, alpha: 1)
         label.font = UIFont.boldSystemFont(ofSize: 28)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private var monthLabelText: String? {
+        didSet { setMonthLabel() }
+    }
+    
+    private func setMonthLabel() {
+        guard let monthLabelText = monthLabelText else { return }
+        monthLabel.text = monthLabelText
+    }
     
     var getCategories: [Category] {
         return CoreDataManager.shared.fetchCategories()
@@ -115,9 +124,6 @@ class TodoItemsController: UIViewController {
     }
     
     private func setupView() {
-        
-        let headerNib = UINib.init(nibName: "TagHeaderView", bundle: Bundle.main)
-        todoListsTable.register(headerNib, forCellReuseIdentifier: "TagHeaderView")
         navigationController?.view.backgroundColor = .white
         guard let navigationBar = navigationController?.navigationBar else { return }
         navigationBar.addSubview(monthLabel)
@@ -135,7 +141,7 @@ class TodoItemsController: UIViewController {
                                            constant: -20).isActive = true
         todayButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
         todayButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        todayButton.bottomAnchor.constraint(equalTo: monthLabel.bottomAnchor).isActive = true
+        todayButton.bottomAnchor.constraint(equalTo: monthLabel.bottomAnchor, constant: -2).isActive = true
         
         monthLabel.text = Dates.getDateString(format: "MMMM", date: Date())
         
@@ -144,7 +150,7 @@ class TodoItemsController: UIViewController {
         todoListsTable.separatorInset = .zero
         todoListsTable.layoutMargins = .zero
         todoListsTable.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
-        todoListsTable.separatorColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
+        todoListsTable.separatorStyle = .none
         todoListsTable.tableFooterView = UIView()
     }
     
@@ -212,6 +218,7 @@ class TodoItemsController: UIViewController {
             self.categories.remove(at: section)
             self.todos.remove(at: section)
             self.todoListsTable.deleteSections(sectionIndexSet, with: .right)
+            self.todoListsTable.reloadData()
         } else {
             self.todos[section].value.remove(at: indexPath.row)
             self.todoListsTable.deleteRows(at: [indexPath], with: .automatic)
@@ -230,7 +237,7 @@ class TodoItemsController: UIViewController {
         UsedDates.shared.displayedDate = date
         UsedDates.shared.currentDate = date
         UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date)
-        monthLabel.text = UsedDates.shared.displayedDateString
+        monthLabelText = UsedDates.shared.displayedDateString
         let dayString = Weekdays.getDay(dayOfWeekNumber: UsedDates.shared.selectdDayOfWeek)
         selectedDay = dayString
         displayedDayOfWeek = dayString
@@ -302,7 +309,9 @@ class TodoItemsController: UIViewController {
         let middleCell = visibleCells[middleIndex] as! DateCollectionViewCell
         let displayedDate = UsedDates.shared.getDateOfAnotherDayOfTheSameWeek(selectedDate: middleCell.date!,
                                                                               requiredDayOfWeek: UsedDates.shared.selectdDayOfWeek)
+        let cell = visibleCells.first as! DateCollectionViewCell
         displayDate(date: displayedDate)
+        monthLabelText = Dates.getDateString(format: "MMMM", date: cell.date)
     }
 }
 

@@ -46,6 +46,7 @@
 		CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */; };
 		CE8F24FB21F7AE7A0028AC7F /* DescriptionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24FA21F7AE7A0028AC7F /* DescriptionVM.swift */; };
 		CE8F250B21F886730028AC7F /* WeekdaysEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250A21F886730028AC7F /* WeekdaysEnum.swift */; };
+		CEACE6DF224B56510003E081 /* NotesTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACE6DE224B56510003E081 /* NotesTextView.swift */; };
 		CECAEE37221C3C9B002F1D4B /* Weekdays.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECAEE36221C3C9B002F1D4B /* Weekdays.swift */; };
 		CEF78BDF220B150900DB0031 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF78BDE220B150900DB0031 /* Dates.swift */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,7 @@
 		CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		CE8F24FA21F7AE7A0028AC7F /* DescriptionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionVM.swift; sourceTree = "<group>"; };
 		CE8F250A21F886730028AC7F /* WeekdaysEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysEnum.swift; sourceTree = "<group>"; };
+		CEACE6DE224B56510003E081 /* NotesTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTextView.swift; sourceTree = "<group>"; };
 		CECAEE36221C3C9B002F1D4B /* Weekdays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekdays.swift; sourceTree = "<group>"; };
 		CEF78BDE220B150900DB0031 /* Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -341,6 +343,7 @@
 				CE14E4BD2218AE98009C4432 /* AddHabitView.xib */,
 				CE14E4BF2218AEDB009C4432 /* AddHabitView.swift */,
 				CE261D6B22475C5B009C05C2 /* CategoryTextField.swift */,
+				CEACE6DE224B56510003E081 /* NotesTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */,
 				CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */,
 				CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */,
+				CEACE6DF224B56510003E081 /* NotesTextView.swift in Sources */,
 				CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */,
 				CEF78BDF220B150900DB0031 /* Dates.swift in Sources */,
 				CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */,

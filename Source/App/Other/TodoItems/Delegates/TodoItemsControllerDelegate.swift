@@ -26,6 +26,7 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate {
             categories.remove(at: section)
             todos.remove(at: section)
             todoListsTable.deleteSections(sectionIndexSet, with: .right)
+            self.todoListsTable.reloadData()
         } else {
             todos[section].value.remove(at: index)
             let indexPath = IndexPath(row: index, section: section)

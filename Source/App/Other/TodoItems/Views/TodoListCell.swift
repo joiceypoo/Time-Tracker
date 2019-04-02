@@ -11,7 +11,6 @@ import Foundation
 
 public class TodoListCell: UITableViewCell {
     
-    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         setupView()
@@ -26,6 +25,19 @@ public class TodoListCell: UITableViewCell {
     
     var viewModel: TodoItem? {
         didSet { bindViewModel() }
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let separator = UIView()
+        separator.frame = CGRect(x: frame.origin.x,
+                                 y: frame.size.height - 1,
+                                 width: frame.size.width,
+                                 height: 1)
+        
+        separator.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.9529411765, blue: 0.9568627451, alpha: 1)
+        
+        self.addSubview(separator)
     }
     
     private func bindViewModel() {
