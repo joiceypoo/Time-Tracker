@@ -21,6 +21,7 @@
 		CE1CE2582228102B00877EDE /* LaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CE2572228102B00877EDE /* LaunchController.swift */; };
 		CE261D6C22475C5B009C05C2 /* CategoryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE261D6B22475C5B009C05C2 /* CategoryTextField.swift */; };
 		CE261D6E2247BA46009C05C2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE261D6D2247BA46009C05C2 /* String+Extension.swift */; };
+		CE35660C2256503500303C57 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE35660B2256503500303C57 /* UIView+Extension.swift */; };
 		CE776B1122024D9F003E617C /* UsedDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1022024D9F003E617C /* UsedDates.swift */; };
 		CE776B1322024DDF003E617C /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */; };
 		CE776B1522024F61003E617C /* TodoItemsController+DateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */; };
@@ -52,7 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		242FB83E21C0447B00931945 /* Habbbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habbbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		242FB83E21C0447B00931945 /* Atomic Habit Daily To Do Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Atomic Habit Daily To Do Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		242FB84121C0447B00931945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		242FB84321C0447B00931945 /* TodoItemsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemsController.swift; sourceTree = "<group>"; };
 		242FB84621C0447B00931945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		CE1CE2572228102B00877EDE /* LaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchController.swift; sourceTree = "<group>"; };
 		CE261D6B22475C5B009C05C2 /* CategoryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTextField.swift; sourceTree = "<group>"; };
 		CE261D6D2247BA46009C05C2 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		CE35660B2256503500303C57 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE776B1022024D9F003E617C /* UsedDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedDates.swift; sourceTree = "<group>"; };
 		CE776B1222024DDF003E617C /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE776B1422024F61003E617C /* TodoItemsController+DateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+DateDataSource.swift"; sourceTree = "<group>"; };
@@ -122,7 +124,7 @@
 		242FB83F21C0447B00931945 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				242FB83E21C0447B00931945 /* Habbbit.app */,
+				242FB83E21C0447B00931945 /* Atomic Habit Daily To Do Tracker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,6 +251,7 @@
 				CE8C9AD821FA67EA002947EE /* TodoItemsController+extension.swift */,
 				CE84233F2245AD1E00343C78 /* UIDevice+Extension.swift */,
 				CE261D6D2247BA46009C05C2 /* String+Extension.swift */,
+				CE35660B2256503500303C57 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -386,9 +389,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		242FB83D21C0447B00931945 /* Habbbit */ = {
+		242FB83D21C0447B00931945 /* Atomic Habit Daily To Do Tracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 242FB85021C0447D00931945 /* Build configuration list for PBXNativeTarget "Habbbit" */;
+			buildConfigurationList = 242FB85021C0447D00931945 /* Build configuration list for PBXNativeTarget "Atomic Habit Daily To Do Tracker" */;
 			buildPhases = (
 				242FB83A21C0447B00931945 /* Sources */,
 				242FB83B21C0447B00931945 /* Frameworks */,
@@ -398,9 +401,9 @@
 			);
 			dependencies = (
 			);
-			name = Habbbit;
+			name = "Atomic Habit Daily To Do Tracker";
 			productName = "Time-Tracker";
-			productReference = 242FB83E21C0447B00931945 /* Habbbit.app */;
+			productReference = 242FB83E21C0447B00931945 /* Atomic Habit Daily To Do Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -418,7 +421,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 242FB83921C0447B00931945 /* Build configuration list for PBXProject "Habbbit" */;
+			buildConfigurationList = 242FB83921C0447B00931945 /* Build configuration list for PBXProject "Atomic Habit Daily To Do Tracker" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -431,7 +434,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				242FB83D21C0447B00931945 /* Habbbit */,
+				242FB83D21C0447B00931945 /* Atomic Habit Daily To Do Tracker */,
 			);
 		};
 /* End PBXProject section */
@@ -482,6 +485,7 @@
 				CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */,
 				CE8F24E721F767CD0028AC7F /* TodoItemsControllerDataSource.swift in Sources */,
 				CE776B202205F3D4003E617C /* Unarchive.swift in Sources */,
+				CE35660C2256503500303C57 /* UIView+Extension.swift in Sources */,
 				CE8C9AEF21FC203E002947EE /* SectionHeaderView.swift in Sources */,
 				CE8C9AD521FA62DC002947EE /* CellDetail.swift in Sources */,
 				CE0C6CBD221AF6B70007F68F /* AddHabitViewModel.swift in Sources */,
@@ -673,7 +677,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		242FB83921C0447B00931945 /* Build configuration list for PBXProject "Habbbit" */ = {
+		242FB83921C0447B00931945 /* Build configuration list for PBXProject "Atomic Habit Daily To Do Tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				242FB84E21C0447D00931945 /* Debug */,
@@ -682,7 +686,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		242FB85021C0447D00931945 /* Build configuration list for PBXNativeTarget "Habbbit" */ = {
+		242FB85021C0447D00931945 /* Build configuration list for PBXNativeTarget "Atomic Habit Daily To Do Tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				242FB85121C0447D00931945 /* Debug */,

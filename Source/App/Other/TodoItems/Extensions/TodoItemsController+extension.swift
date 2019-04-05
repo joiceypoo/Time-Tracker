@@ -62,24 +62,46 @@ extension TodoItemsController {
                     todos[indexPath.section].value.insert(oldTodo, at: indexPath.row)
                     CoreDataManager.shared.reorderTodo(from: oldTodo, to: replacedTodo)
                 } else if cellIndexPath.section == indexPath.section && cellIndexPath.row > 0 {
-                    if indexPath.row > cellIndexPath.row || cellIndexPath.row > indexPath.row {
-                        return
+                    let oldTodo = todos[cellIndexPath.section].value.remove(at: cellIndexPath.row)
+                    if todos[cellIndexPath.section].value.count == indexPath.row {
+                        let replacedTodo = todos[cellIndexPath.section].value[indexPath.row - 1]
+                        todos[cellIndexPath.section].value.insert(oldTodo, at: indexPath.row)
+                        CoreDataManager.shared.reorderTodo(from: oldTodo, to: replacedTodo)
                     } else {
-                        let oldTodo = todos[cellIndexPath.section].value.remove(at: cellIndexPath.row)
                         let replacedTodo = todos[cellIndexPath.section].value[indexPath.row]
                         todos[cellIndexPath.section].value.insert(oldTodo, at: indexPath.row)
                         CoreDataManager.shared.reorderTodo(from: oldTodo, to: replacedTodo)
                     }
-              
                 } else {
                     let oldTodo = todos[cellIndexPath.section].value.remove(at: cellIndexPath.row)
                     let replacedTodo = todos[cellIndexPath.section].value[cellIndexPath.row]
                     todos[cellIndexPath.section].value.insert(oldTodo, at: cellIndexPath.row)
                     CoreDataManager.shared.reorderTodo(from: oldTodo, to: replacedTodo)
                 }
-                todoListsTable.moveRow(at: cellIndexPath,
-                                       to: indexPath)
-                CellIndexPath.initialIndexPath = indexPath
+                
+                if todos[cellIndexPath.section].value.count == 0 && cellIndexPath.section > indexPath.section {
+                    todoListsTable.moveRow(at: cellIndexPath,
+                                           to: indexPath)
+                    CellIndexPath.initialIndexPath = indexPath
+                    let sectionIndexSet = IndexSet(integer: cellIndexPath.section)
+                    categories.remove(at: cellIndexPath.section)
+                    todos.remove(at: cellIndexPath.section)
+                    todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+                    todoListsTable.reloadData()
+                } else if todos[cellIndexPath.section].value.count == 0 && cellIndexPath.section < indexPath.section {
+                    todoListsTable.moveRow(at: cellIndexPath,
+                                           to: indexPath)
+                    CellIndexPath.initialIndexPath = cellIndexPath
+                    let sectionIndexSet = IndexSet(integer: cellIndexPath.section)
+                    categories.remove(at: cellIndexPath.section)
+                    todos.remove(at: cellIndexPath.section)
+                    todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
+                    todoListsTable.reloadData()
+                } else {
+                    todoListsTable.moveRow(at: cellIndexPath,
+                                           to: indexPath)
+                    CellIndexPath.initialIndexPath = indexPath
+                }
             }
         }
     }

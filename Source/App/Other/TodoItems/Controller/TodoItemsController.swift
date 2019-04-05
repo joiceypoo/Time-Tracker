@@ -26,10 +26,48 @@ class TodoItemsController: UIViewController {
     
     let addButton = UIButton()
     let todayButton = UIButton()
-
+    
+    @IBOutlet weak var crossedFinger1: UILabel!
+    @IBOutlet weak var crossedFinger2: UILabel!
+    @IBOutlet weak var crossedFinger3: UILabel!
+    @IBOutlet weak var crossedFinger4: UILabel!
+    @IBOutlet weak var crossedFinger5: UILabel!
+    @IBOutlet weak var crossedFinger6: UILabel!
+    @IBOutlet weak var crossedFinger7: UILabel!
+    @IBOutlet weak var crossedFinger8: UILabel!
+    @IBOutlet weak var crossedFinger9: UILabel!
+    @IBOutlet weak var crossedFinger10: UILabel!
+    @IBOutlet weak var crossedFinger11: UILabel!
+    @IBOutlet weak var crossedFinger12: UILabel!
+    @IBOutlet weak var crossedFinger13: UILabel!
+    @IBOutlet weak var crossedFinger14: UILabel!
+    @IBOutlet weak var crossedFinger15: UILabel!
+    
+    
     @IBOutlet weak var todoListsTable: UITableView!
     @IBOutlet weak var dateCollectionView: UICollectionView!
+    @IBOutlet weak var rewardView: UIView!
     var displayedDayOfWeek: String?
+    
+    lazy var crossedFingers: [UILabel] = [
+        crossedFinger1,
+        crossedFinger2,
+        crossedFinger3,
+        crossedFinger4,
+        crossedFinger5,
+        crossedFinger6,
+        crossedFinger7,
+        crossedFinger8,
+        crossedFinger9,
+        crossedFinger10,
+        crossedFinger11,
+        crossedFinger12,
+        crossedFinger13,
+        crossedFinger14,
+        crossedFinger15
+        
+    ]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,8 +170,8 @@ class TodoItemsController: UIViewController {
         monthLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
         monthLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
         
-        todayButton.addTarget(self, action: #selector(displayTodayDate),
-                              for: .touchUpInside)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(displayTodayDate))
+        todayButton.addGestureRecognizer(tapGestureRecognizer)
         todayButton.setImage(#imageLiteral(resourceName: "today"), for: .normal)
         navigationBar.addSubview(todayButton)
         todayButton.translatesAutoresizingMaskIntoConstraints = false
@@ -150,7 +188,7 @@ class TodoItemsController: UIViewController {
         todoListsTable.separatorInset = .zero
         todoListsTable.layoutMargins = .zero
         todoListsTable.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.968627451, blue: 0.9725490196, alpha: 1)
-        todoListsTable.separatorStyle = .none
+        todoListsTable.separatorColor = #colorLiteral(red: 0.937254902, green: 0.9529411765, blue: 0.9568627451, alpha: 1)
         todoListsTable.tableFooterView = UIView()
     }
     
@@ -217,7 +255,7 @@ class TodoItemsController: UIViewController {
             let sectionIndexSet = IndexSet(integer: section)
             self.categories.remove(at: section)
             self.todos.remove(at: section)
-            self.todoListsTable.deleteSections(sectionIndexSet, with: .right)
+            self.todoListsTable.deleteSections(sectionIndexSet, with: .automatic)
             self.todoListsTable.reloadData()
         } else {
             self.todos[section].value.remove(at: indexPath.row)
@@ -314,7 +352,6 @@ class TodoItemsController: UIViewController {
         monthLabelText = Dates.getDateString(format: "MMMM", date: cell.date)
     }
 }
-
 
 
 

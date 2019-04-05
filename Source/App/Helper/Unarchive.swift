@@ -20,4 +20,10 @@ public class Unarchive {
         let stringArray = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(newData) as! [String]
         return stringArray
     }
+    
+    static func unarchiveDictionaryArray(from data: Data?) -> [String: Int] {
+        guard let newData = data else { return [:] }
+        let dictArray = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(newData) as! [String: Int]
+        return dictArray
+    }
 }

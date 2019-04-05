@@ -263,7 +263,7 @@ public class AddHabitView: UIView {
             categories = categories.filter { $0.name != "" }
         } else {
             let data = viewModel.todo?.repeatTodos?.weekday
-            let dateStringsData = viewModel.todo?.isDone
+            let dateStringsData = viewModel.todo?.doneDateData
             let completionDateStrings = Unarchive.unarchiveStringArrayData(from: dateStringsData)
             let count = completionDateStrings.count
             let creationDate = viewModel.todo?.creationDate

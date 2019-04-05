@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,7 +55,7 @@
                     </constraints>
                     <color key="textColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4a-0u-o1a">
                     <rect key="frame" x="0.0" y="162" width="375" height="1"/>
@@ -109,14 +109,13 @@
                     </constraints>
                     <color key="textColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tb6-yY-1H5">
-                    <rect key="frame" x="5" y="300" width="240" height="100"/>
+                    <rect key="frame" x="5" y="300" width="240" height="122"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="jK0-nV-8jJ"/>
-                        <constraint firstAttribute="height" constant="100" id="zTv-Id-9Ik"/>
                     </constraints>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4s8-5Z-kPs">
@@ -170,6 +169,7 @@
                 <constraint firstAttribute="trailing" secondItem="Y4a-0u-o1a" secondAttribute="trailing" id="4rt-gN-0Sf"/>
                 <constraint firstItem="F38-Gp-sbt" firstAttribute="top" secondItem="4s8-5Z-kPs" secondAttribute="bottom" constant="8" id="636-eA-Ra2"/>
                 <constraint firstItem="qMh-pU-46m" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="27" id="6tW-cv-hvH"/>
+                <constraint firstItem="Tb6-yY-1H5" firstAttribute="centerY" secondItem="Vmt-k1-OQ1" secondAttribute="centerY" id="7hh-M5-Rpw"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="R0D-kI-AOB" secondAttribute="trailing" constant="90" id="DA6-AH-nG7"/>
                 <constraint firstItem="7GM-BP-JJW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="23" id="DPC-C4-mZf"/>
                 <constraint firstItem="dnL-L4-Upk" firstAttribute="top" secondItem="SzY-r5-1Ka" secondAttribute="bottom" constant="14" id="FsO-oV-Bx2"/>

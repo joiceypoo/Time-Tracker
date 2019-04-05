@@ -9,6 +9,10 @@
 import UIKit
 import Foundation
 
+protocol TodoListCellDelegate {
+    func showRewardView(for doneDate: Date)
+}
+
 public class TodoListCell: UITableViewCell {
     
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -21,29 +25,16 @@ public class TodoListCell: UITableViewCell {
         setupView()
     }
     
+    var delegate: TodoListCellDelegate?
     let calendar = Calendar.current
     
     var viewModel: TodoItem? {
         didSet { bindViewModel() }
     }
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        let separator = UIView()
-        separator.frame = CGRect(x: frame.origin.x,
-                                 y: frame.size.height - 1,
-                                 width: frame.size.width,
-                                 height: 1)
-        
-        separator.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.9529411765, blue: 0.9568627451, alpha: 1)
-        
-        self.addSubview(separator)
-    }
-    
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
         let data = viewModel.repeatTodos?.weekday
-        
         let daysArray = Unarchive.unarchiveStringArrayData(from: data)
         var newDaysArray: [String] = []
         for day in calendar.weekdaySymbols {
@@ -59,7 +50,7 @@ public class TodoListCell: UITableViewCell {
         let dateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",
                                                     date: currentDate)
         
-        let datesArray = Unarchive.unarchiveStringArrayData(from: viewModel.isDone)
+        let datesArray = Unarchive.unarchiveStringArrayData(from: viewModel.doneDateData)
         if datesArray.contains(dateString) {
             checkBox.setImage(#imageLiteral(resourceName: "Checked"), for: .normal)
         } else {
@@ -91,24 +82,16 @@ public class TodoListCell: UITableViewCell {
         let currentDate = UsedDates.shared.displayedDate
         if sender.currentImage == #imageLiteral(resourceName: "unchecked") {
             sender.setImage(#imageLiteral(resourceName: "Checked"), for: .normal)
-            animateButton(sender: sender)
+            sender.animateButton()
             impact.impactOccurred()
             updateDateRecord(from: currentDate)
+            handleCheckedItem(for: currentDate, isChecked: true)
+            delegate?.showRewardView(for: currentDate)
         } else if sender.currentImage == #imageLiteral(resourceName: "Checked") {
             sender.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
             updateDateRecord(from: currentDate)
+            handleCheckedItem(for: currentDate, isChecked: false)
         }
-    }
-    
-    private func animateButton(sender: UIButton) {
-        sender.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
-        UIView.animate(withDuration: 1, delay: 0,
-                       usingSpringWithDamping: 0.3,
-                       initialSpringVelocity: 0,
-                       options: .curveEaseIn,
-                       animations: {
-                        sender.transform = .identity
-        }, completion: nil)
     }
     
     private func setupView() {
@@ -126,26 +109,45 @@ public class TodoListCell: UITableViewCell {
     
     private func updateDateRecord(from date: Date) {
         let context = CoreDataManager.shared.persistentContainer.viewContext
-        
         guard let todo = viewModel else { return }
         do {
-            var datesArray = Unarchive.unarchiveStringArrayData(from: todo.isDone)
-            let currentDateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",
+            var datesArray = Unarchive.unarchiveStringArrayData(from: todo.doneDateData)
+            let dateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",
                                                                date: date)
-            if !datesArray.contains(currentDateString) {
-                datesArray.append(currentDateString)
-                
-            } else if let currentIndex = datesArray.index(of: currentDateString) {
+            if !datesArray.contains(dateString) {
+                datesArray.append(dateString)
+            } else if let currentIndex = datesArray.index(of: dateString) {
                 datesArray.remove(at: currentIndex)
             }
-            let data = try NSKeyedArchiver.archivedData(withRootObject: datesArray,
+            
+            let doneDateData = try NSKeyedArchiver.archivedData(withRootObject: datesArray,
                                                         requiringSecureCoding: false)
-            todo.isDone = data
+            todo.doneDateData = doneDateData
             try context.save()
         } catch let error {
             print("Failed to archive data", error )
         }
-
     }
     
+    private func handleCheckedItem(for date: Date, isChecked: Bool) {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+         guard let todo = viewModel else { return }
+        do {
+            var checkedItems = Unarchive.unarchiveDictionaryArray(from: todo.checkedItems)
+            let dateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",
+                                                        date: date)
+            if isChecked {
+                checkedItems[dateString] = 1
+            } else if let value = checkedItems[dateString] {
+                checkedItems[dateString] = value - 1
+            }
+            
+            let checkedItemsData = try NSKeyedArchiver.archivedData(withRootObject: checkedItems,
+                                                                    requiringSecureCoding: false)
+            todo.checkedItems = checkedItemsData
+            try context.save()
+        } catch let error {
+            print("Failed to archive data", error )
+        }
+    }
 }

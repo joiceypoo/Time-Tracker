@@ -191,5 +191,31 @@ struct CoreDataManager {
         let creationDate = dateFormatter.date(from: dateString)
         return creationDate
     }
+    
+    func filterCheckedItems(for weekday: String, date: Date) -> Bool {
+        let context = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<TodoItem>(entityName: "TodoItem")
+        let dateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",
+                                                    date: date)
+        do {
+            let todos = try context.fetch(fetchRequest).filter { Unarchive.unarchiveStringArrayData(from: $0.repeatTodos?.weekday).contains(weekday)
+            }
+            
+            let checkedTodos = todos.filter {
+                let dict = Unarchive.unarchiveDictionaryArray(from: $0.checkedItems)
+                if let value = dict[dateString], value == 1 {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            return todos.count == checkedTodos.count
+        } catch let error {
+            print("Failed in fetching todos", error)
+            return false
+        }
+    }
+    
+    
 }
 

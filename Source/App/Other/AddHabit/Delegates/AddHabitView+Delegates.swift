@@ -24,9 +24,10 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
         if textField == categoryTextField {
             hashTagLabel.textColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1843137255, alpha: 1)
             shouldShowCategories = true
-            self.frame.origin.y -= keyboardHeight + categoriesTable.frame.height + 5
+            notesTextView.isHidden = true
+            frame.origin.y -= keyboardHeight + categoriesTable.frame.height + 5
         } else {
-            self.frame.origin.y = originalYPosition
+            frame.origin.y = originalYPosition
         }
     }
     
@@ -34,15 +35,17 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == categoryTextField {
             shouldShowCategories = false
+            notesTextView.isHidden = false
         }
         textField.resignFirstResponder()
         return true
     }
     
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        categoryTextField.isEnabled = false
         delegate?.showTextInputArea()
         originalYPosition = self.frame.origin.y
-        self.frame.origin.y -= keyboardHeight + categoriesTable.frame.height + 5
+        frame.origin.y -= keyboardHeight + categoriesTable.frame.height + 5
         if viewModel?.todo != nil {
             notesTextViewHeightConstraint.constant = 120
         }
@@ -67,6 +70,7 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
         if text == "\n" {
             textView.resignFirstResponder()
             self.frame.origin.y = originalYPosition
+            categoryTextField.isEnabled = true
             return false
         }
         
