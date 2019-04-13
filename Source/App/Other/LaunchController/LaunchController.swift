@@ -22,8 +22,7 @@ public class LaunchController: UIViewController {
     }
     
     private func navigate() {
-        guard let todoItemsController = TodoItemsController.instantiate(from: .main) else { return }
-        
+        let todoItemsController = TodoItemsController.instantiate()
         let customNavigationController = UINavigationController(rootViewController: todoItemsController)
         present(customNavigationController, animated: true)
     }
@@ -44,7 +43,7 @@ public class LaunchController: UIViewController {
             scaledTransform = originalTransform.scaledBy(x: 4.2, y: 4.2)
         }
         
-        UIView.animate(withDuration: 0.9, delay: 0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 0.45, delay: 0, options: .curveLinear, animations: {
             if let scaledTransform = scaledTransform {
                 self.launchIcon.transform = scaledTransform
             }

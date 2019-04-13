@@ -12,6 +12,7 @@
 		242FB84721C0447B00931945 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84521C0447B00931945 /* Main.storyboard */; };
 		242FB84921C0447D00931945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84821C0447D00931945 /* Assets.xcassets */; };
 		242FB84C21C0447D00931945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242FB84A21C0447D00931945 /* LaunchScreen.storyboard */; };
+		CE0B4DC9225CB08F002924DA /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B4DC8225CB08F002924DA /* Storyboarded.swift */; };
 		CE0C6CB9221AEE460007F68F /* AddHabitView+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C6CB8221AEE460007F68F /* AddHabitView+DataSource.swift */; };
 		CE0C6CBB221AEEA80007F68F /* AddHabitView+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C6CBA221AEEA80007F68F /* AddHabitView+Delegates.swift */; };
 		CE0C6CBD221AF6B70007F68F /* AddHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C6CBC221AF6B70007F68F /* AddHabitViewModel.swift */; };
@@ -28,10 +29,8 @@
 		CE776B19220251DE003E617C /* TodoItemsController+DateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B18220251DE003E617C /* TodoItemsController+DateDelegate.swift */; };
 		CE776B1E2202939C003E617C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1D2202939C003E617C /* Alert.swift */; };
 		CE776B202205F3D4003E617C /* Unarchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B1F2205F3D4003E617C /* Unarchive.swift */; };
-		CE776B242205FF82003E617C /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776B232205FF82003E617C /* EditViewModel.swift */; };
 		CE8423402245AD1E00343C78 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84233F2245AD1E00343C78 /* UIDevice+Extension.swift */; };
 		CE84D6BF21F8CF40000C9D89 /* DisplayMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */; };
-		CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */; };
 		CE8C9AD521FA62DC002947EE /* CellDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AD421FA62DC002947EE /* CellDetail.swift */; };
 		CE8C9AD721FA638F002947EE /* CellIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AD621FA638F002947EE /* CellIndexPath.swift */; };
 		CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9AD821FA67EA002947EE /* TodoItemsController+extension.swift */; };
@@ -39,13 +38,10 @@
 		CE8C9B1221FE1103002947EE /* HabbbitModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9B1021FE1103002947EE /* HabbbitModels.xcdatamodeld */; };
 		CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24CD21F656050028AC7F /* UIColor+theme.swift */; };
 		CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */; };
-		CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24DE21F766250028AC7F /* StoryboardName.swift */; };
 		CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24E421F7678B0028AC7F /* TodoItemsControllerDelegate.swift */; };
 		CE8F24E721F767CD0028AC7F /* TodoItemsControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24E621F767CD0028AC7F /* TodoItemsControllerDataSource.swift */; };
 		CE8F24E921F76BAD0028AC7F /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24E821F76BAD0028AC7F /* TodoListCell.swift */; };
 		CE8F24EB21F76C2B0028AC7F /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */; };
-		CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */; };
-		CE8F24FB21F7AE7A0028AC7F /* DescriptionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F24FA21F7AE7A0028AC7F /* DescriptionVM.swift */; };
 		CE8F250B21F886730028AC7F /* WeekdaysEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F250A21F886730028AC7F /* WeekdaysEnum.swift */; };
 		CEACE6DF224B56510003E081 /* NotesTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACE6DE224B56510003E081 /* NotesTextView.swift */; };
 		CECAEE37221C3C9B002F1D4B /* Weekdays.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECAEE36221C3C9B002F1D4B /* Weekdays.swift */; };
@@ -60,6 +56,7 @@
 		242FB84821C0447D00931945 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		242FB84B21C0447D00931945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		242FB84D21C0447D00931945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE0B4DC8225CB08F002924DA /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		CE0C6CB8221AEE460007F68F /* AddHabitView+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHabitView+DataSource.swift"; sourceTree = "<group>"; };
 		CE0C6CBA221AEEA80007F68F /* AddHabitView+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHabitView+Delegates.swift"; sourceTree = "<group>"; };
 		CE0C6CBC221AF6B70007F68F /* AddHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitViewModel.swift; sourceTree = "<group>"; };
@@ -76,10 +73,8 @@
 		CE776B18220251DE003E617C /* TodoItemsController+DateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+DateDelegate.swift"; sourceTree = "<group>"; };
 		CE776B1D2202939C003E617C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		CE776B1F2205F3D4003E617C /* Unarchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unarchive.swift; sourceTree = "<group>"; };
-		CE776B232205FF82003E617C /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
 		CE84233F2245AD1E00343C78 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		CE84D6BE21F8CF40000C9D89 /* DisplayMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessage.swift; sourceTree = "<group>"; };
-		CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModel.swift; sourceTree = "<group>"; };
 		CE8C9AD421FA62DC002947EE /* CellDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetail.swift; sourceTree = "<group>"; };
 		CE8C9AD621FA638F002947EE /* CellIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIndexPath.swift; sourceTree = "<group>"; };
 		CE8C9AD821FA67EA002947EE /* TodoItemsController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemsController+extension.swift"; sourceTree = "<group>"; };
@@ -87,13 +82,10 @@
 		CE8C9B1121FE1103002947EE /* HabbbitModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HabbbitModels.xcdatamodel; sourceTree = "<group>"; };
 		CE8F24CD21F656050028AC7F /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		CE8F24D521F662EF0028AC7F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		CE8F24DE21F766250028AC7F /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		CE8F24E421F7678B0028AC7F /* TodoItemsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemsControllerDelegate.swift; sourceTree = "<group>"; };
 		CE8F24E621F767CD0028AC7F /* TodoItemsControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemsControllerDataSource.swift; sourceTree = "<group>"; };
 		CE8F24E821F76BAD0028AC7F /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
 		CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
-		CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
-		CE8F24FA21F7AE7A0028AC7F /* DescriptionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionVM.swift; sourceTree = "<group>"; };
 		CE8F250A21F886730028AC7F /* WeekdaysEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysEnum.swift; sourceTree = "<group>"; };
 		CEACE6DE224B56510003E081 /* NotesTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTextView.swift; sourceTree = "<group>"; };
 		CECAEE36221C3C9B002F1D4B /* Weekdays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekdays.swift; sourceTree = "<group>"; };
@@ -141,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				242FB85621C0468D00931945 /* App */,
-				CE8F24DD21F765F40028AC7F /* Common */,
 				CE8F24D421F662D60028AC7F /* Core */,
 				CE8C9B1621FEF60E002947EE /* CoreDataModel */,
 			);
@@ -283,14 +274,6 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		CE8F24DD21F765F40028AC7F /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				CE8F24DE21F766250028AC7F /* StoryboardName.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 		CE8F24E021F767060028AC7F /* TodoItems */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,9 +337,6 @@
 		CE8F24F921F7AE3D0028AC7F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CE8F24FA21F7AE7A0028AC7F /* DescriptionVM.swift */,
-				CE84D6C421F8FCD7000C9D89 /* TodoListViewModel.swift */,
-				CE776B232205FF82003E617C /* EditViewModel.swift */,
 				CE0C6CBC221AF6B70007F68F /* AddHabitViewModel.swift */,
 			);
 			path = ViewModel;
@@ -381,7 +361,7 @@
 			children = (
 				CE8F24CD21F656050028AC7F /* UIColor+theme.swift */,
 				CE8F24EA21F76C2B0028AC7F /* UITableViewCell+Extension.swift */,
-				CE8F24F021F772E30028AC7F /* UIViewController+extension.swift */,
+				CE0B4DC8225CB08F002924DA /* Storyboarded.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -458,7 +438,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE776B242205FF82003E617C /* EditViewModel.swift in Sources */,
 				CE8F24CE21F656050028AC7F /* UIColor+theme.swift in Sources */,
 				CE776B1122024D9F003E617C /* UsedDates.swift in Sources */,
 				CE776B1322024DDF003E617C /* DateCollectionViewCell.swift in Sources */,
@@ -472,6 +451,7 @@
 				242FB84421C0447B00931945 /* TodoItemsController.swift in Sources */,
 				CE14E4C02218AEDB009C4432 /* AddHabitView.swift in Sources */,
 				CE776B1E2202939C003E617C /* Alert.swift in Sources */,
+				CE0B4DC9225CB08F002924DA /* Storyboarded.swift in Sources */,
 				242FB84221C0447B00931945 /* AppDelegate.swift in Sources */,
 				CE8F24E521F7678B0028AC7F /* TodoItemsControllerDelegate.swift in Sources */,
 				CE8F250B21F886730028AC7F /* WeekdaysEnum.swift in Sources */,
@@ -480,9 +460,7 @@
 				CE1CE25522280F9700877EDE /* AnimationController.swift in Sources */,
 				CE8C9AD921FA67EA002947EE /* TodoItemsController+extension.swift in Sources */,
 				CEACE6DF224B56510003E081 /* NotesTextView.swift in Sources */,
-				CE8F24DF21F766250028AC7F /* StoryboardName.swift in Sources */,
 				CEF78BDF220B150900DB0031 /* Dates.swift in Sources */,
-				CE8F24F121F772E30028AC7F /* UIViewController+extension.swift in Sources */,
 				CE8F24E721F767CD0028AC7F /* TodoItemsControllerDataSource.swift in Sources */,
 				CE776B202205F3D4003E617C /* Unarchive.swift in Sources */,
 				CE35660C2256503500303C57 /* UIView+Extension.swift in Sources */,
@@ -491,8 +469,6 @@
 				CE0C6CBD221AF6B70007F68F /* AddHabitViewModel.swift in Sources */,
 				CE8F24D621F662EF0028AC7F /* CoreDataManager.swift in Sources */,
 				CE1CE2582228102B00877EDE /* LaunchController.swift in Sources */,
-				CE8F24FB21F7AE7A0028AC7F /* DescriptionVM.swift in Sources */,
-				CE84D6C521F8FCD7000C9D89 /* TodoListViewModel.swift in Sources */,
 				CE8C9AD721FA638F002947EE /* CellIndexPath.swift in Sources */,
 				CE261D6E2247BA46009C05C2 /* String+Extension.swift in Sources */,
 				CE0C6CBB221AEEA80007F68F /* AddHabitView+Delegates.swift in Sources */,

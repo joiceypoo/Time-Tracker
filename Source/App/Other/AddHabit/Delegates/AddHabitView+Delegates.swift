@@ -20,14 +20,20 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
     }
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        originalYPosition = self.frame.origin.y
         if textField == categoryTextField {
             hashTagLabel.textColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1843137255, alpha: 1)
             shouldShowCategories = true
-            notesTextView.isHidden = true
-            frame.origin.y -= keyboardHeight + categoriesTable.frame.height + 5
-        } else {
-            frame.origin.y = originalYPosition
+            notesTextView.alpha = 0
+            if contentViewBottomConstraint.constant != -100 && changedYPosition == 0 {
+                contentViewBottomConstraint.constant -= 100
+            }
+            
+            if textField == categoryTextField && contentViewBottomConstraint.constant == 0 {
+                hashTagLabel.textColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1843137255, alpha: 1)
+                shouldShowCategories = true
+                notesTextView.alpha = 0
+                contentViewBottomConstraint.constant -= 100
+            }
         }
     }
     
@@ -35,17 +41,37 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == categoryTextField {
             shouldShowCategories = false
-            notesTextView.isHidden = false
+            notesTextView.alpha = 1
+            contentViewBottomConstraint.constant = 0
+        } else if textField == habitTitleTextField && contentViewBottomConstraint.constant == -100 {
+            shouldShowCategories = shouldShowCategories == true ? false: true
+            notesTextView.alpha = 1
+            contentViewBottomConstraint.constant = 0
+        }
+        
+        if contentViewBottomConstraint.constant == changedYPosition {
+            categoryTextField.isEnabled = true
+            contentViewBottomConstraint.constant -= changedYPosition
+        }
+        
+        if contentViewBottomConstraint.constant == -100 && changedYPosition != 0 {
+            contentViewBottomConstraint.constant += 100
         }
         textField.resignFirstResponder()
         return true
     }
     
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        categoryTextField.isEnabled = false
         delegate?.showTextInputArea()
-        originalYPosition = self.frame.origin.y
-        frame.origin.y -= keyboardHeight + categoriesTable.frame.height + 5
+        categoryTextField.isEnabled = false
+        if originalYPosition == 0 {
+            originalYPosition = frame.origin.y
+            let yValue = frame.origin.y
+            changedYPosition = yValue - (keyboardHeight + categoriesTable.frame.height)
+            contentViewBottomConstraint.constant += changedYPosition
+        } else {
+            contentViewBottomConstraint.constant = changedYPosition
+        }
         if viewModel?.todo != nil {
             notesTextViewHeightConstraint.constant = 120
         }
@@ -62,6 +88,7 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
                 return false
             }
         }
+        
         return true
     }
     
@@ -69,7 +96,7 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
                          replacementText text: String) -> Bool {
         if text == "\n" {
             textView.resignFirstResponder()
-            self.frame.origin.y = originalYPosition
+            contentViewBottomConstraint.constant -= changedYPosition
             categoryTextField.isEnabled = true
             return false
         }
@@ -79,7 +106,10 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
     
     public func textViewDidEndEditing(_ textView: UITextView) {
         let textSize = estimateFrame(for: notesTextView.text)
-        notesTextViewHeightConstraint.constant = textSize.height + 30
+        if textSize.height + 30 > 120 {
+            notesTextViewHeightConstraint.constant = textSize.height + 30
+        }
+        notesTextViewHeightConstraint.constant = 120
     }
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {

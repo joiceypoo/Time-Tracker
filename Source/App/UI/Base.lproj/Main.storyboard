@@ -13,13 +13,13 @@
         <!--Todo Items Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="TodoItemsControllerID" id="BYZ-38-t0r" customClass="TodoItemsController" customModule="Habbbit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TodoItemsController" id="BYZ-38-t0r" customClass="TodoItemsController" customModule="Atomic_Habit_Daily_To_Do_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G1L-ms-s5B">
-                                <rect key="frame" x="8" y="44" width="359" height="50"/>
+                                <rect key="frame" x="8" y="36" width="359" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="IRa-r1-TbJ"/>
@@ -31,7 +31,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DateCollectionViewCell" id="mks-LB-8zR" customClass="DateCollectionViewCell" customModule="Habbbit" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DateCollectionViewCell" id="mks-LB-8zR" customClass="DateCollectionViewCell" customModule="Atomic_Habit_Daily_To_Do_Tracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="48" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -75,10 +75,10 @@
                                 </connections>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0ww-Ks-kEg">
-                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoListCell" textLabel="rsn-lL-D9b" detailTextLabel="xrY-qw-fMt" style="IBUITableViewCellStyleSubtitle" id="oLH-sH-hmD" customClass="TodoListCell" customModule="Habbbit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoListCell" textLabel="rsn-lL-D9b" detailTextLabel="xrY-qw-fMt" style="IBUITableViewCellStyleSubtitle" id="oLH-sH-hmD" customClass="TodoListCell" customModule="Atomic_Habit_Daily_To_Do_Tracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oLH-sH-hmD" id="Ij3-Yd-hAE">
@@ -297,7 +297,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0ww-Ks-kEg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Z2-ZP-191"/>
-                            <constraint firstItem="G1L-ms-s5B" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="V8u-te-cj6"/>
+                            <constraint firstItem="G1L-ms-s5B" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="V8u-te-cj6"/>
                             <constraint firstItem="juN-VK-Ypb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Yh9-3M-OSx"/>
                             <constraint firstItem="juN-VK-Ypb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aIl-Xl-gZt"/>
                             <constraint firstAttribute="bottom" secondItem="0ww-Ks-kEg" secondAttribute="bottom" id="adB-ym-ebp"/>
@@ -312,21 +312,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Afw-ob-4ae"/>
                     <connections>
-                        <outlet property="crossedFinger1" destination="29B-4k-0NP" id="n6d-zo-i9D"/>
-                        <outlet property="crossedFinger10" destination="Euo-Oh-UZD" id="ztp-OO-Cwp"/>
-                        <outlet property="crossedFinger11" destination="Bg5-WN-5BJ" id="4eU-1p-h5P"/>
-                        <outlet property="crossedFinger12" destination="WfC-Mx-jnO" id="jZn-tl-v4U"/>
-                        <outlet property="crossedFinger13" destination="y51-EV-Xpt" id="cjv-aj-cwT"/>
-                        <outlet property="crossedFinger14" destination="7uZ-zR-cM9" id="Pyn-53-p2P"/>
-                        <outlet property="crossedFinger15" destination="fdG-dE-Nzi" id="7RP-bh-oGL"/>
-                        <outlet property="crossedFinger2" destination="1Kx-uK-s3W" id="mRo-3E-KP8"/>
-                        <outlet property="crossedFinger3" destination="tIG-b1-DJx" id="euf-3t-7w9"/>
-                        <outlet property="crossedFinger4" destination="zut-SY-1Mw" id="nu5-2C-8m1"/>
-                        <outlet property="crossedFinger5" destination="KT5-SW-0e0" id="px0-5V-zjg"/>
-                        <outlet property="crossedFinger6" destination="dfD-e7-5Iq" id="W7V-CX-JtM"/>
-                        <outlet property="crossedFinger7" destination="emz-If-RNT" id="Ffn-n5-tXT"/>
-                        <outlet property="crossedFinger8" destination="oLl-Uw-Pvx" id="HQt-lK-2Z6"/>
-                        <outlet property="crossedFinger9" destination="Qye-Az-jAR" id="nkW-sL-mcd"/>
                         <outlet property="dateCollectionView" destination="G1L-ms-s5B" id="IVI-8o-GXM"/>
                         <outlet property="rewardView" destination="juN-VK-Ypb" id="ibI-nO-KhS"/>
                         <outlet property="todoListsTable" destination="0ww-Ks-kEg" id="FJg-IX-aOI"/>
@@ -339,7 +324,7 @@
         <!--Launch Controller-->
         <scene sceneID="bfZ-Wz-ZpM">
             <objects>
-                <viewController storyboardIdentifier="LaunchControllerID" id="1JK-dg-Acx" customClass="LaunchController" customModule="Habbbit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1JK-dg-Acx" customClass="LaunchController" customModule="Atomic_Habit_Daily_To_Do_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L3e-Z5-2Us">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -10,18 +10,12 @@ import UIKit
 
 extension TodoItemsController: UITableViewDelegate,
 AddHabitViewDelegate, UIViewControllerTransitioningDelegate, TodoListCellDelegate {
-    
     func showRewardView(for doneDate: Date) {
         let weekday = Weekdays.getDay(dayOfWeekNumber: UsedDates.shared.selectdDayOfWeek)
         var isAllChecked = CoreDataManager.shared.filterCheckedItems(for: weekday, date: doneDate)
         if isAllChecked {
             UIView.animate(withDuration: 1.8, delay: 0, options: .curveEaseOut, animations: {
                 self.rewardView.alpha = 1
-                let randomNumbers: [Int] = Array(0...14).shuffled()
-                for num in randomNumbers {
-                    let crossedFinger = self.crossedFingers[num]
-                    crossedFinger.animate(duration: 0.8, options: .autoreverse)
-                }
             }) { _ in
                 self.rewardView.alpha = 0
             }
@@ -161,7 +155,6 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate, TodoListCellDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        displayHabitView.toggle()
         let newTodos = todos[indexPath.section].value
         let todo = newTodos[indexPath.row]
         setupAddHabitView(for: todo)

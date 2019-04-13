@@ -23,6 +23,7 @@ public class AddHabitView: UIView {
     let calendar = Calendar.current
     var categories: [Category] = []
     var categoriesPlaceholder: [Category] = []
+    var changedYPosition: CGFloat = 0
     var delegate: AddHabitViewDelegate?
     var keyboardHeight: CGFloat = 0
     var originalYPosition: CGFloat = 0
@@ -38,9 +39,9 @@ public class AddHabitView: UIView {
     var shouldShowCategories: Bool? {
         didSet {
             if let shouldShowCategories = shouldShowCategories, shouldShowCategories {
-                categoriesTable.isHidden = false
+                categoriesTable.alpha = 1
             } else {
-                categoriesTable.isHidden = true
+                categoriesTable.alpha = 0
             }
         }
     }
@@ -71,6 +72,8 @@ public class AddHabitView: UIView {
     @IBOutlet weak var notesTextViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var saveButton: UIButton!
     
+    var contentViewBottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var secondLineSeparator: UIView!
     
     // MARK: Initialization
@@ -83,7 +86,6 @@ public class AddHabitView: UIView {
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupView()
     }
     
     // MARK: ViewModel
@@ -256,6 +258,7 @@ public class AddHabitView: UIView {
         guard let viewModel = viewModel else { return }
         if viewModel.todo == nil {
             completedCountLabel.isHidden = true
+            cancelButton.isHidden = true
             deleteButton.isHidden = true
             lineSeparator.isHidden = true
             categories = viewModel.categories
@@ -555,7 +558,8 @@ public class AddHabitView: UIView {
         contentView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         contentView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         contentView.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        contentViewBottomConstraint.isActive = true
         contentView.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
         weekdayButtons = weekdaysStackView.arrangedSubviews as? [UIButton]
         categoriesTable.tableFooterView = UIView()
@@ -616,11 +620,8 @@ public class AddHabitView: UIView {
     }
     
     @objc func keyboardWillShow(notification: Notification) {
-        guard let keyBoardInf = notification.userInfo else { return }
-        
-        if let keyboardSize = (keyBoardInf[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size {
-            keyboardHeight = keyboardSize.height
-        }
+        guard let keyBoardInf = notification.userInfo, let keyboardSize = (keyBoardInf[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size else { return }
+        keyboardHeight = keyboardSize.height
     }
     
     @objc func keyboardWillHide(notification: Notification) {

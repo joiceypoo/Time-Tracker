@@ -32,9 +32,7 @@ public class TodoListCell: UITableViewCell {
         didSet { bindViewModel() }
     }
     
-    private func bindViewModel() {
-        guard let viewModel = viewModel else { return }
-        let data = viewModel.repeatTodos?.weekday
+    private func getDaysString(from data: Data?) -> [String] {
         let daysArray = Unarchive.unarchiveStringArrayData(from: data)
         var newDaysArray: [String] = []
         for day in calendar.weekdaySymbols {
@@ -43,8 +41,14 @@ public class TodoListCell: UITableViewCell {
                 newDaysArray.append(shortWeekday)
             }
         }
-        
-        let daysString = newDaysArray.joined(separator: " ")
+        return newDaysArray
+    }
+    
+    private func bindViewModel() {
+        guard let viewModel = viewModel else { return }
+        let data = viewModel.repeatTodos?.weekday
+        let daysArray = getDaysString(from: data)
+        let daysString = daysArray.joined(separator: " ")
         
         let currentDate = UsedDates.shared.currentDate
         let dateString = Dates.getDateString(format: "EEEE, d MMMM yyyy",

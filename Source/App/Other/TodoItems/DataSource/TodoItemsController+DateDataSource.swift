@@ -79,9 +79,6 @@ extension TodoItemsController: UICollectionViewDataSource {
             cell.dayOfMonthLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
             cell.dayOfWeekLabel.textColor = #colorLiteral(red: 0.6470588235, green: 0.6588235294, blue: 0.662745098, alpha: 1)
         }
-    
         feedbackGenerator?.selectionChanged()
     }
-    
-    
 }

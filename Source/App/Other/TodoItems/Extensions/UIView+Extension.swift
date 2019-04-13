@@ -19,11 +19,4 @@ extension UIView {
                         self.transform = .identity
         }, completion: nil)
     }
-    func animate(duration: TimeInterval, options: UIView.AnimationOptions) {
-        UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
-            self.transform = self.transform.rotated(by: CGFloat.pi / 4)
-        }, completion: { _ in
-            self.transform = .identity
-        })
-    }
 }

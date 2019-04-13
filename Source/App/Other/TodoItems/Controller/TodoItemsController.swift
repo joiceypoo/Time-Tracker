@@ -9,13 +9,13 @@
 import UIKit
 import CoreData
 
-class TodoItemsController: UIViewController {
+class TodoItemsController: UIViewController, Storyboarded {
     
     var activeSelectedDateIndexPath: IndexPath?
     var addHabitView: AddHabitView?
+    var addHabitViewBottonConstraint: NSLayoutConstraint?
     var categories: [String] = []
     var currentIndexPath: IndexPath?
-    var displayHabitView = false
     var feedbackGenerator : UISelectionFeedbackGenerator? = nil
     var isNoteTextViewTapped: Bool?
     var isTextInputAreaTapped: Bool?
@@ -24,50 +24,13 @@ class TodoItemsController: UIViewController {
     var selectedDay = String()
     var todos: [(key: String, value: [TodoItem])] = []
     
-    let addButton = UIButton()
-    let todayButton = UIButton()
-    
-    @IBOutlet weak var crossedFinger1: UILabel!
-    @IBOutlet weak var crossedFinger2: UILabel!
-    @IBOutlet weak var crossedFinger3: UILabel!
-    @IBOutlet weak var crossedFinger4: UILabel!
-    @IBOutlet weak var crossedFinger5: UILabel!
-    @IBOutlet weak var crossedFinger6: UILabel!
-    @IBOutlet weak var crossedFinger7: UILabel!
-    @IBOutlet weak var crossedFinger8: UILabel!
-    @IBOutlet weak var crossedFinger9: UILabel!
-    @IBOutlet weak var crossedFinger10: UILabel!
-    @IBOutlet weak var crossedFinger11: UILabel!
-    @IBOutlet weak var crossedFinger12: UILabel!
-    @IBOutlet weak var crossedFinger13: UILabel!
-    @IBOutlet weak var crossedFinger14: UILabel!
-    @IBOutlet weak var crossedFinger15: UILabel!
-    
-    
+    private let addButton = UIButton()
+    private let todayButton = UIButton()
+
     @IBOutlet weak var todoListsTable: UITableView!
     @IBOutlet weak var dateCollectionView: UICollectionView!
     @IBOutlet weak var rewardView: UIView!
     var displayedDayOfWeek: String?
-    
-    lazy var crossedFingers: [UILabel] = [
-        crossedFinger1,
-        crossedFinger2,
-        crossedFinger3,
-        crossedFinger4,
-        crossedFinger5,
-        crossedFinger6,
-        crossedFinger7,
-        crossedFinger8,
-        crossedFinger9,
-        crossedFinger10,
-        crossedFinger11,
-        crossedFinger12,
-        crossedFinger13,
-        crossedFinger14,
-        crossedFinger15
-        
-    ]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +61,7 @@ class TodoItemsController: UIViewController {
     
     private var monthLabel: UILabel = {
         let label = UILabel()
-        label.textColor = #colorLiteral(red: 0.137254902, green: 0.431372549, blue: 1, alpha: 1)
+        label.textColor = UIColor.customBlue
         label.font = UIFont.boldSystemFont(ofSize: 28)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -165,12 +128,15 @@ class TodoItemsController: UIViewController {
         navigationController?.view.backgroundColor = .white
         guard let navigationBar = navigationController?.navigationBar else { return }
         navigationBar.addSubview(monthLabel)
-        monthLabel.leftAnchor.constraint(equalTo: navigationBar.leftAnchor, constant: 20).isActive = true
-        monthLabel.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: 80).isActive = true
+        monthLabel.leftAnchor.constraint(equalTo: navigationBar.leftAnchor,
+                                         constant: 8).isActive = true
         monthLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
         monthLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        monthLabel.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor,
+                                           constant: -2).isActive = true
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(displayTodayDate))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                          action: #selector(displayTodayDate))
         todayButton.addGestureRecognizer(tapGestureRecognizer)
         todayButton.setImage(#imageLiteral(resourceName: "today"), for: .normal)
         navigationBar.addSubview(todayButton)
@@ -179,8 +145,8 @@ class TodoItemsController: UIViewController {
                                            constant: -20).isActive = true
         todayButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
         todayButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        todayButton.bottomAnchor.constraint(equalTo: monthLabel.bottomAnchor, constant: -2).isActive = true
-        
+        todayButton.bottomAnchor.constraint(equalTo: monthLabel.bottomAnchor,
+                                            constant: -2).isActive = true
         monthLabel.text = Dates.getDateString(format: "MMMM", date: Date())
         
         setupAddButton()
@@ -205,7 +171,6 @@ class TodoItemsController: UIViewController {
     }
     
     func dismissViewHandler() {
-        displayHabitView = false
         UIView.animate(withDuration: 0.28, delay: 0, options: .curveEaseIn, animations: {
             self.addHabitView?.center.y += self.view.bounds.height + 100
             self.navigationController?.removeBlurredBackgroundView()
@@ -215,7 +180,6 @@ class TodoItemsController: UIViewController {
     }
     
     @objc private func addTodoItemButtonPressed(_ sender: UIButton) {
-        displayHabitView.toggle()
         setupAddHabitView(for: nil)
     }
     
@@ -230,21 +194,18 @@ class TodoItemsController: UIViewController {
         addHabitView.viewModel = addHabitViewModel
         addHabitView.translatesAutoresizingMaskIntoConstraints = false
         addHabitView.delegate = self
-        if displayHabitView {
-            let currentWindow = UIApplication.shared.keyWindow
-            currentWindow?.addSubview(addHabitView)
-            addHabitView.topAnchor.constraint(equalTo: navigationBar.topAnchor).isActive = true
-            addHabitView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-            addHabitView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-            addHabitView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-     
-            navigationController?.overlayBlurredBackgroundView()
-            UIView.animate(withDuration: 0.28, delay: 0, options: .curveEaseIn, animations: {
-                addHabitView.center.y -= self.view.bounds.height - 100
-            }, completion: nil)
-        } else {
-            return
-        }
+        let currentWindow = UIApplication.shared.keyWindow
+        currentWindow?.addSubview(addHabitView)
+        addHabitView.topAnchor.constraint(equalTo: navigationBar.topAnchor).isActive = true
+        addHabitView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        addHabitView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        addHabitViewBottonConstraint = addHabitView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        addHabitViewBottonConstraint?.isActive = true
+        
+        navigationController?.overlayBlurredBackgroundView()
+        UIView.animate(withDuration: 0.28, delay: 0, options: .curveEaseIn, animations: {
+            addHabitView.center.y -= self.view.bounds.height - 100
+        }, completion: nil)
     }
  
     internal func deleteHandler(action: UITableViewRowAction, indexPath: IndexPath) {
@@ -282,7 +243,6 @@ class TodoItemsController: UIViewController {
     }
     
     func resetNavBar() {
-        displayHabitView = false
         navigationController?.removeBlurredBackgroundView()
     }
     
@@ -320,13 +280,17 @@ class TodoItemsController: UIViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if lastContentOffSet < scrollView.contentOffset.x,
             let displayedDayOfWeek = displayedDayOfWeek {
+            let visibleCells = dateCollectionView.visibleCells as! [DateCollectionViewCell]
+            for cell in visibleCells {
+                if cell.dayOfWeekLabel.text == Weekdays.getShortWeekday(for: displayedDayOfWeek) {
+                    UsedDates.shared.currentDate = cell.date
+                }
+            }
             displayWeek()
             fetchTodos(from: displayedDayOfWeek)
             if categories.count > 0 {
                 todoListsTable.reloadData()
             }
-            
-
         }
     }
     
@@ -343,12 +307,8 @@ class TodoItemsController: UIViewController {
             return result == ComparisonResult.orderedAscending
             
         }
-        let middleIndex = visibleCells.count / 2
-        let middleCell = visibleCells[middleIndex] as! DateCollectionViewCell
-        let displayedDate = UsedDates.shared.getDateOfAnotherDayOfTheSameWeek(selectedDate: middleCell.date!,
-                                                                              requiredDayOfWeek: UsedDates.shared.selectdDayOfWeek)
         let cell = visibleCells.first as! DateCollectionViewCell
-        displayDate(date: displayedDate)
+        displayDate(date: UsedDates.shared.currentDate)
         monthLabelText = Dates.getDateString(format: "MMMM", date: cell.date)
     }
 }

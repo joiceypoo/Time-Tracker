@@ -82,7 +82,6 @@ struct CoreDataManager {
                 let creationDateString = todo.creationDate ?? ""
                 let creationDate = getCreationDate(from: creationDateString)
                 let currentDate = UsedDates.shared.currentDate
-      
                 let daysArray = Unarchive.unarchiveStringArrayData(from: data)
                 let isValidDay = daysArray.contains(day) || daysArray.count == 7
                 if let name = todo.categoryName, name == "None" && todosDictionary[name] == nil && isValidDay && creationDate?.compare(currentDate) != .orderedDescending  {
