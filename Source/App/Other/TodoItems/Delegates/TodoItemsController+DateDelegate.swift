@@ -28,7 +28,8 @@ extension TodoItemsController: UICollectionViewDelegateFlowLayout {
             cell.dayOfMonthLabel.textColor = .white
             cell.dayOfWeekLabel.textColor = .white
             
-            if let activeSelectedDateIndexPath = activeSelectedDateIndexPath, let currentCell = dateCollectionView.cellForItem(at: activeSelectedDateIndexPath) as? DateCollectionViewCell {
+            if let activeSelectedDateIndexPath = activeSelectedDateIndexPath,
+                let currentCell = dateCollectionView.cellForItem(at: activeSelectedDateIndexPath) as? DateCollectionViewCell {
                 currentCell.dayOfMonthLabel.textColor = .customBlue
                 currentCell.dayOfWeekLabel.textColor = .customBlue
             }

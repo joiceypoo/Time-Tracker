@@ -120,7 +120,7 @@ public class TodoListCell: UITableViewCell {
                                                                date: date)
             if !datesArray.contains(dateString) {
                 datesArray.append(dateString)
-            } else if let currentIndex = datesArray.index(of: dateString) {
+            } else if let currentIndex = datesArray.firstIndex(of: dateString) {
                 datesArray.remove(at: currentIndex)
             }
             

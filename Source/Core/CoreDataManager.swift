@@ -122,7 +122,7 @@ struct CoreDataManager {
             let categoryName = todo.categoryName,
             let creationDate = todo.creationDate,
             let isRepeating = todo.repeatTodos?.isRepeating,
-            let indexOfSelectedWeekday = repeatWeekdays.index(of: selectedWeekday),
+            let indexOfSelectedWeekday = repeatWeekdays.firstIndex(of: selectedWeekday),
             let notes = todo.notes
             else { return }
         

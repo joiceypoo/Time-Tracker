@@ -10,29 +10,34 @@ import UIKit
 
 extension TodoItemsController: UITableViewDelegate,
 AddHabitViewDelegate, UIViewControllerTransitioningDelegate, TodoListCellDelegate {
-    func showRewardView(for doneDate: Date) {
-        let weekday = Weekdays.getDay(dayOfWeekNumber: UsedDates.shared.selectdDayOfWeek)
-        var isAllChecked = CoreDataManager.shared.filterCheckedItems(for: weekday, date: doneDate)
-        if isAllChecked {
-            UIView.animate(withDuration: 1.8, delay: 0, options: .curveEaseOut, animations: {
-                self.rewardView.alpha = 1
-            }) { _ in
-                self.rewardView.alpha = 0
-            }
+    
+    func didAddHabit(todo: TodoItem) {
+        resetNavBar()
+        if categories.count == 0, let category = todo.categoryName {
+            categories.append(category)
+            let newTodo = (key: category, value: [todo])
+            todos.append(newTodo)
+            todoListsTable.reloadData()
+        } else if let category = todo.categoryName, categories.contains(category),
+            let section = categories.firstIndex(of: category) {
+            var newTodo = todos[section].value
+            newTodo.append(todo)
+            todos[section].value = newTodo
+            todoListsTable.reloadData()
+        } else if let category = todo.categoryName {
+            categories.append(category)
+            let newTodo = (key: category, value: [todo])
+            todos.append(newTodo)
+            todoListsTable.reloadData()
         }
-        isAllChecked = false
-    }
-
-    func showTextInputArea() {
-        isTextInputAreaTapped = true
     }
     
     func didDeleteHabit(todo: TodoItem?) {
         resetNavBar()
         guard let category = todo?.categoryName,
             let todo = todo,
-            let section = categories.index(of: category),
-            let index = todos[section].value.index(of: todo) else { return }
+            let section = categories.firstIndex(of: category),
+            let index = todos[section].value.firstIndex(of: todo) else { return }
         
         if todos[section].value.count == 1 {
             let sectionIndexSet = IndexSet(integer: section)
@@ -60,8 +65,8 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate, TodoListCellDelegat
         
         guard
             let name = todo?.categoryName, let todo = todo,
-            let section = categories.index(of: categoryName),
-            let row = todos[section].value.index(of: todo) else { return }
+            let section = categories.firstIndex(of: categoryName),
+            let row = todos[section].value.firstIndex(of: todo) else { return }
         
         let todoItem = todos[section].value[row]
         
@@ -69,7 +74,7 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate, TodoListCellDelegat
             let reloadIndexPath = IndexPath(row: row, section: section)
             todoListsTable.reloadRows(at: [reloadIndexPath], with: .automatic)
         } else if !categories.contains(name) {
-            guard let section = categories.index(of: categoryName) else { return }
+            guard let section = categories.firstIndex(of: categoryName) else { return }
             
             if todos[section].value.count == 1 {
                 let sectionIndexSet = IndexSet(integer: section)
@@ -81,7 +86,7 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate, TodoListCellDelegat
                 newTodo.key = name
                 todos.append(newTodo)
                 todoListsTable.reloadData()
-            } else if let index = todos[section].value.index(of: todo) {
+            } else if let index = todos[section].value.firstIndex(of: todo) {
                 todos[section].value.remove(at: index)
                 let indexPath = IndexPath(row: index, section: section)
                 todoListsTable.deleteRows(at: [indexPath], with: .automatic)
@@ -90,7 +95,7 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate, TodoListCellDelegat
                 todos.append(newTodo)
                 todoListsTable.reloadData()
             }
-        } else if let newSection = categories.index(of: name), newSection == 0 || newSection > 0  {
+        } else if let newSection = categories.firstIndex(of: name), newSection == 0 || newSection > 0  {
             if todos[section].value.count == 1 {
                 let sectionIndexSet = IndexSet(integer: section)
                 categories.remove(at: section)
@@ -104,7 +109,7 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate, TodoListCellDelegat
                 }
                 
                 todoListsTable.reloadData()
-            } else if let index = todos[section].value.index(of: todo)  {
+            } else if let index = todos[section].value.firstIndex(of: todo)  {
                 todos[section].value.remove(at: index)
                 let indexPath = IndexPath(row: index, section: section)
                 todoListsTable.deleteRows(at: [indexPath], with: .automatic)
@@ -118,32 +123,28 @@ AddHabitViewDelegate, UIViewControllerTransitioningDelegate, TodoListCellDelegat
         dismissViewHandler()
     }
     
-    func didAddHabit(todo: TodoItem) {
-        resetNavBar()
-        if categories.count == 0, let category = todo.categoryName {
-            categories.append(category)
-            let newTodo = (key: category, value: [todo])
-            todos.append(newTodo)
-            todoListsTable.reloadData()
-        } else if let category = todo.categoryName, categories.contains(category),
-            let section = categories.index(of: category) {
-            var newTodo = todos[section].value
-            newTodo.append(todo)
-            todos[section].value = newTodo
-            todoListsTable.reloadData()
-        } else if let category = todo.categoryName {
-            categories.append(category)
-            let newTodo = (key: category, value: [todo])
-            todos.append(newTodo)
-            todoListsTable.reloadData()
+    func showRewardView(for doneDate: Date) {
+        let weekday = Weekdays.getDay(dayOfWeekNumber: UsedDates.shared.selectdDayOfWeek)
+        var isAllChecked = CoreDataManager.shared.filterCheckedItems(for: weekday, date: doneDate)
+        if isAllChecked {
+            UIView.animate(withDuration: 1.8, delay: 0, options: .curveEaseOut, animations: {
+                self.rewardView.alpha = 1
+            }) { _ in
+                self.rewardView.alpha = 0
+            }
         }
+        isAllChecked = false
+    }
+    
+    func showTextInputArea() {
+        isTextInputAreaTapped = true
     }
     
     func handleTodoDeletion(todoItem: TodoItem?) {
         guard let category = todoItem?.categoryName,
             let todo = todoItem,
-            let section = categories.index(of: category),
-            let index = todos[section].value.index(of: todo) else { return }
+            let section = categories.firstIndex(of: category),
+            let index = todos[section].value.firstIndex(of: todo) else { return }
         let newIndexPath = IndexPath(row: index, section: section)
         todos[section].value.remove(at: index)
         todoListsTable.deleteRows(at: [newIndexPath], with: .automatic)

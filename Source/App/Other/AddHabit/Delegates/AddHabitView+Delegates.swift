@@ -81,8 +81,8 @@ extension AddHabitView: UITableViewDelegate, UITextFieldDelegate, UITextViewDele
         return true
     }
 
-    
-    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                          replacementString string: String) -> Bool {
         if textField == categoryTextField {
             if string == "#" {
                 return false

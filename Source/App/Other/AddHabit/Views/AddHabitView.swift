@@ -18,25 +18,30 @@ protocol AddHabitViewDelegate {
 
 public class AddHabitView: UIView {
     
-    // MARK: Instance Properties
+    // MARK: Private Instance Properties
     
-    let calendar = Calendar.current
-    var categories: [Category] = []
-    var categoriesPlaceholder: [Category] = []
-    var changedYPosition: CGFloat = 0
-    var delegate: AddHabitViewDelegate?
-    var keyboardHeight: CGFloat = 0
-    var originalYPosition: CGFloat = 0
-    var weekdays = [WeekdaysEnum.sunday.rawValue,
+    private let calendar = Calendar.current
+    private var categoriesPlaceholder: [Category] = []
+    private var weekdays = [WeekdaysEnum.sunday.rawValue,
                     WeekdaysEnum.monday.rawValue,
                     WeekdaysEnum.tuesday.rawValue,
                     WeekdaysEnum.wednesday.rawValue,
                     WeekdaysEnum.thursday.rawValue,
                     WeekdaysEnum.friday.rawValue,
                     WeekdaysEnum.saturday.rawValue]
-    var weekdayButtons: [UIButton]? = []
+    private var weekdayButtons: [UIButton]? = []
+    private let weekdaysStackView = UIStackView()
     
-    var shouldShowCategories: Bool? {
+    // MARK: Internal Instance Properties
+    
+    internal var categories: [Category] = []
+    internal var changedYPosition: CGFloat = 0
+    internal var contentViewBottomConstraint: NSLayoutConstraint!
+    internal var delegate: AddHabitViewDelegate?
+    internal var keyboardHeight: CGFloat = 0
+    internal var originalYPosition: CGFloat = 0
+    
+    internal var shouldShowCategories: Bool? {
         didSet {
             if let shouldShowCategories = shouldShowCategories, shouldShowCategories {
                 categoriesTable.alpha = 1
@@ -54,27 +59,26 @@ public class AddHabitView: UIView {
         }
     }
     
-    let weekdaysStackView = UIStackView()
+    // MARK: Private IBOutlet's
     
-    // MARK: Outlets
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var deleteButton: UIButton!
+    @IBOutlet private weak var firstLineSeparator: UIView!
+    @IBOutlet private weak var lineSeparator: UIView!
+    @IBOutlet private weak var saveButton: UIButton!
+    @IBOutlet private weak var secondLineSeparator: UIView!
     
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var categoryTextField: UITextField!
-    @IBOutlet weak var categoriesTable: UITableView!
-    @IBOutlet weak var completedCountLabel: UILabel!
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var firstLineSeparator: UIView!
-    @IBOutlet weak var habitTitleTextField: UITextField!
-    @IBOutlet weak var hashTagLabel: UILabel!
-    @IBOutlet weak var lineSeparator: UIView!
-    @IBOutlet weak var notesTextView: UITextView!
-    @IBOutlet weak var notesTextViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var saveButton: UIButton!
+     // MARK: Internal IBOutlet's
     
-    var contentViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet internal weak var categoryTextField: UITextField!
+    @IBOutlet internal weak var categoriesTable: UITableView!
+    @IBOutlet internal weak var completedCountLabel: UILabel!
+    @IBOutlet internal var contentView: UIView!
+    @IBOutlet internal weak var habitTitleTextField: UITextField!
+    @IBOutlet internal weak var hashTagLabel: UILabel!
+    @IBOutlet internal weak var notesTextView: UITextView!
+    @IBOutlet internal weak var notesTextViewHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var secondLineSeparator: UIView!
     
     // MARK: Initialization
     
@@ -90,11 +94,11 @@ public class AddHabitView: UIView {
     
     // MARK: ViewModel
     
-    var viewModel: AddHabitViewModel? {
+    internal var viewModel: AddHabitViewModel? {
         didSet { bindViewModel() }
     }
     
-    lazy var mondayButton: UIButton = {
+    private lazy var mondayButton: UIButton = {
         let button = UIButton()
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -109,7 +113,7 @@ public class AddHabitView: UIView {
         return button
     }()
     
-    lazy var tuesdayButton: UIButton = {
+    private lazy var tuesdayButton: UIButton = {
         let button = UIButton()
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -124,7 +128,7 @@ public class AddHabitView: UIView {
         return button
     }()
     
-    lazy var wednesdayButton: UIButton = {
+    private lazy var wednesdayButton: UIButton = {
         let button = UIButton()
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -139,7 +143,7 @@ public class AddHabitView: UIView {
         return button
     }()
     
-    lazy var thursdayButton: UIButton = {
+    private lazy var thursdayButton: UIButton = {
         let button = UIButton()
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -154,7 +158,7 @@ public class AddHabitView: UIView {
         return button
     }()
     
-    lazy var fridayButton: UIButton = {
+    private lazy var fridayButton: UIButton = {
         let button = UIButton()
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -169,7 +173,7 @@ public class AddHabitView: UIView {
         return button
     }()
     
-    lazy var saturdayButton: UIButton = {
+    private lazy var saturdayButton: UIButton = {
         let button = UIButton()
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -184,7 +188,7 @@ public class AddHabitView: UIView {
         return button
     }()
     
-    lazy var sundayButton: UIButton = {
+    private lazy var sundayButton: UIButton = {
         let button = UIButton()
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -198,32 +202,6 @@ public class AddHabitView: UIView {
         
         return button
     }()
-    
-    
-    func setupStackView() {
-        weekdaysStackView.addArrangedSubview(mondayButton)
-        weekdaysStackView.addArrangedSubview(tuesdayButton)
-        weekdaysStackView.addArrangedSubview(wednesdayButton)
-        weekdaysStackView.addArrangedSubview(thursdayButton)
-        weekdaysStackView.addArrangedSubview(fridayButton)
-        weekdaysStackView.addArrangedSubview(saturdayButton)
-        weekdaysStackView.addArrangedSubview(sundayButton)
-        
-        weekdaysStackView.axis = NSLayoutConstraint.Axis.horizontal
-        weekdaysStackView.distribution = UIStackView.Distribution.equalSpacing
-        weekdaysStackView.alignment = UIStackView.Alignment.fill
-        weekdaysStackView.spacing = 10
-        
-        contentView.addSubview(weekdaysStackView)
-        setStackViewConstraints()
-    }
-    
-    func setStackViewConstraints() {
-        weekdaysStackView.translatesAutoresizingMaskIntoConstraints = false
-        weekdaysStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15.5).isActive = true
-        weekdaysStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15.5).isActive = true
-        weekdaysStackView.topAnchor.constraint(equalTo: firstLineSeparator.bottomAnchor, constant: 20).isActive = true        
-    }
     
     // MARK: Private Instance Methods
     
@@ -374,7 +352,7 @@ public class AddHabitView: UIView {
             let range = calendar.range(of: .day, in: .month, for: Date())
             else { return }
         
-        var monthInt = dateFormatter.monthSymbols.index(of: month)! + 1
+        var monthInt = dateFormatter.monthSymbols.firstIndex(of: month)! + 1
         let numDays = range.count
         currentDayIntegerValue += minValue
         
@@ -492,7 +470,7 @@ public class AddHabitView: UIView {
     }
     
     private func removeDay(from day: String) {
-        if weekdays.contains(day), let index = weekdays.index(of: day) {
+        if weekdays.contains(day), let index = weekdays.firstIndex(of: day) {
             weekdays.remove(at: index)
         }
     }
@@ -537,6 +515,31 @@ public class AddHabitView: UIView {
                 editHabitHandler()
             }
         }
+    }
+    
+    private func setupStackView() {
+        weekdaysStackView.addArrangedSubview(mondayButton)
+        weekdaysStackView.addArrangedSubview(tuesdayButton)
+        weekdaysStackView.addArrangedSubview(wednesdayButton)
+        weekdaysStackView.addArrangedSubview(thursdayButton)
+        weekdaysStackView.addArrangedSubview(fridayButton)
+        weekdaysStackView.addArrangedSubview(saturdayButton)
+        weekdaysStackView.addArrangedSubview(sundayButton)
+        
+        weekdaysStackView.axis = NSLayoutConstraint.Axis.horizontal
+        weekdaysStackView.distribution = UIStackView.Distribution.equalSpacing
+        weekdaysStackView.alignment = UIStackView.Alignment.fill
+        weekdaysStackView.spacing = 10
+        
+        contentView.addSubview(weekdaysStackView)
+        setStackViewConstraints()
+    }
+    
+    private func setStackViewConstraints() {
+        weekdaysStackView.translatesAutoresizingMaskIntoConstraints = false
+        weekdaysStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15.5).isActive = true
+        weekdaysStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15.5).isActive = true
+        weekdaysStackView.topAnchor.constraint(equalTo: firstLineSeparator.bottomAnchor, constant: 20).isActive = true
     }
     
     private func setupView() {
@@ -628,7 +631,9 @@ public class AddHabitView: UIView {
         keyboardHeight = 0
     }
     
-    public func estimateFrame(for text: String) -> CGRect {
+     // MARK: Internal Instance Methods
+    
+    internal func estimateFrame(for text: String) -> CGRect {
         let size = CGSize(width: frame.width - 16, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         return NSString(string: text).boundingRect(with: size,

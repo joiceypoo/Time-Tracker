@@ -11,26 +11,33 @@ import CoreData
 
 class TodoItemsController: UIViewController, Storyboarded {
     
-    var activeSelectedDateIndexPath: IndexPath?
-    var addHabitView: AddHabitView?
-    var addHabitViewBottonConstraint: NSLayoutConstraint?
-    var categories: [String] = []
-    var currentIndexPath: IndexPath?
-    var feedbackGenerator : UISelectionFeedbackGenerator? = nil
-    var isNoteTextViewTapped: Bool?
-    var isTextInputAreaTapped: Bool?
+    // MARK: Private Instance Properties
+
+    private var addHabitView: AddHabitView?
     private var lastContentOffSet: CGFloat = 0
-    var selectedCellIndexPath: [IndexPath] = []
-    var selectedDay = String()
-    var todos: [(key: String, value: [TodoItem])] = []
-    
+    private var selectedDay = String()
     private let addButton = UIButton()
     private let todayButton = UIButton()
+    
+    // MARK: Internal Instance Properties
+    
+    internal var activeSelectedDateIndexPath: IndexPath?
+    internal var addHabitViewBottonConstraint: NSLayoutConstraint?
+    internal var categories: [String] = []
+    internal var currentIndexPath: IndexPath?
+    internal var displayedDayOfWeek: String?
+    internal var feedbackGenerator : UISelectionFeedbackGenerator? = nil
+    internal var isTextInputAreaTapped: Bool?
+    internal var selectedCellIndexPath: [IndexPath] = []
+    internal var todos: [(key: String, value: [TodoItem])] = []
+    
 
-    @IBOutlet weak var todoListsTable: UITableView!
-    @IBOutlet weak var dateCollectionView: UICollectionView!
-    @IBOutlet weak var rewardView: UIView!
-    var displayedDayOfWeek: String?
+    // MARK: Internal IBOutlet's
+    
+    @IBOutlet internal weak var dateCollectionView: UICollectionView!
+    @IBOutlet internal weak var todoListsTable: UITableView!
+    @IBOutlet internal weak var rewardView: UIView!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +83,7 @@ class TodoItemsController: UIViewController, Storyboarded {
         monthLabel.text = monthLabelText
     }
     
-    var getCategories: [Category] {
+    private var getCategories: [Category] {
         return CoreDataManager.shared.fetchCategories()
     }
     
@@ -89,7 +96,7 @@ class TodoItemsController: UIViewController, Storyboarded {
         categories = newCategories
     }
     
-    @objc func handleLongPress(recognizer: UILongPressGestureRecognizer) {
+    @objc private func handleLongPress(recognizer: UILongPressGestureRecognizer) {
         let state = recognizer.state
         let locationInView = recognizer.location(in: todoListsTable)
         let indexPath = todoListsTable.indexPathForRow(at: locationInView)
@@ -116,7 +123,7 @@ class TodoItemsController: UIViewController, Storyboarded {
         setAddButtonConstraints()
     }
     
-    func setAddButtonConstraints() {
+    private func setAddButtonConstraints() {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         addButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
@@ -159,7 +166,7 @@ class TodoItemsController: UIViewController, Storyboarded {
     }
     
     
-    @objc func displayTodayDate() {
+    @objc private func displayTodayDate() {
         let day = Calendar.current.component(.weekday, from: Date())
         let weekday = Weekdays.getDay(dayOfWeekNumber: day)
         selectedDay = weekday
@@ -170,7 +177,7 @@ class TodoItemsController: UIViewController, Storyboarded {
         }
     }
     
-    func dismissViewHandler() {
+    internal func dismissViewHandler() {
         UIView.animate(withDuration: 0.28, delay: 0, options: .curveEaseIn, animations: {
             self.addHabitView?.center.y += self.view.bounds.height + 100
             self.navigationController?.removeBlurredBackgroundView()
@@ -232,7 +239,7 @@ class TodoItemsController: UIViewController, Storyboarded {
         }
     }
     
-    func displayDate(date: Date) {
+    internal func displayDate(date: Date) {
         UsedDates.shared.displayedDate = date
         UsedDates.shared.currentDate = date
         UsedDates.shared.selectdDayOfWeek = Calendar.current.component(.weekday, from: date)
@@ -242,12 +249,11 @@ class TodoItemsController: UIViewController, Storyboarded {
         displayedDayOfWeek = dayString
     }
     
-    func resetNavBar() {
+    internal func resetNavBar() {
         navigationController?.removeBlurredBackgroundView()
     }
     
-    func scrollToDate(date: Date)
-    {
+    private func scrollToDate(date: Date) {
         let startDate = UsedDates.shared.startDate
         let cal = Calendar.current
         if let numberOfDays = cal.dateComponents([.day],
@@ -256,7 +262,7 @@ class TodoItemsController: UIViewController, Storyboarded {
             let extraDays: Int = numberOfDays % 7
             let scrolledNumberOfDays = numberOfDays - extraDays
             let indexPath = IndexPath(row: scrolledNumberOfDays,
-                                                 section: 0)
+                                      section: 0)
             dateCollectionView.scrollToItem(at: indexPath,
                                             at: .left ,
                                             animated: false)
@@ -277,7 +283,7 @@ class TodoItemsController: UIViewController, Storyboarded {
         displayDate(date: date)
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    private func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if lastContentOffSet < scrollView.contentOffset.x,
             let displayedDayOfWeek = displayedDayOfWeek {
             let visibleCells = dateCollectionView.visibleCells as! [DateCollectionViewCell]
@@ -294,7 +300,7 @@ class TodoItemsController: UIViewController, Storyboarded {
         }
     }
     
-    func displayWeek() {
+    private func displayWeek() {
         var visibleCells = dateCollectionView.visibleCells
         visibleCells.sort { (cell1: UICollectionViewCell, cell2: UICollectionViewCell) -> Bool in
             guard let cell1 = cell1 as? DateCollectionViewCell else {
